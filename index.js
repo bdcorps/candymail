@@ -3,8 +3,8 @@ require('dotenv').config()
 
 const cron = require('node-cron')
 
-const { sendEmail } = require('./helper')
-const { addMessage, getMessagesAtTime } = require('./builder')
+const { generateDateKey, sendEmail } = require('./helper')
+const { runCandyMailWorkflow, getMessagesAtTime } = require('./builder')
 
 cron.schedule('0 * * * *', () => {
   console.log(`Running cron work at ${(new Date()).getHours}`)
@@ -13,13 +13,15 @@ cron.schedule('0 * * * *', () => {
 
 const sendMessagesNow = () => {
   const today = new Date() // TODO: get data in ETC all the time, this is local time to the machine
-  const currentHour = today.getHours()
-  const messagesForThisHour = getMessagesAtTime(currentHour)
-  if (messagesForThisHour) { sendEmail(messagesForThisHour) } else { console.log('no messages to send at this time') }
+  const dateKey = generateDateKey(today)
+  console.log('Looking for messages on', dateKey)
+  const messagesForThisHour = getMessagesAtTime(dateKey)
+  if (messagesForThisHour) { sendEmail(messagesForThisHour[0]) } else { console.log('no messages to send at this time') }
 }
 
-// for part 2 -> decoding the candymail.wordkflow.json
-// addMessage(12, { template: '', sendFrom: 'sunnyashiin@gmail.com', sendTo: 'sunnyashiin@gmail.com', subject: 'first email', body: 'body!' })
-// sendEmail(emailMap[1])
-
-sendMessagesNow()
+const someConditionSatisfiedByUser = () => {
+  const user = 'betoko1104@chatdays.com'
+  runCandyMailWorkflow('workflow2', user)
+}
+// sendMessagesNow()
+someConditionSatisfiedByUser()

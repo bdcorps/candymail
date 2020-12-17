@@ -1,6 +1,27 @@
+const messagesJSON = require('./candymail.workflow.json')
+const { generateDateKey } = require('./helper')
+
 const messages = {}
 
-// messages = { 22: { template: '', sendFrom: 'sunnyashiin@gmail.com', sendTo: 'sunnyashiin@gmail.com', subject: 'its 23 reight now', body: 'body!' } }
+// TODO: on init, validate JSON
+
+const buildCandyMail = (emails, sendTo) => {
+  emails.forEach(({ trigger, sendDelay, subject, body, from }) => {
+    const template = 'default'
+    const today = new Date()
+    today.setHours(today.getHours() + sendDelay) // TDDO: problem here. what happens with 10:59 + 1 will be 11
+    const time = generateDateKey(today)
+    const sendFrom = from
+
+    addMessage(time, { template, sendFrom, sendTo, subject, body })
+  })
+}
+
+const runCandyMailWorkflow = (workflow, sendTo) => {
+  const messagesInWorkflow = messagesJSON.workflows.find(message => message.name === workflow)
+  buildCandyMail(messagesInWorkflow.emails, sendTo)
+  console.log('runCandyMailWorkflow', messages)
+}
 
 const addMessage = (time, messageOptions) => {
   if (time in messages) {
@@ -8,24 +29,10 @@ const addMessage = (time, messageOptions) => {
   } else {
     messages[time] = [messageOptions]
   }
-  // console.log(messages)
 }
 
 const getMessagesAtTime = (time) => {
   return messages[time]
 }
 
-// addMessage(12, { template: '', sendFrom: 'sunnyashiin@gmail.com', sendTo: 'sunnyashiin@gmail.com', subject: 'first email', body: 'body!' })
-
-// addMessage(10, { template: '', sendFrom: 'another@gmail.com', sendTo: 'sunnyashiin@gmail.com', subject: 'first email', body: 'body!' })
-
-// addMessage(12, { template: '', sendFrom: 'anotheragain@gmail.com', sendTo: 'sunnyashiin@gmail.com', subject: 'first email', body: 'body!' })
-
-// console.log(messages)
-
-// console.log('1' in messages)
-// console.log(messages[1])
-// console.log(messages.get(22))
-
-
-module.exports = { addMessage, getMessagesAtTime }
+module.exports = { runCandyMailWorkflow, addMessage, getMessagesAtTime }

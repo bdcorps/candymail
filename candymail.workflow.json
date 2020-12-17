@@ -1,0 +1,32 @@
+{
+  "workflows": [
+    {
+      "name": "workflow1",
+      "description": "tell user about pro features",
+      "trigger_name": "proplan",
+      "emails": [
+        {
+          "trigger": "time",
+          "sendDelay": 1,
+          "subject": "email1 from workflow 1 Get access to 10+ customizations with the Pro plan",
+          "body": "Customizations are great",
+          "from": "sunnyashiin@gmail.com"
+        }
+      ]
+    },
+    {
+      "name": "workflow2",
+      "description": "tell user about pro features 2",
+      "trigger_name": "proplan",
+      "emails": [
+        {
+          "trigger": "time",
+          "sendDelay": 1,
+          "subject": "email 1 from workflow 2 Get access to 10+ customizations with the Pro plan",
+          "body": "Customizations are great",
+          "from": "sunnyashiin@gmail.com"
+        }
+      ]
+    }
+  ]
+}
