@@ -12,10 +12,10 @@ const transporter = mailer.createTransport({
 
 const sendEmail = ({ template, sendFrom, sendTo, subject, body }) => {
   const mailOptions = {
-    from: sendFrom || process.env.MAIL_USER,
-    to: sendTo || process.env.MAIL_USER,
-    subject: subject || 'Meeting Reminder',
-    html: body || '<p>hi your meeting in just 15 min</p>'
+    from: sendFrom,
+    to: sendTo,
+    subject,
+    html: body
   }
   transporter.sendMail(mailOptions, function (err, info) {
     if (err) {
