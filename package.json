@@ -7,12 +7,24 @@
     "start": "node index",
     "example": "node example/app"
   },
-  "author": "sssaini",
+  "author": "bdcorps",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "node-cron": "^2.0.3",
     "nodemailer": "^6.4.17"
-  }
+  },
+  "directories": {
+    "example": "example"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdcorps/candymail.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bdcorps/candymail/issues"
+  },
+  "homepage": "https://github.com/bdcorps/candymail#readme"
 }
