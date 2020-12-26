@@ -1,11 +1,12 @@
 
 const mailer = require('nodemailer')
+const { getConfig } = require('./config.js')
 
 const transporter = mailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASSWORD
+    user: getConfig.senderEmail,
+    pass: getConfig.senderPassword
   }
 })
 

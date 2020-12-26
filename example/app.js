@@ -1,8 +1,12 @@
 const path = require('path')
 const { init, runWorkflow, getAllMessages, getMessagesAtTime } = require('../index')
 
-const workflowFile = path.resolve('example', 'candymail.workflow.json')
-init(workflowFile)
+const workflowPath = path.resolve('example', 'candymail.workflow.json')
+init(workflowPath, {
+  senderEmail: process.env.MAIL_USER,
+  senderPassword: process.env.MAIL_PASSWORD,
+  workflowPath
+})
 
 const someConditionSatisfiedByUser = () => {
   const user1 = 'betoko1104@chatdays.com'

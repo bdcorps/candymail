@@ -1,3 +1,4 @@
+const { setConfig } = require('./config')
 const { generateDateKey } = require('./helper')
 
 let messagesJSON = {}
@@ -5,9 +6,10 @@ const messages = {}
 
 // TODO: on init, validate JSON
 
-const init = (workflowPath) => {
-  messagesJSON = require(workflowPath)
-  //TODO: Look for candymail.workflow.json in the root path
+const init = (workflowPath, config) => {
+  messagesJSON = require(workflowPath)// TODO: Look for candymail.workflow.json in the root path
+
+  setConfig(config)
 }
 
 const build = (emails, sendTo) => {

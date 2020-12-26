@@ -11,6 +11,7 @@ Email Automation library
 ## Notes
 1. Only the hour value will be used in the cron, minutes will be ignored. +1 hour at 11:58 is 12.
 2. Object keys: `MM/DD/YYYY:HH`. Hours are specified in 24-hour format. 
+3. Only GMail with `Less Secure Apps` turned on. 
 
 ## API Reference
 - `getAllMessages`: Get all scheduled emails
