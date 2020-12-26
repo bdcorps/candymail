@@ -1,13 +1,13 @@
 {
   "name": "candymail",
   "version": "1.0.0",
-  "description": "",
+  "description": "Email Automation Library for Node.js",
   "main": "index.js",
   "scripts": {
     "start": "node index",
     "example": "node example/app"
   },
-  "author": "",
+  "author": "sssaini",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
