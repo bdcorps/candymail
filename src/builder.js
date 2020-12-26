@@ -1,11 +1,16 @@
-const messagesJSON = require('./candymail.workflow.json')
 const { generateDateKey } = require('./helper')
 
+let messagesJSON = {}
 const messages = {}
 
 // TODO: on init, validate JSON
 
-const buildCandyMail = (emails, sendTo) => {
+const init = (workflowPath) => {
+  messagesJSON = require(workflowPath)
+  //TODO: Look for candymail.workflow.json in the root path
+}
+
+const build = (emails, sendTo) => {
   emails.forEach(({ trigger, sendDelay, subject, body, from }) => {
     const template = 'default'
     const today = new Date()
@@ -17,10 +22,10 @@ const buildCandyMail = (emails, sendTo) => {
   })
 }
 
-const runCandyMailWorkflow = (workflow, sendTo) => {
+const runWorkflow = (workflow, sendTo) => {
+  if (!messagesJSON) { throw new Error('No workflow configuration found. Run the init first: init()') }
   const messagesInWorkflow = messagesJSON.workflows.find(message => message.name === workflow)
-  buildCandyMail(messagesInWorkflow.emails, sendTo)
-  console.log('runCandyMailWorkflow', messages)
+  build(messagesInWorkflow.emails, sendTo)
 }
 
 const addMessage = (time, messageOptions) => {
@@ -35,4 +40,8 @@ const getMessagesAtTime = (time) => {
   return messages[time]
 }
 
-module.exports = { runCandyMailWorkflow, addMessage, getMessagesAtTime }
+const getAllMessages = () => {
+  return messages
+}
+
+module.exports = { init, runWorkflow, addMessage, getAllMessages, getMessagesAtTime }

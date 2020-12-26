@@ -8,7 +8,14 @@
         {
           "trigger": "time",
           "sendDelay": 1,
-          "subject": "email1 from workflow 1 Get access to 10+ customizations with the Pro plan",
+          "subject": "w1e1",
+          "body": "Customizations are great",
+          "from": "sunnyashiin@gmail.com"
+        },
+        {
+          "trigger": "time",
+          "sendDelay": 3,
+          "subject": "w1e2",
           "body": "Customizations are great",
           "from": "sunnyashiin@gmail.com"
         }
@@ -21,8 +28,8 @@
       "emails": [
         {
           "trigger": "time",
-          "sendDelay": 1,
-          "subject": "email 1 from workflow 2 Get access to 10+ customizations with the Pro plan",
+          "sendDelay": 2,
+          "subject": "w2e1",
           "body": "Customizations are great",
           "from": "sunnyashiin@gmail.com"
         }
