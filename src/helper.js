@@ -5,8 +5,8 @@ const { getConfig } = require('./config.js')
 const transporter = mailer.createTransport({
   service: 'gmail',
   auth: {
-    user: getConfig.senderEmail,
-    pass: getConfig.senderPassword
+    user: getConfig().senderEmail,
+    pass: getConfig().senderPassword
   }
 })
 
