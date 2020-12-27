@@ -2,15 +2,15 @@
 const mailer = require('nodemailer')
 const { getConfig } = require('./config.js')
 
-const transporter = mailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: getConfig().senderEmail,
-    pass: getConfig().senderPassword
-  }
-})
-
 const sendEmail = ({ template, sendFrom, sendTo, subject, body }) => {
+  const transporter = mailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: getConfig().senderEmail,
+      pass: getConfig().senderPassword
+    }
+  })
+
   const mailOptions = {
     from: sendFrom,
     to: sendTo,
