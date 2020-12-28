@@ -8,7 +8,7 @@ jest.mock('../index')
 jest.mock('../src/scheduler')
 jest.mock('../src/helper')
 
-test('Adding 1 + 1 equals 2', () => {
+test('Should send email at time', () => {
   const response = [{
     template: 'default',
     sendFrom: 'sunnyashiin@gmail.com',
