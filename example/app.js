@@ -4,9 +4,10 @@ const candymail = require('../index')
 const automationPath = path.resolve('example', 'candymail.automation.json')
 candymail.init(automationPath, {
   senderEmail: process.env.MAIL_USER,
-  senderPassword: process.env.MAIL_PASSWORD,
-  automationPath
+  senderPassword: process.env.MAIL_PASSWORD
 })
+
+candymail.start()
 
 const someConditionSatisfiedByUser = () => {
   const user1 = 'betoko1104@chatdays.com'

@@ -6,10 +6,10 @@ let config = {
 
 const setConfig = (userConfig) => {
   // TODO: Better  validation with joi
-  if (userConfig.senderEmail && userConfig.senderPassword && userConfig.automationPath) {
+  if (userConfig.senderEmail && userConfig.senderPassword) {
     config = userConfig
   } else {
-    throw new Error('senderEmail, senderPasword, automationPath not provided')
+    throw new Error('senderEmail, senderPasword, not provided')
   }
 }
 

@@ -4,29 +4,39 @@ require('dotenv').config()
 const cron = require('node-cron')
 
 const { generateDateKey, sendEmail } = require('./src/helper')
-const { init, runAutomation, getAllScheduledMessages, getScheduledMessagesAtTime } = require('./src/scheduler')
+const { init, runAutomation, getAllScheduledMessages, getScheduledMessagesAtTime, clearAllScheduledMessages } = require('./src/scheduler')
 
 // scheduler runs automatically on import
-// cron.schedule('0 * * * *', () => {
-//   console.log(`Running cron work at ${(new Date()).getHours}`)
-//   const today = new Date() // TODO: get data in ETC all the time, this is local time to the machine
-//   const dateKey = generateDateKey(today)
-//   console.log('Looking for messages on', dateKey)
-//   sendMessagesNow(dateKey)
-// })
+const task = cron.schedule('* * * * * *', () => {
+  console.log(`Running cron work at ${(new Date()).getHours}`)
+  // TODO: get data in ETC all the time, this is local time to the machine
+  sendMessagesNow()
+}, {
+  scheduled: false
+})
 
-const sendMessagesNow = (dateKey) => {
-  // console.log('d')
+const start = () => {
+  task.start()
+}
+
+const stop = () => {
+  task.stop()
+}
+
+const destroy = () => {
+  task.destroy()
+}
+
+const sendMessagesNow = () => {
+  const dateKey = generateDateKey()
   const messagesForThisHour = getScheduledMessagesAtTime(dateKey)
 
-  console.log('messagesForThisHour', messagesForThisHour)
-
   if (messagesForThisHour) {
-    console.log('sending mail')
     messagesForThisHour.forEach(message => {
+      console.log('sendEmail')
       sendEmail(message)
     })
   } else { console.log('no messages to send at this time') }
 }
 
-module.exports = { init, runAutomation, getAllScheduledMessages, getScheduledMessagesAtTime, sendMessagesNow }
+module.exports = { init, start, stop, destroy, runAutomation, getAllScheduledMessages, getScheduledMessagesAtTime, clearAllScheduledMessages, sendMessagesNow }

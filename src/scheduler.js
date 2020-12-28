@@ -1,10 +1,9 @@
+const path = require('path')
 const { setConfig } = require('./config')
 const { generateDateKey } = require('./helper')
-const path = require('path')
-const { addScheduledMessage } = require('./messages')
+const { addScheduledMessage, getAllScheduledMessages, getScheduledMessagesAtTime, clearAllScheduledMessages } = require('./messages')
 
 let loadedAutomations = {}
-const scheduledMessages = {}
 
 // TODO: on init, validate JSON
 
@@ -12,7 +11,6 @@ const init = (automationPath, config) => {
   const automationFile = require(automationPath) || path.resolve(process.cwd(), './candymail.automation.json')
 
   loadedAutomations = loadAutomations(automationFile)
-
   // TODO: Look for candymail.automation.json in the root path
 
   setConfig(config)
@@ -40,12 +38,4 @@ const runAutomation = (automation, sendTo) => {
   build(messagesInAutomation.emails, sendTo)
 }
 
-const getScheduledMessagesAtTime = (time) => {
-  return scheduledMessages[time]
-}
-
-const getAllScheduledMessages = () => {
-  return scheduledMessages
-}
-
-module.exports = { init, runAutomation, addScheduledMessage, getAllScheduledMessages, getScheduledMessagesAtTime }
+module.exports = { init, runAutomation, addScheduledMessage, getAllScheduledMessages, getScheduledMessagesAtTime, clearAllScheduledMessages }

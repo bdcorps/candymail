@@ -1,4 +1,4 @@
-const scheduledMessages = {}
+let scheduledMessages = {}
 
 const addScheduledMessage = (time, messageOptions) => {
   if (time in scheduledMessages) {
@@ -8,4 +8,16 @@ const addScheduledMessage = (time, messageOptions) => {
   }
 }
 
-module.exports = { addScheduledMessage }
+const getScheduledMessagesAtTime = (time) => {
+  return scheduledMessages[time]
+}
+
+const getAllScheduledMessages = () => {
+  return scheduledMessages
+}
+
+const clearAllScheduledMessages = () => {
+  scheduledMessages = {}
+}
+
+module.exports = { addScheduledMessage, getScheduledMessagesAtTime, getAllScheduledMessages, clearAllScheduledMessages }
