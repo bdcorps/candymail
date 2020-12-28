@@ -1,15 +1,15 @@
 let config = {
   senderEmail: '',
   senderPassword: '',
-  workflowPath: ''
+  automationPath: ''
 }
 
-const setConfig = (myConfig) => {
+const setConfig = (userConfig) => {
   // TODO: Better  validation with joi
-  if (myConfig.senderEmail && myConfig.senderPassword && myConfig.workflowPath) {
-    config = myConfig
+  if (userConfig.senderEmail && userConfig.senderPassword && userConfig.automationPath) {
+    config = userConfig
   } else {
-    throw new Error('senderEmail, senderPasword, workflowPath not provided')
+    throw new Error('senderEmail, senderPasword, automationPath not provided')
   }
 }
 

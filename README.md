@@ -16,14 +16,14 @@ Email Automation library
 ## API Reference
 - `getAllMessages`: Get all scheduled emails
 - `getMessagesAtTime`: Get all emails scheduled for a specific time
-- `runWorkflow`: Run specific workflow defined in the candymail.workflow.json with the `user` being the recipient's email address
+- `runAutomation`: Run specific automation defined in the candymail.automation.json with the `user` being the recipient's email address
 
 ## Sample Configuration
 ```
 {
-  "workflows": [
+  "automations": [
     {
-      "name": "workflow1",
+      "name": "automation1",
       "description": "tell user about pro features",
       "trigger_name": "proplan",
       "emails": [
@@ -44,7 +44,7 @@ Email Automation library
       ]
     },
     {
-      "name": "workflow2",
+      "name": "automation2",
       "description": "tell user about pro features 2",
       "trigger_name": "proplan",
       "emails": [
