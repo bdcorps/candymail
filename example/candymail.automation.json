@@ -2,36 +2,36 @@
   "automations": [
     {
       "name": "automation1",
-      "description": "tell user about pro features",
+      "description": "tell users about pro features",
       "trigger_name": "proplan",
       "emails": [
         {
           "trigger": "time",
           "sendDelay": 1,
-          "subject": "w1e1",
-          "body": "Customizations are great",
-          "from": "sunnyashiin@gmail.com"
+          "subject": "Have you tried Feature A?",
+          "body": "Feature A will let you do ABC things. Check it out!",
+          "from": "abc@gmail.com"
         },
         {
           "trigger": "time",
           "sendDelay": 3,
-          "subject": "w1e2",
-          "body": "Customizations are great",
-          "from": "sunnyashiin@gmail.com"
+          "subject": "Try our feature B!",
+          "body": "We released feature B just last week and can't wait for you to try it out :)",
+          "from": "abc@gmail.com"
         }
       ]
     },
     {
       "name": "automation2",
-      "description": "tell user about pro features 2",
-      "trigger_name": "proplan",
+      "description": "Are you having trouble with XYZ?",
+      "trigger_name": "support",
       "emails": [
         {
           "trigger": "time",
           "sendDelay": 2,
-          "subject": "w2e1",
-          "body": "Customizations are great",
-          "from": "sunnyashiin@gmail.com"
+          "subject": "We are here for your questions 24/7",
+          "body": "Looks like you hit a bug, we can definitely help you out. Open a support ticket right now on our website.",
+          "from": "abc@gmail.com"
         }
       ]
     }

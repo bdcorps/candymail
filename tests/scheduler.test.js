@@ -10,7 +10,7 @@ jest.mock('../src/helper', () => {
   }
 })
 
-describe('MyLastMssg Component', () => {
+describe('Basic Tests', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     jest.resetAllMocks()
@@ -52,9 +52,12 @@ describe('MyLastMssg Component', () => {
 
     const user1 = 'betoko1104@chatdays.com'
     scheduler.runAutomation('automation1', user1)
-    console.log('messasges', scheduler.getAllScheduledMessages())
-    expect(Object.keys(scheduler.getAllScheduledMessages()).length).toBe(1)
 
-    expect(Object.keys(scheduler.getAllScheduledMessages()['8/19/2020:23']).length).toBe(2)
+    console.log('schedule', scheduler.getAllScheduledMessages())
+
+    expect(Object.keys(scheduler.getAllScheduledMessages()).length).toBe(2)
+
+    expect(scheduler.getAllScheduledMessages()['8/20/2020:0'].length).toBe(1)
+    expect(scheduler.getAllScheduledMessages()['8/20/2020:2'].length).toBe(1)
   })
 })

@@ -26,9 +26,9 @@ const sendEmail = ({ template, sendFrom, sendTo, subject, body }) => {
   })
 }
 
-const generateDateKey = () => {
-  const today = new Date(Date.now())
-  return today.toLocaleDateString('en-US') + ':' + today.getHours() // 7/21/1983:23
+const generateDateKey = (today) => {
+  const date = today || new Date(Date.now())
+  return date.toLocaleDateString('en-US') + ':' + date.getHours() // 7/21/1983:23
 }
 
 module.exports = { sendEmail, generateDateKey }

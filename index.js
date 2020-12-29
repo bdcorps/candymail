@@ -8,7 +8,7 @@ const { init, runAutomation, getAllScheduledMessages, getScheduledMessagesAtTime
 
 // scheduler runs automatically on import
 const task = cron.schedule('* * * * * *', () => {
-  console.log(`Running cron work at ${(new Date()).getHours}`)
+  console.log(`Running cron work at ${(new Date()).getHours()}`)
   // TODO: get data in ETC all the time, this is local time to the machine
   sendMessagesNow()
 }, {
@@ -17,6 +17,7 @@ const task = cron.schedule('* * * * * *', () => {
 
 const start = () => {
   task.start()
+  console.log('start', task.getStatus(), new Date().toLocaleTimeString())
 }
 
 const stop = () => {

@@ -23,7 +23,7 @@ const loadAutomations = (file) => {
 const build = (emails, sendTo) => {
   emails.forEach(({ trigger, sendDelay, subject, body, from }) => {
     const template = 'default'
-    const today = new Date()
+    const today = new Date(Date.now())
     today.setHours(today.getHours() + sendDelay) // TDDO: problem here. what happens with 10:59 + 1 will be 11
     const time = generateDateKey(today)
     const sendFrom = from
