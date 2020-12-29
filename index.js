@@ -7,7 +7,7 @@ const { generateDateKey, sendEmail } = require('./src/helper')
 const { init, runAutomation, getAllScheduledMessages, getScheduledMessagesAtTime, clearAllScheduledMessages } = require('./src/scheduler')
 
 // scheduler runs automatically on import
-const task = cron.schedule('* * * * * *', () => {
+const task = cron.schedule('0 * * * *', () => {
   console.log(`Running cron work at ${(new Date()).getHours()}`)
   // TODO: get data in ETC all the time, this is local time to the machine
   sendMessagesNow()
