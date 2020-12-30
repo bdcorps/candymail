@@ -78,7 +78,7 @@ candymail.runAutomation('automation1', user)
 
 console.log('Emails added to queue', candymail.getAllScheduledMessages())
 ```
-Note: Having problems with Gmail? Enable `Allow less secure apps`  in Google Account settings [here](!https://myaccount.google.com/lesssecureapps).
+Note: Having problems with Gmail? Enable `Allow less secure apps`  in Google Account settings [here](https://myaccount.google.com/lesssecureapps).
 
 ## Automation File Options
 | Property        | Required           | Description  |
