@@ -1,22 +1,24 @@
+![npm](https://img.shields.io/npm/v/candymail)
+![David](https://img.shields.io/david/bdcorps/candymail)
+![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fsssaini_)
+
 # CandyMail - Email Automation for Node.js
 
 <p align="center">
   <img src="https://github.com/bdcorps/candymail/blob/main/web1.png?raw=true" />
 </p>
 
-Trigger and send multi-step email sequences in Node.js using a single JSON file.
+Candymail makes it easy to trigger and send multi-step email sequences in Node.js using a single JSON file. Built for bootstrappers, indie makers with special care. 
 
 ## Features
 1. **Portable**: Create, share and reuse email marketing strategies between different products 
 2. **Simple to use**: Time to send, subject, body of the emails can all be set up in a single JSON file
 3. **Free**: No need to pay for monthly Mailchimp etc. payments for email automation plans
 
-
-## Who is it for?
-- SAAS Product Makers
-
-## Why use this?
-- Increase retention by sending users personalized emails when they complete certain actions in your application. 
+## Use Cases
+- Build better onboarding by guiding the user through the app with paced training emails
+- Reduce churn by sending exciting community content every few days
+- Convert more customers to paid plans by offering discounts based on the user's usage activity
 
 ## Installation
 Install candymail using yarn:
@@ -84,3 +86,5 @@ Note: Having problems with Gmail? Enable `Allow less secure apps`  in Google Acc
 1. Only the hour value will be used in the cron, minutes will be ignored. +1 hour at 11:58 is 12.
 2. Object keys: `MM/DD/YYYY:HH`. Hours are specified in 24-hour format. 
 3. Only GMail with `Less Secure Apps` turned on. 
+
+Got feedback? Hit me up at <a href="mailto:sunnyashiin@gmail.com">sunnyashiin@gmail.com</a>
