@@ -6,6 +6,11 @@
 
 Trigger and send multi-step email sequences in Node.js using a single JSON file.
 
+## Features
+1. **Portable**: Create, share and reuse email marketing strategies between different products 
+2. **Simple to use**: Time to send, subject, body of the emails can all be set up in a single JSON file
+3. **Free**: No need to pay for monthly Mailchimp etc. payments for email automation plans
+
 
 ## Who is it for?
 - SAAS Product Makers
