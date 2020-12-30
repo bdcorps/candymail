@@ -1,3 +1,4 @@
+![NPM](https://img.shields.io/npm/l/candymail)
 ![npm](https://img.shields.io/npm/v/candymail)
 ![David](https://img.shields.io/david/bdcorps/candymail)
 
