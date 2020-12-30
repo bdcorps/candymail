@@ -5,7 +5,7 @@
 Candymail makes it easy to trigger and send multi-step email sequences in Node.js using a single JSON file. Built for bootstrappers, indie makers with special care. 
 
 <p align="center">
-  <img src="https://github.com/bdcorps/candymail/blob/main/web1.png?raw=true" />
+  <img src="https://github.com/bdcorps/candymail/blob/main/web.png?raw=true" />
 </p>
 
 ## Features
@@ -80,9 +80,17 @@ console.log('Emails added to queue', candymail.getAllScheduledMessages())
 ```
 Note: Having problems with Gmail? Enable `Allow less secure apps`  in Google Account settings [here](!https://myaccount.google.com/lesssecureapps).
 
+## Automation File Options
+| Property        | Required           | Description  |
+| ------------- |:-------------:| -----:|
+| trigger     | No | Name of the trigger (Not usable) |
+| sendDelay      | Yes | Delay after which the email will be sent (in hours). From time 0, not from the last email |
+| subject | Yes  | Subject of the email |
+| body | Yes | Body of the email |
+| from | Yes | Sender's Email Address |
+
 ## Notes
 1. Only the hour value will be used in the cron, minutes will be ignored. +1 hour at 11:58 is 12.
 2. Object keys: `MM/DD/YYYY:HH`. Hours are specified in 24-hour format. 
-3. Only GMail with `Less Secure Apps` turned on. 
 
 Got feedback? Hit me up at <a href="mailto:sunnyashiin@gmail.com">sunnyashiin@gmail.com</a>
