@@ -59,6 +59,11 @@ Here's a sample:
   ]
 }
 ```
+
+### Supported Email Providers
+- Gmail
+- Looking for more support? Send me a message.
+
 ### Usage
 ```
 const path = require('path')
@@ -89,8 +94,44 @@ Note: Having problems with Gmail? Enable `Allow less secure apps`  in Google Acc
 | body | Yes | Body of the email |
 | from | Yes | Sender's Email Address |
 
+## Methods
+### init (automationPath, config)
+Initializes automations specified in the automation path and sets the configuration with sender's email and password.
+- **automationPath**: Absolute path to the candymail.automation.json file. Example: `path.resolve('example', 'candymail.automation.json')` if the file is located at `*ROOT*/example/candymail.automation.json`.
+
+- **config**: ```{
+  senderEmail -> Gmail Address of the sender
+  senderPassword -> Gmail Password of the sender
+}```
+
+### start()
+Starts the internal timer that will send emails at appropriate times. 
+
+### runAutomation(automationName)
+Triggers an automation based on `name` specified in the `candymail.automation.json` file. Needs `candymail.start()` to have been called.
+- **automationName**: Name of `automation` in `candymail.automation.json`. Example: 'automation1'.
+
+### getAllScheduledMessages()
+Get the list of all scheduled messages. 
+
+### getScheduledMessagesAtTime(time)
+Get the list of scheduled messages for a particular `time`. 
+- **time**: Time should be specified in this format: `MM/DD/YYYY:HH`. For Example: `8/20/2020:2`.
+
+### clearAllScheduledMessages()
+Clears all scheduled messages.
+
+### stop()
+Stops the internal timer. Can be restarted with `candymail.start()`
+
+### destroy()
+Destroys the internal timer. 
+
+
 ## Notes
 1. Only the hour value will be used in the cron, minutes will be ignored. +1 hour at 11:58 is 12.
 2. Object keys: `MM/DD/YYYY:HH`. Hours are specified in 24-hour format. 
+3. There is currently no `Unsubscribe` option in the emails. Being worked on right now.
+4. Only supports GMail. More providers being added right now.  
 
 Got feedback? Hit me up at <a href="mailto:sunnyashiin@gmail.com">sunnyashiin@gmail.com</a>

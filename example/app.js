@@ -11,11 +11,11 @@ candymail.init(automationPath, {
 candymail.start()
 
 const someConditionSatisfiedByUser = () => {
-  const user1 = 'howivey729@chatdays.com'
-  candymail.runAutomation('automation2', user1)
+  const user1 = 'user1@gmail.com'
+  candymail.runAutomation('automation1', user1)
 
-  const user2 = 'cobwuc@mailpoof.com'
-  candymail.runAutomation('automation1', user2)
+  const user2 = 'user2@hotmail.com'
+  candymail.runAutomation('automation2', user2)
 }
 
 someConditionSatisfiedByUser()
