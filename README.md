@@ -1,6 +1,5 @@
 ![npm](https://img.shields.io/npm/v/candymail)
 ![David](https://img.shields.io/david/bdcorps/candymail)
-![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fsssaini_)
 
 # CandyMail - Email Automation for Node.js
 Candymail makes it easy to trigger and send multi-step email sequences in Node.js using a single JSON file. Built for bootstrappers, indie makers with special care. 
