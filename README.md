@@ -100,10 +100,8 @@ Note: Having problems with Gmail? Enable `Allow less secure apps`  in Google Acc
 Initializes automations specified in the automation path and sets the configuration with sender's email and password.
 - **automationPath**: Absolute path to the candymail.automation.json file. Example: `path.resolve('example', 'candymail.automation.json')` if the file is located at `*ROOT*/example/candymail.automation.json`.
 
-- **config**: ```{
-  senderEmail -> Gmail Address of the sender
-  senderPassword -> Gmail Password of the sender
-}```
+- **config**: `{senderEmail -> Gmail Address of the sender, senderPassword -> Gmail Password of the sender }`
+
 
 ### start()
 Starts the internal timer that will send emails at appropriate times. 
@@ -128,11 +126,11 @@ Stops the internal timer. Can be restarted with `candymail.start()`
 ### destroy()
 Destroys the internal timer. 
 
-
 ## Notes
 1. Only the hour value will be used in the cron, minutes will be ignored. +1 hour at 11:58 is 12.
 2. Object keys: `MM/DD/YYYY:HH`. Hours are specified in 24-hour format. 
 3. There is currently no `Unsubscribe` option in the emails. Being worked on right now.
 4. Only supports GMail. More providers being added right now.  
 
-Got feedback? Hit me up at <a href="mailto:sunnyashiin@gmail.com">sunnyashiin@gmail.com</a>
+Got Feeback? Hit me up at <a href="mailto:sunnyashiin@gmail.com">sunnyashiin@gmail.com</a>
+Now available for freelance work.
