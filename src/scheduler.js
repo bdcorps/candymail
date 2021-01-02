@@ -1,7 +1,7 @@
 const path = require('path')
 const { setConfig } = require('./config')
 const { generateDateKey } = require('./helper')
-const { addScheduledMessage, getAllScheduledMessages, getScheduledMessagesAtTime, clearAllScheduledMessages } = require('./messages')
+const { addScheduledMessage, getAllScheduledMessages, getScheduledMessagesAtTime, clearAllScheduledMessages, unsubscribeUser, hasUnsubscribed } = require('./messages') // TODO Clean these propagating imports
 
 let loadedAutomations = {}
 
@@ -38,4 +38,4 @@ const runAutomation = (automation, sendTo) => {
   build(messagesInAutomation.emails, sendTo)
 }
 
-module.exports = { init, runAutomation, addScheduledMessage, getAllScheduledMessages, getScheduledMessagesAtTime, clearAllScheduledMessages }
+module.exports = { init, runAutomation, addScheduledMessage, getAllScheduledMessages, getScheduledMessagesAtTime, clearAllScheduledMessages, unsubscribeUser, hasUnsubscribed }

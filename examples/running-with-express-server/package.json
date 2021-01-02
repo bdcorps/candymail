@@ -1,0 +1,16 @@
+{
+  "name": "candymail-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "candymail": "^1.0.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
+}

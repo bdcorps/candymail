@@ -1,7 +1,7 @@
 let config = {
   senderEmail: '',
   senderPassword: '',
-  automationPath: ''
+  hostingURL: ''
 }
 
 const setConfig = (userConfig) => {

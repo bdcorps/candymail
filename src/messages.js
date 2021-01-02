@@ -1,4 +1,5 @@
 let scheduledMessages = {}
+const unsubscribedUsers = []
 
 const addScheduledMessage = (time, messageOptions) => {
   if (time in scheduledMessages) {
@@ -6,6 +7,15 @@ const addScheduledMessage = (time, messageOptions) => {
   } else {
     scheduledMessages[time] = [messageOptions]
   }
+}
+
+const unsubscribeUser = (email) => {
+  unsubscribedUsers.push(email)
+  console.log(unsubscribedUsers)
+}
+
+const hasUnsubscribed = (email) => {
+  return unsubscribedUsers.includes(email)
 }
 
 const getScheduledMessagesAtTime = (time) => {
@@ -20,4 +30,4 @@ const clearAllScheduledMessages = () => {
   scheduledMessages = {}
 }
 
-module.exports = { addScheduledMessage, getScheduledMessagesAtTime, getAllScheduledMessages, clearAllScheduledMessages }
+module.exports = { addScheduledMessage, getScheduledMessagesAtTime, getAllScheduledMessages, clearAllScheduledMessages, unsubscribeUser, hasUnsubscribed }
