@@ -30,4 +30,11 @@ const clearAllScheduledMessages = () => {
   scheduledMessages = {}
 }
 
-module.exports = { addScheduledMessage, getScheduledMessagesAtTime, getAllScheduledMessages, clearAllScheduledMessages, unsubscribeUser, hasUnsubscribed }
+module.exports = {
+  addScheduledMessage,
+  getScheduledMessagesAtTime,
+  getAllScheduledMessages,
+  clearAllScheduledMessages,
+  unsubscribeUser,
+  hasUnsubscribed,
+}

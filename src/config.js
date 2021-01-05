@@ -1,7 +1,7 @@
 let config = {
   senderEmail: '',
   senderPassword: '',
-  hostingURL: ''
+  hostingURL: '',
 }
 
 const setConfig = (userConfig) => {

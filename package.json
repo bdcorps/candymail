@@ -6,13 +6,15 @@
   "scripts": {
     "start": "node index",
     "example": "node example/app",
-    "test": "jest"
+    "test": "jest",
+    "prettify": "npx prettier --write **/*.js"
   },
   "author": "bdcorps",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "lodash": "^4.17.20",
     "node-cron": "^2.0.3",
     "nodemailer": "^6.4.17"
   },
@@ -20,7 +22,8 @@
     "example": "example"
   },
   "devDependencies": {
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "prettier": "2.2.1"
   },
   "standard": {
     "env": [

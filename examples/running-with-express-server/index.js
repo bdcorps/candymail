@@ -9,7 +9,7 @@ const automationPath = path.resolve('examples', 'candymail.automation.json')
 candymail.init(automationPath, {
   senderEmail: process.env.MAIL_USER,
   senderPassword: process.env.MAIL_PASSWORD,
-  hostingURL: 'http://localhost:3000'
+  hostingURL: 'http://localhost:3000',
 })
 
 candymail.start()
@@ -20,7 +20,9 @@ const someConditionSatisfiedByUser = () => {
 }
 
 app.get('/', (req, res) => {
-  res.send('Welcome to Candymail Demo. Go to /trigger to trigger the `automation1` email automation. Be sure to replace email with yours in the `someConditionSatisfiedByUser` method to be able to view the messages.')
+  res.send(
+    'Welcome to Candymail Demo. Go to /trigger to trigger the `automation1` email automation. Be sure to replace email with yours in the `someConditionSatisfiedByUser` method to be able to view the messages.'
+  )
 })
 
 app.get('/trigger', (req, res) => {

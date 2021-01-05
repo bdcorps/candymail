@@ -6,7 +6,7 @@ const automationPath = path.resolve('examples', 'candymail.automation.json')
 candymail.init(automationPath, {
   senderEmail: process.env.MAIL_USER,
   senderPassword: process.env.MAIL_PASSWORD,
-  hostingURL: 'http://localhost:3000'
+  hostingURL: 'http://localhost:3000',
 })
 
 candymail.start()

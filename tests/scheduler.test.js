@@ -6,7 +6,7 @@ const mockHelper = require('../src/helper')
 jest.mock('../src/helper', () => {
   return {
     ...jest.requireActual('../src/helper'),
-    sendEmail: jest.fn()
+    sendEmail: jest.fn(),
   }
 })
 
@@ -19,7 +19,13 @@ describe('Basic Tests', () => {
 
   test('should send email at time', () => {
     Date.now = jest.fn(() => new Date('2020-08-20T03:20:30Z'))
-    scheduler.addScheduledMessage('8/19/2020:23', { template: 'template', sendFrom: 'sendFrom', sendTo: 'sendTo', subject: 'subject', body: 'body' })
+    scheduler.addScheduledMessage('8/19/2020:23', {
+      template: 'template',
+      sendFrom: 'sendFrom',
+      sendTo: 'sendTo',
+      subject: 'subject',
+      body: 'body',
+    })
     console.log(mockHelper.sendEmail)
     sendMessagesNow()
 
@@ -27,8 +33,20 @@ describe('Basic Tests', () => {
   })
 
   test('should correctly send messages with a delay', () => {
-    scheduler.addScheduledMessage('8/19/2020:23', { template: 'template', sendFrom: 'sendFrom', sendTo: 'sendTo', subject: 'subject', body: 'body' })
-    scheduler.addScheduledMessage('8/20/2020:1', { template: 'template1', sendFrom: 'sendFrom1', sendTo: 'sendTo1', subject: 'subject1', body: 'body1' })
+    scheduler.addScheduledMessage('8/19/2020:23', {
+      template: 'template',
+      sendFrom: 'sendFrom',
+      sendTo: 'sendTo',
+      subject: 'subject',
+      body: 'body',
+    })
+    scheduler.addScheduledMessage('8/20/2020:1', {
+      template: 'template1',
+      sendFrom: 'sendFrom1',
+      sendTo: 'sendTo1',
+      subject: 'subject1',
+      body: 'body1',
+    })
 
     Date.now = jest.fn(() => new Date('2020-08-20T03:20:30Z'))
 
@@ -48,7 +66,7 @@ describe('Basic Tests', () => {
 
     scheduler.init(automationPath, {
       senderEmail: 'process.env.MAIL_USER',
-      senderPassword: 'process.env.MAIL_PASSWORD'
+      senderPassword: 'process.env.MAIL_PASSWORD',
     })
 
     const user1 = 'betoko1104@chatdays.com'
