@@ -1,3 +1,4 @@
+import { isEmpty } from "lodash"
 const path = require("path")
 const { setConfig } = require("./config")
 const { generateDateKey } = require("./helper")
@@ -8,7 +9,7 @@ const {
   clearAllScheduledMessages,
   unsubscribeUser,
   hasUnsubscribed,
-} = require("./messages") // TODO Clean these propagating imports
+} = require("./messages") // TODO: Clean these propagating imports
 
 let loadedAutomations = {}
 
@@ -29,7 +30,7 @@ const loadAutomations = (file) => {
 }
 
 const build = (emails, sendTo) => {
-  emails.forEach(({ trigger, sendDelay, subject, body, from }) => {
+  emails.forEach(({ sendDelay, subject, body, from }) => {
     const template = "default"
     const today = new Date(Date.now())
     today.setHours(today.getHours() + sendDelay) // TDDO: problem here. what happens with 10:59 + 1 will be 11
@@ -41,7 +42,7 @@ const build = (emails, sendTo) => {
 }
 
 const runAutomation = (automation, sendTo) => {
-  if (!loadedAutomations) {
+  if (!loadedAutomations || isEmpty(loadedAutomations)) {
     throw new Error("No automation configuration found. Run the init first: init()")
   }
   const messagesInAutomation = loadedAutomations.find((message) => message.name === automation)
