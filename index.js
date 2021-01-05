@@ -1,9 +1,9 @@
-require("dotenv").config()
+require('dotenv').config()
 // run cron every hour, check the respective entry in emailMap, send email based on properties
 
-const cron = require("node-cron")
+const cron = require('node-cron')
 
-const { generateDateKey, sendEmail } = require("./src/helper")
+const { generateDateKey, sendEmail } = require('./src/helper')
 const {
   init,
   runAutomation,
@@ -11,11 +11,11 @@ const {
   getScheduledMessagesAtTime,
   clearAllScheduledMessages,
   unsubscribeUser,
-} = require("./src/scheduler")
+} = require('./src/scheduler')
 
 // scheduler runs automatically on import
 const task = cron.schedule(
-  "0 * * * *",
+  '0 * * * *',
   () => {
     console.log(`Running cron work at ${new Date().getHours()}`)
     // TODO: get data in ETC all the time, this is local time to the machine
@@ -47,11 +47,11 @@ const sendMessagesNow = () => {
 
   if (messagesForThisHour) {
     messagesForThisHour.forEach((message) => {
-      console.log("sendEmail", message, sendEmail)
+      console.log('sendEmail', message, sendEmail)
       sendEmail(message)
     })
   } else {
-    console.log("no messages to send at this time")
+    console.log('no messages to send at this time')
   }
 }
 
