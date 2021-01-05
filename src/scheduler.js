@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash'
+const { isEmpty } = require('lodash')
 const path = require('path')
 const { setConfig } = require('./config')
 const { generateDateKey } = require('./helper')
