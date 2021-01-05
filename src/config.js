@@ -1,7 +1,7 @@
 let config = {
-  senderEmail: '',
-  senderPassword: '',
-  hostingURL: ''
+  senderEmail: "",
+  senderPassword: "",
+  hostingURL: "",
 }
 
 const setConfig = (userConfig) => {
@@ -9,7 +9,7 @@ const setConfig = (userConfig) => {
   if (userConfig.senderEmail && userConfig.senderPassword) {
     config = userConfig
   } else {
-    throw new Error('senderEmail, senderPasword, not provided')
+    throw new Error("senderEmail, senderPasword, not provided")
   }
 }
 

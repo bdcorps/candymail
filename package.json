@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index",
     "example": "node example/app",
-    "test": "jest"
+    "test": "jest",
+    "prettify": "npx prettier --write **/*.js"
   },
   "author": "bdcorps",
   "license": "MIT",
@@ -20,7 +21,8 @@
     "example": "example"
   },
   "devDependencies": {
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "prettier": "2.2.1"
   },
   "standard": {
     "env": [
