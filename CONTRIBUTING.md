@@ -2,7 +2,7 @@
 We want to make contributing to this project as easy and transparent as possible.
 
 ## Issues that you can work on 
-The project roadmap maintained on the Wiki [here](https://github.com/bdcorps/candymail/wiki/Project-Roadmap). The items are ordered by priority. Feel free to pick one of the items up and respond in the issue if you want to be assigned. 
+The project roadmap is maintained on the Wiki [here](https://github.com/bdcorps/candymail/wiki/Project-Roadmap). The items are ordered by priority. Feel free to pick one of the items up and respond in the issue if you want to be assigned. 
 
 ## Just getting started?
 Watch this free series - [How to Contribute to an Open Source Project on GitHub](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github).
