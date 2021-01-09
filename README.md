@@ -10,8 +10,8 @@ Candymail makes it easy to trigger and send multi-step email sequences in Node.j
 </p>
 
 ## New in 1.0.8
-1. Added `unsubscribe` support. Every email is appended with `Click here to unsubscribe` link by default.
-2. Added HTML support.  
+- Add HTML Templates
+- Unsubscribe Option added to email footer
 
 ## Features
 1. **Portable**: Create, share and reuse email marketing strategies between different products
