@@ -40,7 +40,22 @@ const sendEmail = ({ template, sendFrom, sendTo, subject, body }) => {
 
 const generateDateKey = (today) => {
   const date = today || new Date(Date.now())
-  return date.toLocaleDateString('en-US') + ':' + date.getHours() // 7/21/1983:23
+  console.log('actual date', date)
+  return date.toLocaleDateString('en-US', { timeZone: 'UTC' }) + ':' + date.getUTCHours() // 7/21/1983:23
+}
+
+const getUTCDate = () => {
+  var now = new Date(Date.now())
+  var utc_timestamp = Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate(),
+    now.getUTCHours(),
+    now.getUTCMinutes(),
+    now.getUTCSeconds(),
+    now.getUTCMilliseconds()
+  )
+  return utc_timestamp
 }
 
 module.exports = { sendEmail, generateDateKey }

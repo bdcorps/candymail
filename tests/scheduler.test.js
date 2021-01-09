@@ -19,7 +19,7 @@ describe('Basic Tests', () => {
 
   test('should send email at time', () => {
     Date.now = jest.fn(() => new Date('2020-08-20T03:20:30Z'))
-    scheduler.addScheduledMessage('8/19/2020:23', {
+    scheduler.addScheduledMessage('8/20/2020:3', {
       template: 'template',
       sendFrom: 'sendFrom',
       sendTo: 'sendTo',
@@ -48,11 +48,11 @@ describe('Basic Tests', () => {
       body: 'body1',
     })
 
-    Date.now = jest.fn(() => new Date('2020-08-20T03:20:30Z'))
-
+    Date.now = jest.fn(() => new Date('2020-08-19T23:20:30Z'))
+    console.log('send mes, ', scheduler.getAllScheduledMessages())
     sendMessagesNow()
 
-    Date.now = jest.fn(() => new Date('2020-08-20T05:20:30Z'))
+    Date.now = jest.fn(() => new Date('2020-08-20T01:20:30Z'))
 
     sendMessagesNow()
 
@@ -76,7 +76,7 @@ describe('Basic Tests', () => {
 
     expect(Object.keys(scheduler.getAllScheduledMessages()).length).toBe(2)
 
-    expect(scheduler.getAllScheduledMessages()['8/20/2020:0'].length).toBe(1)
-    expect(scheduler.getAllScheduledMessages()['8/20/2020:2'].length).toBe(1)
+    expect(scheduler.getAllScheduledMessages()['8/20/2020:4'].length).toBe(1)
+    expect(scheduler.getAllScheduledMessages()['8/20/2020:6'].length).toBe(1)
   })
 })

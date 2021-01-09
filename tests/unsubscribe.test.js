@@ -10,7 +10,7 @@ describe('Basic Tests', () => {
   test('should throw an error when email about to be sent to unsubscribed user', () => {
     Date.now = jest.fn(() => new Date('2020-08-20T03:20:30Z'))
     const user = 'unsubscribeduser@gmail.com'
-    scheduler.addScheduledMessage('8/19/2020:23', {
+    scheduler.addScheduledMessage('8/20/2020:3', {
       template: 'template',
       sendFrom: 'sendFrom',
       sendTo: user,
