@@ -19,4 +19,3 @@ const someConditionSatisfiedByUser = () => {
 }
 
 someConditionSatisfiedByUser()
-console.log(candymail.getAllScheduledMessages())

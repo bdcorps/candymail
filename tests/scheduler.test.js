@@ -26,7 +26,6 @@ describe('Basic Tests', () => {
       subject: 'subject',
       body: 'body',
     })
-    console.log(mockHelper.sendEmail)
     sendMessagesNow()
 
     expect(mockHelper.sendEmail).toHaveBeenCalledTimes(1)
@@ -49,7 +48,6 @@ describe('Basic Tests', () => {
     })
 
     Date.now = jest.fn(() => new Date('2020-08-19T23:20:30Z'))
-    console.log('send mes, ', scheduler.getAllScheduledMessages())
     sendMessagesNow()
 
     Date.now = jest.fn(() => new Date('2020-08-20T01:20:30Z'))
@@ -71,8 +69,6 @@ describe('Basic Tests', () => {
 
     const user1 = 'betoko1104@chatdays.com'
     scheduler.runAutomation('automation1', user1)
-
-    console.log('schedule', scheduler.getAllScheduledMessages())
 
     expect(Object.keys(scheduler.getAllScheduledMessages()).length).toBe(2)
 

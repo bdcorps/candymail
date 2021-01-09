@@ -3,7 +3,6 @@ const { getConfig } = require('./config.js')
 const { hasUnsubscribed } = require('./messages')
 
 const sendEmail = ({ template, sendFrom, sendTo, subject, body }) => {
-  console.log('sending email', sendTo, 'is here and it is ', hasUnsubscribed(sendTo))
   if (hasUnsubscribed(sendTo)) {
     throw new Error(
       `The user ${sendTo} you are trying to send a message to has already unsubscribed`
@@ -18,8 +17,7 @@ const sendEmail = ({ template, sendFrom, sendTo, subject, body }) => {
     },
   })
 
-  console.log('hosting is on ', getConfig().hostingURL)
-  const html = `<p>${body}</p><br><a href="${
+  const html = `${body}<br><a href="${
     getConfig().hostingURL
   }/unsubscribe?email=${sendTo}">Click here to unsubscribe</a>`
 
@@ -40,7 +38,6 @@ const sendEmail = ({ template, sendFrom, sendTo, subject, body }) => {
 
 const generateDateKey = (today) => {
   const date = today || new Date(Date.now())
-  console.log('actual date', date)
   return date.toLocaleDateString('en-US', { timeZone: 'UTC' }) + ':' + date.getUTCHours() // 7/21/1983:23
 }
 

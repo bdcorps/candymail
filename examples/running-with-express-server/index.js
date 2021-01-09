@@ -32,7 +32,6 @@ app.get('/trigger', (req, res) => {
 
 app.get('/unsubscribe', (req, res) => {
   const { email } = req.query
-  console.log(email)
   candymail.unsubscribeUser(email)
   res.send(`Sent a unsubscribe request for ${email}`)
 })

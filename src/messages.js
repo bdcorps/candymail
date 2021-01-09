@@ -11,7 +11,6 @@ const addScheduledMessage = (time, messageOptions) => {
 
 const unsubscribeUser = (email) => {
   unsubscribedUsers.push(email)
-  console.log(unsubscribedUsers)
 }
 
 const hasUnsubscribed = (email) => {

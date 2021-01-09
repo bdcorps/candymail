@@ -17,9 +17,6 @@ const {
 const task = cron.schedule(
   '0 * * * *',
   () => {
-    console.log(`Running cron work at ${new Date().getHours()}`)
-    // TODO: get data in ETC all the time, this is local time to the machine
-    console.log(`Current queue is ${JSON.stringify(getAllScheduledMessages())}`)
     sendMessagesNow()
   },
   {
@@ -29,7 +26,6 @@ const task = cron.schedule(
 
 const start = () => {
   task.start()
-  console.log(`Timer status: ${task.getStatus()}`)
 }
 
 const stop = () => {
@@ -42,16 +38,12 @@ const destroy = () => {
 
 const sendMessagesNow = () => {
   const dateKey = generateDateKey()
-  console.log(`Date right now is ${dateKey}`)
   const messagesForThisHour = getScheduledMessagesAtTime(dateKey)
 
   if (messagesForThisHour) {
     messagesForThisHour.forEach((message) => {
-      console.log('sendEmail', message, sendEmail)
       sendEmail(message)
     })
-  } else {
-    console.log('no messages to send at this time')
   }
 }
 
