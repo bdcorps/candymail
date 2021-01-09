@@ -9,6 +9,10 @@ Candymail makes it easy to trigger and send multi-step email sequences in Node.j
   <img src="https://github.com/bdcorps/candymail/blob/main/web.PNG?raw=true" />
 </p>
 
+## New in 1.0.8
+1. Added `unsubscribe` support. Every email is appended with `Click here to unsubscribe` link by default.
+2. Added HTML support.  
+
 ## Features
 1. **Portable**: Create, share and reuse email marketing strategies between different products
 2. **Simple to use**: Time to send, subject, body of the emails can all be set up in a single JSON file
@@ -45,7 +49,7 @@ Here's a sample:
           "trigger": "time",
           "sendDelay": 1,
           "subject": "Have you tried Feature A?",
-          "body": "Feature A will let you do ABC things. Check it out!",
+          "body": "Feature A will let you do ABC things. <p>We can also do HTML!</p>",
           "from": "abc@gmail.com"
         },
         {
@@ -86,13 +90,14 @@ console.log('Emails added to queue', candymail.getAllScheduledMessages())
 ```
 Note: Having problems with Gmail? Enable `Allow less secure apps`  in Google Account settings [here](https://myaccount.google.com/lesssecureapps).
 
+
 ## Automation File Options
 | Property        | Required           | Description  |
 | ------------- |:-------------:| -----:|
 | trigger     | No | Name of the trigger (Not usable) |
 | sendDelay      | Yes | Delay after which the email will be sent (in hours). From time 0, not from the last email |
 | subject | Yes  | Subject of the email |
-| body | Yes | Body of the email |
+| body | Yes | Body of the email: HTML or Text |
 | from | Yes | Sender's Email Address |
 
 ## Methods
@@ -101,7 +106,6 @@ Initializes automations specified in the automation path and sets the configurat
 - **automationPath**: Absolute path to the candymail.automation.json file. Example: `path.resolve('example', 'candymail.automation.json')` if the file is located at `*ROOT*/example/candymail.automation.json`.
 
 - **config**: `{senderEmail -> Gmail Address of the sender, senderPassword -> Gmail Password of the sender }`
-
 
 ### start()
 Starts the internal timer that will send emails at appropriate times.
@@ -125,6 +129,9 @@ Stops the internal timer. Can be restarted with `candymail.start()`
 
 ### destroy()
 Destroys the internal timer.
+
+### unsubscribeUser(email)
+Unsubscribes a user's email. No further emails will be sent out to the user. 
 
 ## Notes
 1. Only the hour value will be used in the cron, minutes will be ignored. +1 hour at 11:58 is 12.

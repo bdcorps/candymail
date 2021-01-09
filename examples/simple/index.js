@@ -14,7 +14,7 @@ candymail.start()
 // candymail.unsubscribeUser('user@hotmail.com') // Immediatedly unsubscribe user and they will not receive any more messages
 
 const someConditionSatisfiedByUser = () => {
-  const user = 'mewice9875@chomagor.com'
+  const user = 'gopode2677@vy89.com'
   candymail.runAutomation('automation1', user)
 }
 
