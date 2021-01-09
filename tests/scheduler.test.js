@@ -63,8 +63,8 @@ describe('Basic Tests', () => {
     const automationPath = path.resolve('mocks', 'candymail.automation.json')
 
     scheduler.init(automationPath, {
-      senderEmail: 'process.env.MAIL_USER',
-      senderPassword: 'process.env.MAIL_PASSWORD',
+      senderEmail: 'email@email.email',
+      senderPassword: 'password',
     })
 
     const user1 = 'betoko1104@chatdays.com'
@@ -75,4 +75,6 @@ describe('Basic Tests', () => {
     expect(scheduler.getAllScheduledMessages()['8/20/2020:4'].length).toBe(1)
     expect(scheduler.getAllScheduledMessages()['8/20/2020:6'].length).toBe(1)
   })
+
+  // TODO tests pending for email services configurations and their validations
 })

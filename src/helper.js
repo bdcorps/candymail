@@ -1,5 +1,4 @@
-const mailer = require('nodemailer')
-const { getConfig } = require('./config.js')
+const { getConfig, getTransporter, setConfig } = require('./config.js')
 const { hasUnsubscribed } = require('./messages')
 
 const sendEmail = ({ template, sendFrom, sendTo, subject, body }) => {
@@ -9,13 +8,7 @@ const sendEmail = ({ template, sendFrom, sendTo, subject, body }) => {
     )
   }
 
-  const transporter = mailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: getConfig().senderEmail || process.env.MAIL_USER,
-      pass: getConfig().senderPassword || process.env.MAIL_PASSWORD,
-    },
-  })
+  const transporter = getTransporter();
 
   const html = `${body}<br><a href="${
     getConfig().hostingURL
