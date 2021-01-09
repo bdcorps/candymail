@@ -185,7 +185,7 @@ Unsubscribes a user's email. No further emails will be sent out to the user.
 4. Only supports GMail. More providers being added right now.
 
 ## Looking to contribute?
-Read the `CONTRIBUTING.md` and pick up issues to work on from the Project Roadmap [here](/wiki/Project-Roadmap).
+Read the `CONTRIBUTING.md` and pick up issues to work on from the Project Roadmap [here](https://github.com/bdcorps/candymail/wiki/Project-Roadmap).
 
 Got Feedback? Hit me up at <a href="mailto:sunnyashiin@gmail.com">sunnyashiin@gmail.com</a> \
 Now available for freelance work.
