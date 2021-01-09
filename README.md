@@ -184,5 +184,8 @@ Unsubscribes a user's email. No further emails will be sent out to the user.
 3. There is currently no `Unsubscribe` option in the emails. Being worked on right now.
 4. Only supports GMail. More providers being added right now.
 
+## Looking to contribute?
+Read the `CONTRIBUTING.md` and pick up issues to work on from the Project Roadmap [here](/wiki/Project-Roadmap).
+
 Got Feedback? Hit me up at <a href="mailto:sunnyashiin@gmail.com">sunnyashiin@gmail.com</a> \
 Now available for freelance work.
