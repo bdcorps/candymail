@@ -9,6 +9,9 @@ Candymail makes it easy to trigger and send multi-step email sequences in Node.j
   <img src="https://github.com/bdcorps/candymail/blob/main/web.PNG?raw=true" />
 </p>
 
+## New in 1.0.10
+- Full Typescript Support
+
 ## New in 1.0.8
 - Add HTML Templates
 - Unsubscribe Option added to email footer
