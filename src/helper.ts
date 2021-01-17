@@ -20,9 +20,8 @@ const sendEmail = (email: Email) => {
     },
   })
 
-  const html = `${body}<br><a href="${
-    getConfig().hostingURL
-  }/unsubscribe?email=${sendTo}">Click here to unsubscribe</a>`
+  const html = `${body}<br><a href="${getConfig().hostingURL
+    }/unsubscribe?email=${sendTo}">Click here to unsubscribe</a>`
 
   const mailOptions = {
     from: sendFrom,
@@ -32,9 +31,7 @@ const sendEmail = (email: Email) => {
   }
   transporter.sendMail(mailOptions, (err: any, info: any) => {
     if (err) {
-      console.log(err)
-    } else {
-      console.log(info)
+      throw err
     }
   })
 }
