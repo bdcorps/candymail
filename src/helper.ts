@@ -20,8 +20,9 @@ const sendEmail = (email: Email) => {
     },
   })
 
-  const html = `${body}<br><a href="${getConfig().hostingURL
-    }/unsubscribe?email=${sendTo}">Click here to unsubscribe</a>`
+  const html = `${body}<br><a href="${
+    getConfig().hostingURL
+  }/unsubscribe?email=${sendTo}">Click here to unsubscribe</a>`
 
   const mailOptions = {
     from: sendFrom,
