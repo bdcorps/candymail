@@ -1,7 +1,7 @@
-const path = require('path')
-const candymail = require('../../index')
+import * as path from 'path'
+import * as candymail from '../../index'
 
-const automationPath = path.resolve('examples', 'candymail.automation.json')
+const automationPath = path.resolve('..', 'candymail.automation.json')
 
 candymail.init(automationPath, {
   senderEmail: process.env.MAIL_USER,

@@ -1,16 +1,16 @@
-const { sendMessagesNow } = require('../index')
-const scheduler = require('../src/scheduler')
+import * as scheduler from '../index'
+import { addScheduledMessage, unsubscribeUser, clearAllScheduledMessages } from '../src/messages'
 
 describe('Basic Tests', () => {
   afterEach(() => {
     jest.clearAllMocks()
     jest.resetAllMocks()
-    scheduler.clearAllScheduledMessages()
+    clearAllScheduledMessages()
   })
   test('should throw an error when email about to be sent to unsubscribed user', () => {
-    Date.now = jest.fn(() => new Date('2020-08-20T03:20:30Z'))
+    Date.now = jest.fn(() => new Date('2020-08-20T03:20:30Z').valueOf())
     const user = 'unsubscribeduser@gmail.com'
-    scheduler.addScheduledMessage('8/20/2020:3', {
+    addScheduledMessage('8/20/2020:3', {
       template: 'template',
       sendFrom: 'sendFrom',
       sendTo: user,
@@ -18,10 +18,10 @@ describe('Basic Tests', () => {
       body: 'body',
     })
 
-    scheduler.unsubscribeUser(user)
+    unsubscribeUser(user)
 
     expect(() => {
-      sendMessagesNow()
+      scheduler.sendMessagesNow()
     }).toThrow(
       new Error(
         'The user unsubscribeduser@gmail.com you are trying to send a message to has already unsubscribed'

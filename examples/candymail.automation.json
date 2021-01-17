@@ -28,7 +28,7 @@
       "emails": [
         {
           "trigger": "time",
-          "sendDelay": 2,
+          "sendDelay": 1,
           "subject": "w2e1",
           "body": "Customizations are great",
           "from": "sunnyashiin@gmail.com"

@@ -1,7 +1,10 @@
-let scheduledMessages = {}
-const unsubscribedUsers = []
+import { Email } from './types/types'
 
-const addScheduledMessage = (time, messageOptions) => {
+let scheduledMessages: Record<string, Email[]> = {}
+
+const unsubscribedUsers: string[] = []
+
+const addScheduledMessage = (time: string, messageOptions: Email) => {
   if (time in scheduledMessages) {
     scheduledMessages[time] = [...scheduledMessages[time], messageOptions]
   } else {
@@ -9,15 +12,15 @@ const addScheduledMessage = (time, messageOptions) => {
   }
 }
 
-const unsubscribeUser = (email) => {
+const unsubscribeUser = (email: string) => {
   unsubscribedUsers.push(email)
 }
 
-const hasUnsubscribed = (email) => {
+const hasUnsubscribed = (email: string) => {
   return unsubscribedUsers.includes(email)
 }
 
-const getScheduledMessagesAtTime = (time) => {
+const getScheduledMessagesAtTime = (time: string) => {
   return scheduledMessages[time]
 }
 
@@ -29,7 +32,7 @@ const clearAllScheduledMessages = () => {
   scheduledMessages = {}
 }
 
-module.exports = {
+export {
   addScheduledMessage,
   getScheduledMessagesAtTime,
   getAllScheduledMessages,

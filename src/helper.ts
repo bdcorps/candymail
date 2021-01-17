@@ -1,8 +1,11 @@
-const mailer = require('nodemailer')
-const { getConfig } = require('./config.js')
-const { hasUnsubscribed } = require('./messages')
+import { Email } from './types/types'
 
-const sendEmail = ({ template, sendFrom, sendTo, subject, body }) => {
+import * as mailer from 'nodemailer'
+import { getConfig } from './config'
+import { hasUnsubscribed } from './messages'
+
+const sendEmail = (email: Email) => {
+  const { template, sendFrom, sendTo, subject, body } = email
   if (hasUnsubscribed(sendTo)) {
     throw new Error(
       `The user ${sendTo} you are trying to send a message to has already unsubscribed`
@@ -27,7 +30,7 @@ const sendEmail = ({ template, sendFrom, sendTo, subject, body }) => {
     subject,
     html,
   }
-  transporter.sendMail(mailOptions, function (err, info) {
+  transporter.sendMail(mailOptions, (err: any, info: any) => {
     if (err) {
       console.log(err)
     } else {
@@ -36,23 +39,9 @@ const sendEmail = ({ template, sendFrom, sendTo, subject, body }) => {
   })
 }
 
-const generateDateKey = (today) => {
+const generateDateKey = (today: Date) => {
   const date = today || new Date(Date.now())
   return date.toLocaleDateString('en-US', { timeZone: 'UTC' }) + ':' + date.getUTCHours() // 7/21/1983:23
 }
 
-const getUTCDate = () => {
-  var now = new Date(Date.now())
-  var utc_timestamp = Date.UTC(
-    now.getUTCFullYear(),
-    now.getUTCMonth(),
-    now.getUTCDate(),
-    now.getUTCHours(),
-    now.getUTCMinutes(),
-    now.getUTCSeconds(),
-    now.getUTCMilliseconds()
-  )
-  return utc_timestamp
-}
-
-module.exports = { sendEmail, generateDateKey }
+export { sendEmail, generateDateKey }

@@ -93,7 +93,7 @@ module.exports = {
   // notifyMode: 'failure-change',
 
   // A preset that is used as a base for Jest's configuration
-  // preset: undefined,
+  preset: 'ts-jest',
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -173,14 +173,11 @@ module.exports = {
   // Setting this value to 'fake' allows the use of fake timers for functions such as 'setTimeout'
   // timers: 'real',
 
-  // A map from regular expressions to paths to transformers
-  // transform: undefined,
-
-  // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  // transformIgnorePatterns: [
-  //   '\\\\node_modules\\\\',
-  //   '\\.pnp\\.[^\\\\]+$'
-  // ],
+  transform: {
+    '^.+\\.(t|j)sx?$': 'ts-jest',
+  },
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,

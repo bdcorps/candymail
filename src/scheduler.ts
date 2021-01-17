@@ -1,21 +1,16 @@
-const { isEmpty } = require('lodash')
-const path = require('path')
-const { setConfig } = require('./config')
-const { generateDateKey } = require('./helper')
-const {
-  addScheduledMessage,
-  getAllScheduledMessages,
-  getScheduledMessagesAtTime,
-  clearAllScheduledMessages,
-  unsubscribeUser,
-  hasUnsubscribed,
-} = require('./messages') // TODO: Clean these propagating imports
+import { AutomationConfig, AutomationEmailConfig, AutomationFile, Config } from './types/types'
 
-let loadedAutomations = {}
+import { isEmpty } from 'lodash'
+import * as path from 'path'
+import { setConfig } from './config'
+import { generateDateKey } from './helper'
+import { addScheduledMessage } from './messages' // TODO: Clean these propagating imports
+
+let loadedAutomations: AutomationConfig[]
 
 // TODO: on init, validate JSON
 
-const init = (automationPath, config) => {
+const init = (automationPath: string, config: Config) => {
   const automationFile =
     require(automationPath) || path.resolve(process.cwd(), './candymail.automation.json')
 
@@ -25,11 +20,11 @@ const init = (automationPath, config) => {
   setConfig(config)
 }
 
-const loadAutomations = (file) => {
+const loadAutomations = (file: AutomationFile): AutomationConfig[] => {
   return file.automations
 }
 
-const build = (emails, sendTo) => {
+const build = (emails: AutomationEmailConfig[], sendTo: string) => {
   emails.forEach(({ sendDelay, subject, body, from }) => {
     const template = 'default'
     const today = new Date(Date.now())
@@ -41,21 +36,14 @@ const build = (emails, sendTo) => {
   })
 }
 
-const runAutomation = (automation, sendTo) => {
+const runAutomation = (automation: string, sendTo: string) => {
   if (!loadedAutomations || isEmpty(loadedAutomations)) {
     throw new Error('No automation configuration found. Run the init first: init()')
   }
   const messagesInAutomation = loadedAutomations.find((message) => message.name === automation)
-  build(messagesInAutomation.emails, sendTo)
+  if (messagesInAutomation) {
+    build(messagesInAutomation.emails, sendTo)
+  }
 }
 
-module.exports = {
-  init,
-  runAutomation,
-  addScheduledMessage,
-  getAllScheduledMessages,
-  getScheduledMessagesAtTime,
-  clearAllScheduledMessages,
-  unsubscribeUser,
-  hasUnsubscribed,
-}
+export { init, runAutomation }

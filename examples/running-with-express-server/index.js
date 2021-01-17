@@ -1,11 +1,11 @@
 require('dotenv').config()
 const path = require('path')
-const candymail = require('../../index')
+const candymail = require('../../lib')
 const express = require('express')
 const app = express()
 const port = 3000
 
-const automationPath = path.resolve('examples', 'candymail.automation.json')
+const automationPath = path.resolve('..', 'candymail.automation.json')
 candymail.init(automationPath, {
   senderEmail: process.env.MAIL_USER,
   senderPassword: process.env.MAIL_PASSWORD,
@@ -15,7 +15,7 @@ candymail.init(automationPath, {
 candymail.start()
 
 const someConditionSatisfiedByUser = () => {
-  const user = 'mewice9875@chomagor.com'
+  const user = 'gopode2677@vy89.com'
   candymail.runAutomation('automation1', user)
 }
 
