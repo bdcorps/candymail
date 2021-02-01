@@ -11,11 +11,9 @@ Candymail makes it easy to trigger and send multi-step email sequences in Node.j
 </p>
 
 ## New in 1.0.10
-- Full Typescript Support
-
-## New in 1.0.8
 - Add HTML Templates
 - Unsubscribe Option added to email footer
+- Full Typescript Support
 
 ## Features
 1. **Portable**: Create, share and reuse email marketing strategies between different products
@@ -75,15 +73,24 @@ Here's a sample:
 
 ### Simple Usage
 ```
-import * as path from 'path'
-import * as candymail from '../../index'
+require('dotenv').config()
+const candymail = require('candymail')
+const automations = require('../candymail.automation.json')
 
-const automationPath = path.resolve('..', 'candymail.automation.json')
-
-candymail.init(automationPath, {
-  senderEmail: process.env.MAIL_USER,
-  senderPassword: process.env.MAIL_PASSWORD,
-  hostingURL: 'http://localhost:3000',
+candymail.init(automations.automations, {
+  mail: {
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: true,
+    },
+  },
+  hosting: { url: process.env.HOSTING_URL },
 })
 
 candymail.start()
@@ -91,8 +98,9 @@ candymail.start()
 // candymail.unsubscribeUser('user@hotmail.com') // Immediatedly unsubscribe user and they will not receive any more messages
 
 const someConditionSatisfiedByUser = () => {
-  const user = 'gopode2677@vy89.com'
+  const user = process.env.RECIPIENT_EMAIL
   candymail.runAutomation('automation1', user)
+  console.log({ get: candymail.getAllScheduledMessages() })
 }
 
 someConditionSatisfiedByUser()
@@ -109,27 +117,32 @@ const port = 3000
 
 const automationPath = path.resolve('..', 'candymail.automation.json')
 candymail.init(automationPath, {
-  senderEmail: process.env.MAIL_USER,
-  senderPassword: process.env.MAIL_PASSWORD,
-  hostingURL: 'http://localhost:3000',
+  mail: {
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: true,
+    },
+  },
+  hosting: { url: process.env.HOSTING_URL },
 })
 
 candymail.start()
 
-const someConditionSatisfiedByUser = () => {
-  const user = 'gopode2677@vy89.com'
-  candymail.runAutomation('automation1', user)
-}
-
 app.get('/', (req, res) => {
-  res.send(
-    'Welcome to Candymail Demo. Go to /trigger to trigger the `automation1` email automation. Be sure to replace email with yours in the `someConditionSatisfiedByUser` method to be able to view the messages.'
-  )
-})
+  const user = process.env.RECIPIENT_EMAIL
+  candymail.runAutomation('automation1', user)
 
-app.get('/trigger', (req, res) => {
-  someConditionSatisfiedByUser()
-  res.send(candymail.getAllScheduledMessages())
+  res.send(
+    `Welcome to Candymail Demo. Messages scheduled: ${JSON.stringify(
+      candymail.getAllScheduledMessages()
+    )} `
+  )
 })
 
 app.get('/unsubscribe', (req, res) => {
@@ -156,11 +169,24 @@ Note: Having problems with Gmail? Enable `Allow less secure apps`  in Google Acc
 | from | Yes | Sender's Email Address |
 
 ## Methods
-### init (automationPath, config)
-Initializes automations specified in the automation path and sets the configuration with sender's email and password.
-- **automationPath**: Absolute path to the candymail.automation.json file. Example: `path.resolve('example', 'candymail.automation.json')` if the file is located at `*ROOT*/example/candymail.automation.json`.
+### init (automations, options)
+Loads up all the automations and the options.
+- **automations**: Automations to be run.
 
-- **config**: `{senderEmail -> Gmail Address of the sender, senderPassword -> Gmail Password of the sender }`
+- **options**: `{
+  mail: {
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: true,
+    },
+  },
+  hosting: { url: process.env.HOSTING_URL }`
 
 ### start()
 Starts the internal timer that will send emails at appropriate times.
