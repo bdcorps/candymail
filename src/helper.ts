@@ -1,7 +1,7 @@
 import { Email } from './types/types'
 
 import * as mailer from 'nodemailer'
-import { getConfig } from './config'
+import { getMailerConfig, getTransporter } from './config'
 import { hasUnsubscribed } from './messages'
 
 const sendEmail = (email: Email) => {
@@ -12,17 +12,10 @@ const sendEmail = (email: Email) => {
     )
   }
 
-  const transporter = mailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: getConfig().senderEmail || process.env.MAIL_USER,
-      pass: getConfig().senderPassword || process.env.MAIL_PASSWORD,
-    },
-  })
+  const transporter = getTransporter();
 
-  const html = `${body}<br><a href="${
-    getConfig().hostingURL
-  }/unsubscribe?email=${sendTo}">Click here to unsubscribe</a>`
+  const html = `${body}<br><a href="${getMailerConfig().hosting.url
+    }/unsubscribe?email=${sendTo}">Click here to unsubscribe</a>`
 
   const mailOptions = {
     from: sendFrom,

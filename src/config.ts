@@ -1,22 +1,26 @@
-import { Config } from './types/types'
+import { Options } from './types/types'
+import * as mailer from 'nodemailer'
+import * as validator from 'validator'
 
-let config: Config = {
-  senderEmail: '',
-  senderPassword: '',
-  hostingURL: '',
-}
+let config: Options
 
-const setConfig = (userConfig: Config) => {
-  // TODO: Better  validation with joi
-  if (userConfig.senderEmail && userConfig.senderPassword && userConfig.hostingURL) {
+const setMailerConfig = (userConfig: Options) => {
+  if (userConfig) {
     config = userConfig
   } else {
-    throw new Error('senderEmail, senderPasword, not provided')
+    throw new Error('Invalid Configurations provided for custom service')
   }
 }
 
-const getConfig = () => {
+/**
+ * @returns {config} Config
+ */
+const getMailerConfig = () => {
   return config
 }
 
-export { getConfig, setConfig }
+const getTransporter = (config = {}) => {
+  return mailer.createTransport(config)
+}
+
+export { getMailerConfig, setMailerConfig, getTransporter }

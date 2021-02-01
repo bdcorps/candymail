@@ -1,7 +1,7 @@
 import * as path from 'path'
 import { addScheduledMessage, getAllScheduledMessages, clearAllScheduledMessages } from '../src/messages'
-import { init, runAutomation } from '../src/scheduler'
-import { sendMessagesNow } from '../index'
+import { runAutomation } from '../src/scheduler'
+import { init, sendMessagesNow } from '../index'
 import * as mockHelper from '../src/helper'
 
 jest.mock('../src/helper', () => {
@@ -64,9 +64,19 @@ describe('Basic Tests', () => {
     const automationPath = path.resolve('mocks', 'candymail.automation.json')
 
     init(automationPath, {
-      senderEmail: 'process.env.MAIL_USER',
-      senderPassword: 'process.env.MAIL_PASSWORD',
-      hostingURL: 'process.env.HOSTING_URL'
+      mail: {
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+          user: 'user',
+          pass: 'pass',
+        },
+        tls: {
+          rejectUnauthorized: true,
+        },
+      },
+      hosting: { url: 'http://localhost:4242' },
     })
 
     const user1 = 'betoko1104@chatdays.com'
@@ -77,4 +87,6 @@ describe('Basic Tests', () => {
     expect(getAllScheduledMessages()['8/20/2020:4'].length).toBe(1)
     expect(getAllScheduledMessages()['8/20/2020:6'].length).toBe(1)
   })
+
+  // TODO tests pending for email services configurations and their validations
 })

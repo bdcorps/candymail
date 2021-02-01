@@ -4,9 +4,19 @@ import * as candymail from '../../index'
 const automationPath = path.resolve('..', 'candymail.automation.json')
 
 candymail.init(automationPath, {
-  senderEmail: process.env.MAIL_USER,
-  senderPassword: process.env.MAIL_PASSWORD,
-  hostingURL: 'http://localhost:3000',
+  mail: {
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: '',
+      pass: '',
+    },
+    tls: {
+      rejectUnauthorized: true,
+    },
+  },
+  hosting: { url: 'http://localhost:4242' },
 })
 
 candymail.start()

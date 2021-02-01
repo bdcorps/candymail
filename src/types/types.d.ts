@@ -6,10 +6,26 @@ export type Email = {
   body: string
 }
 
-export type Config = {
-  senderEmail: string
-  senderPassword: string
-  hostingURL: string
+export type HostingOptions = {
+  url: string
+}
+
+export type MailOptions = {
+  host: string,
+  port: number,
+  secure: boolean,
+  auth: {
+    user: string
+    pass: string
+  },
+  tls: {
+    rejectUnauthorized: true,
+  }
+}
+
+export type Options = {
+  mail: MailOptions,
+  hosting: HostingOptions
 }
 
 export type AutomationFile = {
