@@ -9,12 +9,17 @@ let loadedAutomations: AutomationConfig[]
 
 // TODO: on init, validate JSON
 
-const init = (automationPath: string, options: Options) => {
-  const automationFile =
-    require(automationPath) || path.resolve(process.cwd(), './candymail.automation.json')
+const init = (automations: AutomationConfig[], options: Options) => {
+  // TODO: Load from root 
+  // const automationFile =
+  //   require(automationPath) || path.resolve(process.cwd(), './candymail.automation.json')
 
-  loadedAutomations = loadAutomations(automationFile)
-  // TODO: Look for candymail.automation.json in the root path
+  if (!automations) {
+    const automationFile = require('../candymail.automation.json')
+    loadedAutomations = automationFile?.automations
+  } else {
+    loadedAutomations = automations
+  }
 
   setMailerConfig(options)
 }

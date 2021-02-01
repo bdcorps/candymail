@@ -2,10 +2,7 @@ import * as dotenv from "dotenv"
 dotenv.config()
 
 import { Email } from "./src/types/types"
-
-// run cron every hour, check the respective entry in emailMap, send email based on properties
 import * as cron from 'node-cron'
-
 import { generateDateKey, sendEmail } from './src/helper'
 
 import {
@@ -66,5 +63,5 @@ export {
   getScheduledMessagesAtTime,
   clearAllScheduledMessages,
   sendMessagesNow,
-  unsubscribeUser,
+  unsubscribeUser
 }

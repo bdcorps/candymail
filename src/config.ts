@@ -19,8 +19,9 @@ const getMailerConfig = () => {
   return config
 }
 
-const getTransporter = (config = {}) => {
-  return mailer.createTransport(config)
+const getTransporter = () => {
+  const config = getMailerConfig()
+  return mailer.createTransport(config.mail)
 }
 
 export { getMailerConfig, setMailerConfig, getTransporter }

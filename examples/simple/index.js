@@ -1,31 +1,39 @@
-import * as path from 'path'
-import * as candymail from '../../index'
+require('dotenv').config()
+const candymail = require('../../lib')
+const automations = require('../candymail.automation.json')
 
-const automationPath = path.resolve('..', 'candymail.automation.json')
-
-candymail.init(automationPath, {
+candymail.init(automations.automations, {
   mail: {
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
     auth: {
-      user: '',
-      pass: '',
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASSWORD,
     },
     tls: {
       rejectUnauthorized: true,
     },
   },
-  hosting: { url: 'http://localhost:4242' },
+  hosting: { url: process.env.HOSTING_URL },
 })
 
 candymail.start()
 
 // candymail.unsubscribeUser('user@hotmail.com') // Immediatedly unsubscribe user and they will not receive any more messages
 
+// candymail.sendEmail({
+//   template: 'string',
+//   sendFrom: 'sunnyashiin@gmail.com',
+//   sendTo: 'sunnyashiin@gmail.com',
+//   subject: 'string',
+//   body: 'string',
+// })
+
 const someConditionSatisfiedByUser = () => {
-  const user = 'gopode2677@vy89.com'
+  const user = process.env.RECIPIENT_EMAIL
   candymail.runAutomation('automation1', user)
+  console.log({ get: candymail.getAllScheduledMessages() })
 }
 
 someConditionSatisfiedByUser()

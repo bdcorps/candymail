@@ -7,9 +7,19 @@ const port = 3000
 
 const automationPath = path.resolve('..', 'candymail.automation.json')
 candymail.init(automationPath, {
-  senderEmail: process.env.MAIL_USER,
-  senderPassword: process.env.MAIL_PASSWORD,
-  hostingURL: 'http://localhost:3000',
+  mail: {
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: true,
+    },
+  },
+  hosting: { url: process.env.HOSTING_URL },
 })
 
 candymail.start()
