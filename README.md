@@ -1,5 +1,6 @@
 ![NPM](https://img.shields.io/npm/l/candymail)
 ![npm](https://img.shields.io/npm/v/candymail)
+![npm](https://img.shields.io/npm/dm/candymail)
 ![David](https://img.shields.io/david/bdcorps/candymail)
 
 # CandyMail - Email Automation for Node.js
