@@ -1,6 +1,5 @@
 import { AutomationConfig, AutomationEmailConfig, AutomationFile, Options } from './types/types'
 import { isEmpty } from 'lodash'
-import * as path from 'path'
 import { setMailerConfig } from './config'
 import { generateDateKey } from './helper'
 import { addScheduledMessage } from './messages' // TODO: Clean these propagating imports
@@ -10,10 +9,6 @@ let loadedAutomations: AutomationConfig[]
 // TODO: on init, validate JSON
 
 const init = (automations: AutomationConfig[], options: Options) => {
-  // TODO: Load from root 
-  // const automationFile =
-  //   require(automationPath) || path.resolve(process.cwd(), './candymail.automation.json')
-
   if (!automations) {
     const automationFile = require('../candymail.automation.json')
     loadedAutomations = automationFile?.automations
@@ -22,10 +17,6 @@ const init = (automations: AutomationConfig[], options: Options) => {
   }
 
   setMailerConfig(options)
-}
-
-const loadAutomations = (file: AutomationFile): AutomationConfig[] => {
-  return file.automations
 }
 
 const build = (emails: AutomationEmailConfig[], sendTo: string) => {

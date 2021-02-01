@@ -61,9 +61,10 @@ describe('Basic Tests', () => {
   test('Correctly sets automation messages', () => {
     Date.now = jest.fn(() => new Date('2020-08-20T03:20:30Z').valueOf())
 
-    const automationPath = path.resolve('mocks', 'candymail.automation.json')
+    const mockAutomationsFile = require('../mocks/candymail.automation.json')
+    const mockAutomations = mockAutomationsFile.automations
 
-    init(automationPath, {
+    init(mockAutomations, {
       mail: {
         host: 'smtp.gmail.com',
         port: 465,
