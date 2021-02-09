@@ -2,7 +2,7 @@ import { Email } from './types/types'
 
 import * as mailer from 'nodemailer'
 import { getMailerConfig, getTransporter } from './config'
-import { hasUnsubscribed } from './messages'
+import { hasUnsubscribed } from './unsubscribe'
 
 const sendEmail = (email: Email) => {
   const { template, sendFrom, sendTo, subject, body } = email

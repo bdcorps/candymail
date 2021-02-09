@@ -9,8 +9,11 @@ import {
   getAllScheduledMessages,
   getScheduledMessagesAtTime,
   clearAllScheduledMessages,
-  unsubscribeUser,
 } from './src/messages'
+
+import {
+  unsubscribeUser
+} from './src/unsubscribe'
 
 import {
   init,

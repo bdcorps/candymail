@@ -1,5 +1,6 @@
 import * as scheduler from '../index'
-import { addScheduledMessage, unsubscribeUser, clearAllScheduledMessages } from '../src/messages'
+import { addScheduledMessage, clearAllScheduledMessages } from '../src/messages'
+import { unsubscribeUser } from '../src/unsubscribe'
 
 describe('Basic Tests', () => {
   afterEach(() => {
