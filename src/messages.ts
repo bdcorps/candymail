@@ -26,5 +26,5 @@ export {
   addScheduledMessage,
   getScheduledMessagesAtTime,
   getAllScheduledMessages,
-  clearAllScheduledMessages
+  clearAllScheduledMessages,
 }

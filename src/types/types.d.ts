@@ -11,20 +11,20 @@ export type HostingOptions = {
 }
 
 export type MailOptions = {
-  host: string,
-  port: number,
-  secure: boolean,
+  host: string
+  port: number
+  secure: boolean
   auth: {
     user: string
     pass: string
-  },
+  }
   tls: {
-    rejectUnauthorized: true,
+    rejectUnauthorized: true
   }
 }
 
 export type Options = {
-  mail: MailOptions,
+  mail: MailOptions
   hosting: HostingOptions
 }
 

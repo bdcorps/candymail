@@ -12,10 +12,11 @@ const sendEmail = (email: Email) => {
     )
   }
 
-  const transporter = getTransporter();
+  const transporter = getTransporter()
 
-  const html = `${body}<br><a href="${getMailerConfig().hosting.url
-    }/unsubscribe?email=${sendTo}">Click here to unsubscribe</a>`
+  const html = `${body}<br><a href="${
+    getMailerConfig().hosting.url
+  }/unsubscribe?email=${sendTo}">Click here to unsubscribe</a>`
 
   const mailOptions = {
     from: sendFrom,

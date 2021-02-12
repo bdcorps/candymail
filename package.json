@@ -1,6 +1,6 @@
 {
   "name": "candymail",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Email Automation Library for Node.js",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
