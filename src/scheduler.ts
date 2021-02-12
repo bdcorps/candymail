@@ -1,7 +1,7 @@
 import { AutomationConfig, AutomationEmailConfig, AutomationFile, Options } from './types/types'
 import { isEmpty } from 'lodash'
 import { setMailerConfig } from './config'
-import { generateDateKey } from './helper'
+import { generateDateKey } from './utils/helper'
 import { addScheduledMessage } from './messages' // TODO: Clean these propagating imports
 
 let loadedAutomations: AutomationConfig[]

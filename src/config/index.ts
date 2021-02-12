@@ -1,6 +1,5 @@
-import { Options } from './types/types'
+import { Options } from '../types/types'
 import * as mailer from 'nodemailer'
-import * as validator from 'validator'
 
 let config: Options
 

@@ -2,11 +2,11 @@ import * as path from 'path'
 import { addScheduledMessage, getAllScheduledMessages, clearAllScheduledMessages } from '../src/messages'
 import { runAutomation } from '../src/scheduler'
 import { init, sendMessagesNow } from '../index'
-import * as mockHelper from '../src/helper'
+import * as mockHelper from '../src/utils/helper'
 
-jest.mock('../src/helper', () => {
+jest.mock('../src/utils/helper', () => {
   return {
-    ...jest.requireActual('../src/helper') as object,
+    ...jest.requireActual('../src/utils/helper') as object,
     sendEmail: jest.fn(),
   }
 })

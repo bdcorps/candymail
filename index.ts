@@ -3,7 +3,7 @@ dotenv.config()
 
 import { Email } from "./src/types/types"
 import * as cron from 'node-cron'
-import { generateDateKey, sendEmail } from './src/helper'
+import { generateDateKey, sendEmail } from './src/utils/helper'
 
 import {
   getAllScheduledMessages,
@@ -20,8 +20,6 @@ import {
   runAutomation
 } from './src/scheduler'
 
-
-// scheduler runs automatically on import
 const task = cron.schedule(
   '0 * * * *',
   () => {
@@ -47,10 +45,10 @@ const destroy = () => {
 const sendMessagesNow = () => {
   const today = new Date(Date.now())
   const dateKey = generateDateKey(today)
-  const messagesForThisHour = getScheduledMessagesAtTime(dateKey)
+  const messagesToBeSent = getScheduledMessagesAtTime(dateKey)
 
-  if (messagesForThisHour) {
-    messagesForThisHour.forEach((message: Email) => {
+  if (messagesToBeSent) {
+    messagesToBeSent.forEach((message: Email) => {
       sendEmail(message)
     })
   }
