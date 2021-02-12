@@ -109,14 +109,13 @@ someConditionSatisfiedByUser()
 ### Usage with Express Server
 ```
 require('dotenv').config()
-const path = require('path')
 const candymail = require('../../lib')
 const express = require('express')
 const app = express()
 const port = 3000
 
-const automationPath = path.resolve('..', 'candymail.automation.json')
-candymail.init(automationPath, {
+const automations = require('../candymail.automation.json')
+candymail.init(automations.automations, {
   mail: {
     host: 'smtp.gmail.com',
     port: 465,
@@ -152,7 +151,7 @@ app.get('/unsubscribe', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Learn about our new features at http://localhost:${port}/trigger`)
+  console.log(`Learn about our new features at http://localhost:${port}`)
 })
 ```
 
