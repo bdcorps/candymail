@@ -1,7 +1,7 @@
 import { Email } from '../types/types'
 
 import * as mailer from 'nodemailer'
-import { getMailerConfig, getTransporter } from '../config'
+import { getConfig, getTransporter } from '../config'
 import { hasUnsubscribed } from '../unsubscribe'
 
 const sendEmail = (email: Email) => {
@@ -14,9 +14,8 @@ const sendEmail = (email: Email) => {
 
   const transporter = getTransporter()
 
-  const html = `${body}<br><a href="${
-    getMailerConfig().hosting.url
-  }/unsubscribe?email=${sendTo}">Click here to unsubscribe</a>`
+  const html = `${body}<br><a href="${getConfig().hosting.url
+    }/unsubscribe?email=${sendTo}">Click here to unsubscribe</a>`
 
   const mailOptions = {
     from: sendFrom,

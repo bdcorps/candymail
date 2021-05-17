@@ -4,9 +4,9 @@ import Mail = require('nodemailer/lib/mailer')
 
 let config: Options
 
-const setMailerConfig = (userConfig: Options) => {
-  if (userConfig) {
-    config = userConfig
+const setConfig = (config: Options) => {
+  if (config) {
+    config = config
   } else {
     throw new Error('Invalid Configurations provided for custom service')
   }
@@ -15,13 +15,13 @@ const setMailerConfig = (userConfig: Options) => {
 /**
  * @returns {config} Config
  */
-const getMailerConfig = (): Options => {
+const getConfig = (): Options => {
   return config
 }
 
 const getTransporter = (): Mail => {
-  const mailerOptions = getMailerConfig()
+  const config = getConfig()
   return mailer.createTransport(config.mail)
 }
 
-export { getMailerConfig, setMailerConfig, getTransporter }
+export { getConfig, setConfig, getTransporter }

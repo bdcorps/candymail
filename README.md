@@ -99,7 +99,7 @@ candymail.start()
 
 const someConditionSatisfiedByUser = () => {
   const user = process.env.RECIPIENT_EMAIL
-  candymail.runAutomation('automation1', user)
+  candymail.runWorkflow('automation1', user)
   console.log({ get: candymail.getAllScheduledMessages() })
 }
 
@@ -135,7 +135,7 @@ candymail.start()
 
 app.get('/', (req, res) => {
   const user = process.env.RECIPIENT_EMAIL
-  candymail.runAutomation('automation1', user)
+  candymail.runWorkflow('automation1', user)
 
   res.send(
     `Welcome to Candymail Demo. Messages scheduled: ${JSON.stringify(
@@ -190,7 +190,7 @@ Loads up all the automations and the options.
 ### start()
 Starts the internal timer that will send emails at appropriate times.
 
-### runAutomation(automationName)
+### runWorkflow(workflowName)
 Triggers an automation based on `name` specified in the `candymail.automation.json` file. Needs `candymail.start()` to have been called.
 - **automationName**: Name of `automation` in `candymail.automation.json`. Example: 'automation1'.
 

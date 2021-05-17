@@ -9,7 +9,7 @@ import {
   getAllScheduledMessages,
   getScheduledMessagesAtTime,
   clearAllScheduledMessages,
-} from './src/messages'
+} from './src/queue'
 
 import {
   unsubscribeUser
@@ -17,8 +17,8 @@ import {
 
 import {
   init,
-  runAutomation
-} from './src/scheduler'
+  runWorkflow
+} from './src/workflow'
 
 const task = cron.schedule(
   '0 * * * *',
@@ -59,7 +59,7 @@ export {
   start,
   stop,
   destroy,
-  runAutomation,
+  runWorkflow,
   getAllScheduledMessages,
   getScheduledMessagesAtTime,
   clearAllScheduledMessages,

@@ -10,6 +10,10 @@ export type HostingOptions = {
   url: string
 }
 
+export type DatabaseOptions = {
+  reset: boolean
+}
+
 export type MailOptions = {
   host: string
   port: number
@@ -26,20 +30,21 @@ export type MailOptions = {
 export type Options = {
   mail: MailOptions
   hosting: HostingOptions
+  db: DatabaseOptions
 }
 
 export type AutomationFile = {
-  automations: AutomationConfig[]
+  automation: Workflow[]
 }
 
-export type AutomationConfig = {
+export type Workflow = {
   name: string
   description: string
   trigger_name: string
-  emails: AutomationEmailConfig[]
+  emails: EmailAction[]
 }
 
-export type AutomationEmailConfig = {
+export type EmailAction = {
   trigger: string
   sendDelay: number
   subject: string

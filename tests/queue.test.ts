@@ -1,6 +1,6 @@
 import * as path from 'path'
-import { addScheduledMessage, getAllScheduledMessages, clearAllScheduledMessages } from '../src/messages'
-import { runAutomation } from '../src/scheduler'
+import { addScheduledMessage, getAllScheduledMessages, clearAllScheduledMessages } from '../src/queue'
+import { runWorkflow } from '../src/workflow'
 import { init, sendMessagesNow } from '../index'
 import * as mockHelper from '../src/utils/helper'
 
@@ -77,11 +77,11 @@ describe('Basic Tests', () => {
           rejectUnauthorized: true,
         },
       },
-      hosting: { url: 'http://localhost:4242' },
+      hosting: { url: 'http://localhost:4242' }, db: { reset: false }
     })
 
     const user1 = 'betoko1104@chatdays.com'
-    runAutomation('automation1', user1)
+    runWorkflow('automation1', user1)
 
     expect(Object.keys(getAllScheduledMessages()).length).toBe(2)
 

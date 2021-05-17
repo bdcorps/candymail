@@ -25,7 +25,7 @@ candymail.start()
 
 app.get('/', (req, res) => {
   const user = process.env.RECIPIENT_EMAIL
-  candymail.runAutomation('automation1', user)
+  candymail.runWorkflow('automation1', user)
 
   res.send(
     `Welcome to Candymail Demo. Messages scheduled: ${JSON.stringify(
