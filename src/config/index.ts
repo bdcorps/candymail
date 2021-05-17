@@ -5,6 +5,7 @@ import Mail = require('nodemailer/lib/mailer')
 let config: Options
 
 const setConfig = (config: Options) => {
+  console.log("sukh config", config)
   if (config) {
     config = config
   } else {

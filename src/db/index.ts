@@ -2,23 +2,24 @@ const sqlite3 = require('sqlite3').verbose()
 import { getConfig } from '../config'
 import { Email } from '../types/types'
 
+console.log(getConfig())
+
 let db = new sqlite3.Database('./candymail.db', (err: any) => {
   if (err) {
-    console.log('Problem connecting to the database')
+    return console.error(err.message);
   }
+  console.log('Connected to the in-memory SQlite database.');
 })
 
 db.serialize(function () {
   const config = getConfig()
-  const {
+  // const { db: { reset } } = config
 
-    db: { reset } } = config
+  // if (reset) {
+  //   db.run('DROP TABLE messages')
+  // }
 
-  if (reset) {
-    db.run('DROP TABLE messages')
-  }
-
-  db.run('CREATE TABLE IF NOT EXISTS messages (time TEXT PRIMARY KEY, template TEXT, sendFrom TEXT, sendTo TEXT, subject TEXT, body TEXT)')
+  db.run('CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, template TEXT, sendFrom TEXT, sendTo TEXT, subject TEXT, body TEXT)')
 })
 
 const addEmailRow = (time: string, messageOptions: Email) => {
@@ -28,18 +29,19 @@ const addEmailRow = (time: string, messageOptions: Email) => {
 
 
 const getEmailRows = (time: string) => {
-  let sql = `SELECT * FROM messages WHERE time=${time}
-           ORDER BY time`;
+  let sql = `SELECT * FROM messages WHERE time=? ORDER BY time`;
 
   let emails = null
-  db.all(sql, [], (err: any, rows: any) => {
+  db.all(sql, [time], (err: any, rows: any) => {
     if (err) {
       throw err;
     }
     emails = rows
   });
 
-  return emails
+  console.log("sukh email", emails)
+
+  return []
 }
 
 const getAllEmailRows = () => {
@@ -56,10 +58,14 @@ const getAllEmailRows = () => {
   return emails
 }
 
+const clearAllRows = () => {
+  db.run(`TRUNCATE TABLE messages`)
+}
+
 const close = () => {
   db.close()
 }
 
-close()
+// close()
 
-export { addEmailRow, getEmailRows, getAllEmailRows }
+export { addEmailRow, getEmailRows, getAllEmailRows, clearAllRows }

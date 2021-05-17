@@ -1,8 +1,10 @@
 require('dotenv').config()
 const candymail = require('../../lib')
-const automations = require('../candymail.automation.json')
+const automation = require('../candymail.automation.json')
 
-candymail.init(automations.automations, {
+console.log('sukh', process.env)
+
+candymail.init(automation.workflows, {
   mail: {
     host: 'smtp.gmail.com',
     port: 465,
@@ -16,6 +18,7 @@ candymail.init(automations.automations, {
     },
   },
   hosting: { url: process.env.HOSTING_URL },
+  db: { reset: false },
 })
 
 candymail.start()
@@ -32,7 +35,7 @@ candymail.start()
 
 const someConditionSatisfiedByUser = () => {
   const user = process.env.RECIPIENT_EMAIL
-  candymail.runWorkflow('automation1', user)
+  candymail.runWorkflow('workflow1', user)
   console.log({ get: candymail.getAllScheduledMessages() })
 }
 

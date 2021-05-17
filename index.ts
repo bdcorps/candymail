@@ -31,6 +31,7 @@ const task = cron.schedule(
 )
 
 const start = () => {
+  console.log("sukh start")
   task.start()
 }
 
@@ -43,12 +44,14 @@ const destroy = () => {
 }
 
 const sendMessagesNow = () => {
+  console.log("sukh messw", getAllScheduledMessages())
   const today = new Date(Date.now())
   const dateKey = generateDateKey(today)
   const messagesToBeSent = getScheduledMessagesAtTime(dateKey)
 
   if (messagesToBeSent) {
     messagesToBeSent.forEach((message: Email) => {
+      console.log("sukh mes", message)
       sendEmail(message)
     })
   }
