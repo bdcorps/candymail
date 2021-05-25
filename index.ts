@@ -44,10 +44,11 @@ const destroy = () => {
 }
 
 const sendMessagesNow = () => {
-  console.log("sukh messw", getAllScheduledMessages())
   const today = new Date(Date.now())
   const dateKey = generateDateKey(today)
+  console.log("sukh all messages and time", getAllScheduledMessages(), generateDateKey(today))
   const messagesToBeSent = getScheduledMessagesAtTime(dateKey)
+  console.log("sukh to send out now", messagesToBeSent)
 
   if (messagesToBeSent) {
     messagesToBeSent.forEach((message: Email) => {

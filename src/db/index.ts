@@ -2,10 +2,11 @@ const sqlite3 = require('sqlite3').verbose()
 import { getConfig } from '../config'
 import { Email } from '../types/types'
 
-console.log(getConfig())
+console.log("asd", getConfig())
 
 let db = new sqlite3.Database('./candymail.db', (err: any) => {
   if (err) {
+    console.log("sd")
     return console.error(err.message);
   }
   console.log('Connected to the in-memory SQlite database.');
@@ -37,11 +38,11 @@ const getEmailRows = (time: string) => {
       throw err;
     }
     emails = rows
+    console.log("sukh email", emails)
+
+    return emails
   });
 
-  console.log("sukh email", emails)
-
-  return []
 }
 
 const getAllEmailRows = () => {
@@ -53,9 +54,10 @@ const getAllEmailRows = () => {
       throw err;
     }
     emails = rows
-  });
+    console.log("getting all", emails)
 
-  return emails
+    return emails
+  });
 }
 
 const clearAllRows = () => {
