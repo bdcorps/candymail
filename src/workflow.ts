@@ -15,7 +15,6 @@ const init = (workflows: Workflow[], options: Options) => {
   } else {
     loadedWorkflows = workflows
   }
-
   setConfig(options)
 }
 
@@ -24,7 +23,7 @@ const buildEmailAction = (emails: EmailAction[], sendTo: string) => {
     const template = 'default'
     const today = new Date(Date.now())
     today.setHours(today.getHours() + sendDelay)
-    const time = generateDateKey(today)
+    const time = today.toISOString()
     const sendFrom = from
 
     addScheduledMessage(time, { template, sendFrom, sendTo, subject, body })

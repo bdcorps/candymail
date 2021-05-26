@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv"
 dotenv.config()
 
-import { Email } from "./src/types/types"
+import { MessageRow } from "./src/types/types"
 import * as cron from 'node-cron'
 import { generateDateKey, sendEmail } from './src/utils/helper'
 
@@ -43,15 +43,14 @@ const destroy = () => {
   task.destroy()
 }
 
-const sendMessagesNow = () => {
+const sendMessagesNow = async () => {
   const today = new Date(Date.now())
-  const dateKey = generateDateKey(today)
-  console.log("sukh all messages and time", getAllScheduledMessages(), generateDateKey(today))
-  const messagesToBeSent = getScheduledMessagesAtTime(dateKey)
+  console.log("sukh all messages and time", getAllScheduledMessages(), today)
+  const messagesToBeSent = await getScheduledMessagesAtTime()
   console.log("sukh to send out now", messagesToBeSent)
 
   if (messagesToBeSent) {
-    messagesToBeSent.forEach((message: Email) => {
+    messagesToBeSent.forEach((message: MessageRow) => {
       console.log("sukh mes", message)
       sendEmail(message)
     })

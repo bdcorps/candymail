@@ -1,67 +1,46 @@
-const sqlite3 = require('sqlite3').verbose()
+// const sqlite3 = require('sqlite3').verbose()
 import { getConfig } from '../config'
+import * as sqlite3 from 'better-sqlite3'
 import { Email } from '../types/types'
 
-console.log("asd", getConfig())
 
-let db = new sqlite3.Database('./candymail.db', (err: any) => {
-  if (err) {
-    console.log("sd")
-    return console.error(err.message);
-  }
-  console.log('Connected to the in-memory SQlite database.');
-})
+const db = sqlite3('./candymail.db');
 
-db.serialize(function () {
-  const config = getConfig()
-  // const { db: { reset } } = config
+const stmt = db.prepare('CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY AUTOINCREMENT, time datetime, template TEXT, sendFrom TEXT, sendTo TEXT, subject TEXT, body TEXT, sent INT)');
+stmt.run()
 
-  // if (reset) {
-  //   db.run('DROP TABLE messages')
-  // }
-
-  db.run('CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY AUTOINCREMENT, time TEXT, template TEXT, sendFrom TEXT, sendTo TEXT, subject TEXT, body TEXT)')
-})
 
 const addEmailRow = (time: string, messageOptions: Email) => {
   const { template, sendFrom, sendTo, subject, body } = messageOptions
-  db.run(`INSERT INTO messages (time,template,sendFrom,sendTo,subject,body) VALUES (?,?,?,?,?,?)`, time, template, sendFrom, sendTo, subject, body)
+
+  const stmt = db.prepare('INSERT INTO messages (time,template,sendFrom,sendTo,subject,body, sent) VALUES (?,?,?,?,?,?,?)');
+  const info = stmt.run(time, template, sendFrom, sendTo, subject, body, 0)
+
 }
 
 
-const getEmailRows = (time: string) => {
-  let sql = `SELECT * FROM messages WHERE time=? ORDER BY time`;
+const getEmailRows = () => {
+  let sql = db.prepare(`SELECT * FROM messages WHERE time < DATE("now") AND sent=0`);
 
-  let emails = null
-  db.all(sql, [time], (err: any, rows: any) => {
-    if (err) {
-      throw err;
-    }
-    emails = rows
-    console.log("sukh email", emails)
-
-    return emails
-  });
-
+  return sql.all()
 }
 
 const getAllEmailRows = () => {
-  let sql = `SELECT * FROM messages ORDER BY time`;
+  let sql = db.prepare(`SELECT * FROM messages ORDER BY time`);
 
-  let emails = null
-  db.all(sql, [], (err: any, rows: any) => {
-    if (err) {
-      throw err;
-    }
-    emails = rows
-    console.log("getting all", emails)
+  console.log("sukh getall", sql.all())
+  return sql.all()
+}
 
-    return emails
-  });
+const setEmailSent = (id: number) => {
+  console.log("sukh id to be sent is ", id)
+  let sql = db.prepare(`UPDATE messages SET sent = 1 WHERE id = ?`);
+  sql.run(id)
 }
 
 const clearAllRows = () => {
-  db.run(`TRUNCATE TABLE messages`)
+  const stmt = db.prepare('TRUNCATE TABLE messages');
+  stmt.run();
 }
 
 const close = () => {
@@ -70,4 +49,4 @@ const close = () => {
 
 // close()
 
-export { addEmailRow, getEmailRows, getAllEmailRows, clearAllRows }
+export { addEmailRow, getEmailRows, getAllEmailRows, setEmailSent, clearAllRows }

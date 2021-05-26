@@ -6,6 +6,10 @@ export type Email = {
   body: string
 }
 
+export type MessageRow = {
+  id: number, email: Email
+}
+
 export type HostingOptions = {
   url: string
 }

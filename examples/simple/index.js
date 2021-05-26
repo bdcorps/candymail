@@ -2,8 +2,6 @@ require('dotenv').config()
 const candymail = require('../../lib')
 const automation = require('../candymail.automation.json')
 
-console.log('sukh', process.env)
-
 candymail.init(automation.workflows, {
   mail: {
     host: 'smtp.gmail.com',

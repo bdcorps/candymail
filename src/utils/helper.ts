@@ -1,11 +1,12 @@
-import { Email } from '../types/types'
+import { MessageRow } from '../types/types'
 
 import * as mailer from 'nodemailer'
 import { getConfig, getTransporter } from '../config'
 import { hasUnsubscribed } from '../unsubscribe'
+import { setEmailSent } from '../db'
 
-const sendEmail = (email: Email) => {
-  const { template, sendFrom, sendTo, subject, body } = email
+const sendEmail = (message: MessageRow) => {
+  const { id, email: { template, sendFrom, sendTo, subject, body } } = message
   if (hasUnsubscribed(sendTo)) {
     throw new Error(
       `The user ${sendTo} you are trying to send a message to has already unsubscribed`
@@ -27,6 +28,8 @@ const sendEmail = (email: Email) => {
     if (err) {
       throw err
     }
+
+    setEmailSent(id)
   })
 }
 
