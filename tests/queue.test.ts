@@ -2,25 +2,21 @@ import * as path from 'path'
 import { addScheduledMessage, getAllScheduledMessages, clearAllScheduledMessages } from '../src/queue'
 import { runWorkflow } from '../src/workflow'
 import { init, sendMessagesNow } from '../index'
-import * as mockHelper from '../src/utils/helper'
-
-jest.mock('../src/utils/helper', () => {
-  return {
-    ...jest.requireActual('../src/utils/helper') as object,
-    sendEmail: jest.fn(),
-  }
-})
+import * as db from "../src/db"
+jest.mock('../src/db');
 
 describe('Basic Tests', () => {
   afterEach(() => {
     jest.clearAllMocks()
     jest.resetAllMocks()
-    clearAllScheduledMessages()
   })
 
   test('should send email at time', () => {
     Date.now = jest.fn(() => new Date('2020-08-20T03:20:30Z').valueOf())
-    addScheduledMessage('8/20/2020:3', {
+
+    const date = new Date(Date.now()).toISOString()
+
+    addScheduledMessage(date, {
       template: 'template',
       sendFrom: 'sendFrom',
       sendTo: 'sendTo',
@@ -30,18 +26,37 @@ describe('Basic Tests', () => {
 
     sendMessagesNow()
 
-    expect(mockHelper.sendEmail).toHaveBeenCalledTimes(1)
+    expect(db.addEmailRow).toHaveBeenCalledTimes(1)
   })
 
   test('should correctly send messages with a delay', () => {
-    addScheduledMessage('8/19/2020:23', {
+
+    Date.now = jest.fn(() => new Date('2020-08-19T20:20:30Z').valueOf())
+
+    let date = new Date(Date.now())
+
+    const oneHourAheadTime = date
+    oneHourAheadTime.setHours(oneHourAheadTime.getHours() + 1);
+
+    const oneHourAheadTimeString = oneHourAheadTime.toISOString()
+
+
+    const twoHourAheadTime = date
+    twoHourAheadTime.setHours(twoHourAheadTime.getHours() + 2);
+
+    const twoHourAheadTimeString = twoHourAheadTime.toISOString()
+
+    console.log("sukh scheduled", oneHourAheadTimeString, twoHourAheadTimeString)
+
+    addScheduledMessage(oneHourAheadTimeString, {
       template: 'template',
       sendFrom: 'sendFrom',
       sendTo: 'sendTo',
       subject: 'subject',
       body: 'body',
     })
-    addScheduledMessage('8/20/2020:1', {
+
+    addScheduledMessage(twoHourAheadTimeString, {
       template: 'template1',
       sendFrom: 'sendFrom1',
       sendTo: 'sendTo1',
@@ -49,13 +64,18 @@ describe('Basic Tests', () => {
       body: 'body1',
     })
 
-    Date.now = jest.fn(() => new Date('2020-08-19T23:20:30Z').valueOf())
+
+
+    Date.now = jest.fn(() => new Date('2020-08-20T21:20:30Z').valueOf())
+
     sendMessagesNow()
 
-    Date.now = jest.fn(() => new Date('2020-08-20T01:20:30Z').valueOf())
+
+    Date.now = jest.fn(() => new Date('2020-08-20T22:20:30Z').valueOf())
+
     sendMessagesNow()
 
-    expect(mockHelper.sendEmail).toHaveBeenCalledTimes(2)
+    expect(db.addEmailRow).toHaveBeenCalledTimes(2)
   })
 
   test('Correctly sets automation messages', () => {
@@ -83,10 +103,7 @@ describe('Basic Tests', () => {
     const user1 = 'betoko1104@chatdays.com'
     runWorkflow('automation1', user1)
 
-    expect(Object.keys(getAllScheduledMessages()).length).toBe(2)
-
-    expect(getAllScheduledMessages()['8/20/2020:4'].length).toBe(1)
-    expect(getAllScheduledMessages()['8/20/2020:6'].length).toBe(1)
+    expect(db.addEmailRow).toHaveBeenCalledTimes(2)
   })
 
   // TODO tests pending for email services configurations and their validations

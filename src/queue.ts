@@ -5,8 +5,8 @@ const addScheduledMessage = (time: string, messageOptions: Email) => {
   addEmailRow(time, messageOptions)
 }
 
-const getScheduledMessagesAtTime = (): MessageRow[] => {
-  return getEmailRows()
+const getScheduledMessagesAtTime = (time: string): MessageRow[] => {
+  return getEmailRows(time)
 }
 
 const getAllScheduledMessages = (): MessageRow[] => {

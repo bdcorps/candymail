@@ -45,13 +45,10 @@ const destroy = () => {
 
 const sendMessagesNow = async () => {
   const today = new Date(Date.now())
-  console.log("sukh all messages and time", getAllScheduledMessages(), today)
-  const messagesToBeSent = await getScheduledMessagesAtTime()
-  console.log("sukh to send out now", messagesToBeSent)
+  const messagesToBeSent = await getScheduledMessagesAtTime(today.toISOString())
 
   if (messagesToBeSent) {
     messagesToBeSent.forEach((message: MessageRow) => {
-      console.log("sukh mes", message)
       sendEmail(message)
     })
   }

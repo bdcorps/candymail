@@ -22,10 +22,10 @@ const buildEmailAction = (emails: EmailAction[], sendTo: string) => {
   emails.forEach(({ sendDelay, subject, body, from }) => {
     const template = 'default'
     const today = new Date(Date.now())
+    console.log("sukh time", today)
     today.setHours(today.getHours() + sendDelay)
     const time = today.toISOString()
     const sendFrom = from
-
     addScheduledMessage(time, { template, sendFrom, sendTo, subject, body })
   })
 }

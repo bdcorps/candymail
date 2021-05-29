@@ -9,20 +9,23 @@ const db = sqlite3('./candymail.db');
 const stmt = db.prepare('CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY AUTOINCREMENT, time datetime, template TEXT, sendFrom TEXT, sendTo TEXT, subject TEXT, body TEXT, sent INT)');
 stmt.run()
 
+const stmt2 = db.prepare('CREATE TABLE IF NOT EXISTS unsubscribed (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT)');
+stmt2.run()
+
 
 const addEmailRow = (time: string, messageOptions: Email) => {
+  console.log("sukh", time, messageOptions)
   const { template, sendFrom, sendTo, subject, body } = messageOptions
 
   const stmt = db.prepare('INSERT INTO messages (time,template,sendFrom,sendTo,subject,body, sent) VALUES (?,?,?,?,?,?,?)');
-  const info = stmt.run(time, template, sendFrom, sendTo, subject, body, 0)
-
+  stmt.run(time, template, sendFrom, sendTo, subject, body, 0)
 }
 
 
-const getEmailRows = () => {
-  let sql = db.prepare(`SELECT * FROM messages WHERE time < DATE("now") AND sent=0`);
+const getEmailRows = (time: string) => {
+  let sql = db.prepare(`SELECT * FROM messages WHERE time < DATE(?) AND sent=0`);
 
-  return sql.all()
+  return sql.all(time)
 }
 
 const getAllEmailRows = () => {
@@ -47,6 +50,17 @@ const close = () => {
   db.close()
 }
 
+const addUnsubscribedEmail = (email: string) => {
+  const stmt = db.prepare('INSERT INTO unsubscribed (email) VALUES (?)');
+  stmt.run(email)
+}
+
+const hasUnsubscribedEmail = (email: string): boolean => {
+  let sql = db.prepare(`SELECT * FROM unsubscribed WHERE email = ?`);
+
+  return sql.all(email).length > 0
+}
+
 // close()
 
-export { addEmailRow, getEmailRows, getAllEmailRows, setEmailSent, clearAllRows }
+export { addEmailRow, getEmailRows, getAllEmailRows, setEmailSent, clearAllRows, addUnsubscribedEmail, hasUnsubscribedEmail }

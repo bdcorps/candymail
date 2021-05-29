@@ -1,11 +1,12 @@
-const unsubscribedUsers: string[] = []
+
+import { addUnsubscribedEmail, hasUnsubscribedEmail } from "./db"
 
 const unsubscribeUser = (email: string) => {
-  unsubscribedUsers.push(email)
+  addUnsubscribedEmail(email)
 }
 
-const hasUnsubscribed = (email: string) => {
-  return unsubscribedUsers.includes(email)
+const hasUnsubscribed = (email: string): boolean => {
+  return hasUnsubscribedEmail(email)
 }
 
 export { unsubscribeUser, hasUnsubscribed }
