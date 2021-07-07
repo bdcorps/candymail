@@ -16,7 +16,8 @@ candymail.init(automation.workflows, {
     },
   },
   hosting: { url: process.env.HOSTING_URL },
-  db: { reset: false },
+  db: { reset: true },
+  debug: { trace: true },
 })
 
 candymail.start()

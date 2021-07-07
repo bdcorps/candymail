@@ -18,6 +18,10 @@ export type DatabaseOptions = {
   reset: boolean
 }
 
+export type DebugOptions = {
+  trace: boolean
+}
+
 export type MailOptions = {
   host: string
   port: number
@@ -34,7 +38,8 @@ export type MailOptions = {
 export type Options = {
   mail: MailOptions
   hosting: HostingOptions
-  db: DatabaseOptions
+  db: DatabaseOptions,
+  debug: DebugOptions
 }
 
 export type AutomationFile = {

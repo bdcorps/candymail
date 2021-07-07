@@ -1,13 +1,14 @@
 import { Options } from '../types/types'
 import * as mailer from 'nodemailer'
 import Mail = require('nodemailer/lib/mailer')
+import { log } from '../utils/logger'
 
 let config: Options
 
-const setConfig = (config: Options) => {
-  console.log("sukh config", config)
+const setConfig = (configOptions: Options) => {
   if (config) {
-    config = config
+    config = configOptions
+    log("config set")
   } else {
     throw new Error('Invalid Configurations provided for custom service')
   }
@@ -17,6 +18,7 @@ const setConfig = (config: Options) => {
  * @returns {config} Config
  */
 const getConfig = (): Options => {
+  console.log("sukh getconfig", config)
   return config
 }
 

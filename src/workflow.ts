@@ -4,6 +4,7 @@ import { isEmpty } from 'lodash'
 import { setConfig } from './config'
 import { generateDateKey } from './utils/helper'
 import { addScheduledMessage } from './queue'
+import * as moment from 'moment'
 
 let loadedWorkflows: Workflow[]
 
@@ -21,10 +22,10 @@ const init = (workflows: Workflow[], options: Options) => {
 const buildEmailAction = (emails: EmailAction[], sendTo: string) => {
   emails.forEach(({ sendDelay, subject, body, from }) => {
     const template = 'default'
-    const today = new Date(Date.now())
-    console.log("sukh time", today)
-    today.setHours(today.getHours() + sendDelay)
-    const time = today.toISOString()
+    const today = moment.utc()
+    // const time = today.add(sendDelay, 'hours').format("YYYY-MM-DD HH:MM:SS")
+
+    const time = today.format("YYYY-MM-DD HH:mm:ss")
     const sendFrom = from
     addScheduledMessage(time, { template, sendFrom, sendTo, subject, body })
   })
@@ -40,4 +41,4 @@ const runWorkflow = (workflow: string, sendTo: string) => {
   }
 }
 
-export { init, runWorkflow }
+export { init, buildEmailAction, runWorkflow }

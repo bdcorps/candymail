@@ -4,6 +4,7 @@ dotenv.config()
 import { MessageRow } from "./src/types/types"
 import * as cron from 'node-cron'
 import { generateDateKey, sendEmail } from './src/utils/helper'
+import { log } from './src/utils/logger'
 
 import {
   getAllScheduledMessages,
@@ -19,6 +20,7 @@ import {
   init,
   runWorkflow
 } from './src/workflow'
+import { getConfig } from "./src/config"
 
 const task = cron.schedule(
   '0 * * * *',
@@ -30,8 +32,9 @@ const task = cron.schedule(
   }
 )
 
+
+
 const start = () => {
-  console.log("sukh start")
   task.start()
 }
 
@@ -44,15 +47,20 @@ const destroy = () => {
 }
 
 const sendMessagesNow = async () => {
+  console.log("sukh config", getConfig())
   const today = new Date(Date.now())
-  const messagesToBeSent = await getScheduledMessagesAtTime(today.toISOString())
+  const messagesToBeSent = await getScheduledMessagesAtTime()
 
+  log(`sukh checking at the top of the hour: ${today} ${messagesToBeSent}`);
   if (messagesToBeSent) {
     messagesToBeSent.forEach((message: MessageRow) => {
       sendEmail(message)
     })
   }
 }
+
+
+sendMessagesNow()
 
 export {
   init,

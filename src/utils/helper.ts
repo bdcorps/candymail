@@ -24,6 +24,9 @@ const sendEmail = (message: MessageRow) => {
     subject,
     html,
   }
+
+  console.log("sukh sending message", message);
+
   transporter.sendMail(mailOptions, (err: any, info: any) => {
     if (err) {
       throw err
