@@ -6,7 +6,7 @@ import { log } from '../utils/logger'
 let config: Options
 
 const setConfig = (configOptions: Options) => {
-  if (config) {
+  if (!config) {
     config = configOptions
     log("config set")
   } else {

@@ -9,7 +9,7 @@ import * as moment from 'moment'
 let loadedWorkflows: Workflow[]
 
 const init = (workflows: Workflow[], options: Options) => {
-  console.log("sukh ", workflows)
+  console.log("sukh ", workflows, options)
   if (!workflows) {
     const automationFile = require(path.join(__dirname + 'candymail.automation.json'))
     loadedWorkflows = automationFile?.workflows
