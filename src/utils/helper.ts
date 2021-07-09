@@ -6,10 +6,6 @@ import { hasUnsubscribed } from '../unsubscribe'
 import { setEmailSent } from '../db'
 
 const sendEmail = (message: MessageRow) => {
-
-  console.log(`sending from sendemail ${JSON.stringify(message)}`);
-  console.log(`sending from sendemail 2`, message.id, message.subject);
-  console.log(`sending from sendemail 3`, message.email.subject);
   const { id, email: { template, sendFrom, sendTo, subject, body } } = message
   if (hasUnsubscribed(sendTo)) {
     throw new Error(
