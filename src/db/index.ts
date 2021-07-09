@@ -1,7 +1,7 @@
 // const sqlite3 = require('sqlite3').verbose()
 import { getConfig } from '../config'
 import * as sqlite3 from 'better-sqlite3'
-import { Email } from '../types/types'
+import { Email, EmailDB } from '../types/types'
 import { log } from '../utils/logger'
 import * as moment from 'moment'
 
@@ -15,38 +15,38 @@ stmt2.run()
 
 const addEmailRow = (time: string, messageOptions: Email) => {
 
-  log(`adding email row for ${time} with message: ${messageOptions.body} `)
+  log(`adding email row for ${time} with message: ${messageOptions.body}`)
   const { template, sendFrom, sendTo, subject, body } = messageOptions
 
   const stmt = db.prepare('INSERT INTO messages (time,template,sendFrom,sendTo,subject,body, sent) VALUES (?,?,?,?,?,?,?)');
-
 
   try {
     stmt.run(time, template, sendFrom, sendTo, subject, body, 0)
   } catch (err) {
     log(err)
   }
-
 }
 
-
-const getEmailRowsToBeSent = () => {
-  let sql = db.prepare(`SELECT * FROM messages WHERE time <= date('now') AND sent=0`);
+const getEmailRowsToBeSent = (time: string): EmailDB[] => {
+  console.log(`getting emails before time: ${time}`)
+  let sql = db.prepare(`SELECT * FROM messages WHERE time <= datetime(?) AND sent=0`);
 
   let emails = []
 
   try {
-    emails = sql.all()
+    emails = sql.all(time)
   } catch (err) {
     log(err)
   }
 
   log(`getting emails before time: ${emails.length}`)
 
-  return emails
+  let emailsdb: EmailDB[] = emails
+
+  return emailsdb
 }
 
-const getAllEmailRows = () => {
+const getAllEmailRows = (): EmailDB[] => {
   let sql = db.prepare(`SELECT * FROM messages ORDER BY time`);
 
   let emails = []
@@ -57,7 +57,9 @@ const getAllEmailRows = () => {
     log(err)
   }
 
-  return emails
+  let emailsdb: EmailDB[] = emails
+
+  return emailsdb
 }
 
 const setEmailSent = (id: number) => {

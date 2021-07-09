@@ -1,7 +1,6 @@
 import { getConfig } from '../config'
 
 const log = (messsage: string) => {
-  console.log("sukh log trace", getConfig())
   const shouldTrace = getConfig()?.debug.trace;
 
   if (shouldTrace) {

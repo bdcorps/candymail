@@ -8,7 +8,6 @@ let config: Options
 const setConfig = (configOptions: Options) => {
   if (!config) {
     config = configOptions
-    log("config set")
   } else {
     throw new Error('Invalid Configurations provided for custom service')
   }
@@ -18,7 +17,6 @@ const setConfig = (configOptions: Options) => {
  * @returns {config} Config
  */
 const getConfig = (): Options => {
-  console.log("sukh getconfig", config)
   return config
 }
 

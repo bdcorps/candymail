@@ -60,3 +60,14 @@ export type EmailAction = {
   body: string
   from: string
 }
+
+export type EmailDB = {
+  id: number
+  time: string
+  template: string
+  sendFrom: string
+  sendTo: string
+  subject: string
+  body: string
+  sent: number
+}

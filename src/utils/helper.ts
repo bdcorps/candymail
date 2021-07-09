@@ -6,6 +6,10 @@ import { hasUnsubscribed } from '../unsubscribe'
 import { setEmailSent } from '../db'
 
 const sendEmail = (message: MessageRow) => {
+
+  console.log(`sending from sendemail ${JSON.stringify(message)}`);
+  console.log(`sending from sendemail 2`, message.id, message.subject);
+  console.log(`sending from sendemail 3`, message.email.subject);
   const { id, email: { template, sendFrom, sendTo, subject, body } } = message
   if (hasUnsubscribed(sendTo)) {
     throw new Error(
@@ -25,8 +29,6 @@ const sendEmail = (message: MessageRow) => {
     html,
   }
 
-  console.log("sukh sending message", message);
-
   transporter.sendMail(mailOptions, (err: any, info: any) => {
     if (err) {
       throw err
@@ -36,9 +38,5 @@ const sendEmail = (message: MessageRow) => {
   })
 }
 
-const generateDateKey = (today: Date) => {
-  const date = today || new Date(Date.now())
-  return date.toLocaleDateString('en-US', { timeZone: 'UTC' }) + ':' + date.getUTCHours() // 7/21/1983:23
-}
 
-export { sendEmail, generateDateKey }
+export { sendEmail }

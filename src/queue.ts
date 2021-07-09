@@ -5,12 +5,30 @@ const addScheduledMessage = (time: string, messageOptions: Email) => {
   addEmailRow(time, messageOptions)
 }
 
-const getScheduledMessagesAtTime = (): MessageRow[] => {
-  return getEmailRowsToBeSent()
+const getScheduledMessagesAtTime = (time: string): MessageRow[] => {
+  const emails = getEmailRowsToBeSent(time)
+
+  const messages: MessageRow[] = []
+
+  for (let email of emails) {
+    const message: MessageRow = { id: email.id, email: { template: email.template, sendFrom: email.sendFrom, sendTo: email.sendTo, subject: email.subject, body: email.body } }
+    messages.push(message)
+  }
+
+  return messages
 }
 
 const getAllScheduledMessages = (): MessageRow[] => {
-  return getAllEmailRows()
+  const emails = getAllEmailRows()
+
+  const messages: MessageRow[] = []
+
+  for (let email of emails) {
+    const message: MessageRow = { id: email.id, email: { template: email.template, sendFrom: email.sendFrom, sendTo: email.sendTo, subject: email.subject, body: email.body } }
+    messages.push(message)
+  }
+
+  return messages
 }
 
 const clearAllScheduledMessages = () => {

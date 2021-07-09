@@ -46,8 +46,6 @@ describe('Basic Tests', () => {
 
     const twoHourAheadTimeString = twoHourAheadTime.toISOString()
 
-    console.log("sukh scheduled", oneHourAheadTimeString, twoHourAheadTimeString)
-
     addScheduledMessage(oneHourAheadTimeString, {
       template: 'template',
       sendFrom: 'sendFrom',

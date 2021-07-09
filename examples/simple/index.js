@@ -35,7 +35,7 @@ candymail.start()
 const someConditionSatisfiedByUser = () => {
   const user = process.env.RECIPIENT_EMAIL
   candymail.runWorkflow('workflow1', user)
-  console.log({ get: candymail.getAllScheduledMessages() })
+  // console.log({ get: candymail.getAllScheduledMessages() })
 }
 
 someConditionSatisfiedByUser()

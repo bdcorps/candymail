@@ -3,7 +3,6 @@ dotenv.config()
 
 import { init, start, runWorkflow } from "./index"
 
-console.log("sukh MAIL", process.env.MAIL_USER);
 
 init([
   {
