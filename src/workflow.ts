@@ -1,31 +1,14 @@
-import * as path from 'path'
-import { Workflow, EmailAction, AutomationFile, Options } from './types/types'
+import { Workflow, EmailAction, AutomationFile, Options } from './types'
+import {
+  buildEmailAction
+} from './automation'
 import { isEmpty } from 'lodash'
-import { setConfig } from './config'
-import { addScheduledMessage } from './queue'
-import * as moment from 'moment'
 
 let loadedWorkflows: Workflow[]
 
-const init = (workflows: Workflow[], options: Options) => {
-  if (!workflows) {
-    const automationFile = require(path.join(__dirname + 'candymail.automation.json'))
-    loadedWorkflows = automationFile?.workflows
-  } else {
-    loadedWorkflows = workflows
-  }
-  setConfig(options)
-}
-
-const buildEmailAction = (emails: EmailAction[], sendTo: string) => {
-  emails.forEach(({ sendDelay, subject, body, from }) => {
-    const template = 'default'
-    const today = moment.utc()
-    const time = today.add(sendDelay, 'hours').format("YYYY-MM-DD HH:mm:ss")
-
-    const sendFrom = from
-    addScheduledMessage(time, { template, sendFrom, sendTo, subject, body })
-  })
+const setWorkflows = (workflows: Workflow[]) => {
+  loadedWorkflows = workflows
+  console.log('good1', workflows, loadedWorkflows)
 }
 
 const runWorkflow = (workflow: string, sendTo: string) => {
@@ -38,4 +21,4 @@ const runWorkflow = (workflow: string, sendTo: string) => {
   }
 }
 
-export { init, buildEmailAction, runWorkflow }
+export { setWorkflows, runWorkflow }

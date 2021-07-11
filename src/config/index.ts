@@ -1,4 +1,4 @@
-import { Options } from '../types/types'
+import { Options } from '../types'
 import * as mailer from 'nodemailer'
 import Mail = require('nodemailer/lib/mailer')
 import { log } from '../utils/logger'

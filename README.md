@@ -197,7 +197,7 @@ Triggers an automation based on `name` specified in the `candymail.automation.js
 ### getAllScheduledMessages()
 Get the list of all scheduled messages.
 
-### getScheduledMessagesAtTime(time)
+### getScheduledMessagesBeforeTime(time)
 Get the list of scheduled messages for a particular `time`.
 - **time**: Time should be specified in this format: `MM/DD/YYYY:HH`. For Example: `8/20/2020:2`.
 

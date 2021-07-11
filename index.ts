@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv"
 dotenv.config()
 
-import { MessageRow } from "./src/types/types"
+import { MessageRow } from "./src/types"
 import * as cron from 'node-cron'
 import * as moment from 'moment'
 import { sendEmail } from './src/utils/helper'
@@ -9,7 +9,7 @@ import { log } from './src/utils/logger'
 
 import {
   getAllScheduledMessages,
-  getScheduledMessagesAtTime,
+  getScheduledMessagesBeforeTime,
   clearAllScheduledMessages,
 } from './src/queue'
 
@@ -18,7 +18,10 @@ import {
 } from './src/unsubscribe'
 
 import {
-  init,
+  init
+} from './src/automation'
+
+import {
   runWorkflow
 } from './src/workflow'
 import { getConfig } from "./src/config"
@@ -50,7 +53,7 @@ const destroy = () => {
 const sendMessagesNow = async () => {
   log(`cron trigger > ${moment.utc().format("YYYY-MM-DD HH:mm:ss")}`)
   const today = moment.utc().format("YYYY-MM-DD HH:mm:ss")
-  const messagesToBeSent = await getScheduledMessagesAtTime(today)
+  const messagesToBeSent = await getScheduledMessagesBeforeTime(today)
 
   if (messagesToBeSent) {
     messagesToBeSent.forEach((message: MessageRow) => {
@@ -69,7 +72,7 @@ export {
   destroy,
   runWorkflow,
   getAllScheduledMessages,
-  getScheduledMessagesAtTime,
+  getScheduledMessagesBeforeTime,
   clearAllScheduledMessages,
   sendMessagesNow,
   unsubscribeUser

@@ -1,11 +1,11 @@
-import { Email, MessageRow } from './types/types'
+import { Email, MessageRow } from './types'
 import { addEmailRow, getEmailRowsToBeSent, getAllEmailRows, clearAllRows } from "./db"
 
 const addScheduledMessage = (time: string, messageOptions: Email) => {
   addEmailRow(time, messageOptions)
 }
 
-const getScheduledMessagesAtTime = (time: string): MessageRow[] => {
+const getScheduledMessagesBeforeTime = (time: string): MessageRow[] => {
   const emails = getEmailRowsToBeSent(time)
 
   const messages: MessageRow[] = []
@@ -37,7 +37,7 @@ const clearAllScheduledMessages = () => {
 
 export {
   addScheduledMessage,
-  getScheduledMessagesAtTime,
+  getScheduledMessagesBeforeTime,
   getAllScheduledMessages,
   clearAllScheduledMessages,
 }

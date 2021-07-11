@@ -1,12 +1,10 @@
 
 import { addEmailRow, getEmailRowsToBeSent, getAllEmailRows, setEmailSent, clearAllRows, addUnsubscribedEmail, hasUnsubscribedEmail, close } from "./db"
-import {
-  buildEmailAction
-} from './workflow'
+
 import * as moment from 'moment';
 import {
   getAllScheduledMessages,
-  getScheduledMessagesAtTime,
+  getScheduledMessagesBeforeTime,
   clearAllScheduledMessages,
 } from './queue'
 
@@ -22,6 +20,6 @@ import {
 
 (async () => {
   const today = moment.utc().format("YYYY-MM-DD HH:mm:ss");
-  const messagesToBeSent = await getScheduledMessagesAtTime(today)
+  const messagesToBeSent = await getScheduledMessagesBeforeTime(today)
   console.log(messagesToBeSent)
 })()

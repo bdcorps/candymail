@@ -1,4 +1,4 @@
-import { MessageRow } from '../types/types'
+import { MessageRow } from '../types'
 
 import * as mailer from 'nodemailer'
 import { getConfig, getTransporter } from '../config'

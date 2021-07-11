@@ -1,11 +1,11 @@
-// const sqlite3 = require('sqlite3').verbose()
 import { getConfig } from '../config'
-import * as sqlite3 from 'better-sqlite3'
-import { Email, EmailDB } from '../types/types'
+import * as SQLite3 from 'better-sqlite3'
+import { Email, EmailDB } from '../types'
 import { log } from '../utils/logger'
 import * as moment from 'moment'
+import { getDB } from './db.model'
 
-const db = sqlite3('./candymail.db');
+const db = getDB()
 
 const stmt = db.prepare('CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY AUTOINCREMENT, time datetime, template TEXT, sendFrom TEXT, sendTo TEXT, subject TEXT, body TEXT, sent INT)');
 stmt.run()
