@@ -1,7 +1,7 @@
 {
   "workflows": [
     {
-      "name": "workflow1",
+      "name": "automation1",
       "description": "tell user about pro features",
       "trigger_name": "proplan",
       "emails": [
@@ -22,7 +22,7 @@
       ]
     },
     {
-      "name": "workflow2",
+      "name": "automation2",
       "description": "tell user about pro features 2",
       "trigger_name": "proplan",
       "emails": [

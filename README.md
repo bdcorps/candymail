@@ -10,15 +10,16 @@ Candymail makes it easy to trigger and send multi-step email sequences in Node.j
   <img src="https://github.com/bdcorps/candymail/blob/main/web.PNG?raw=true" />
 </p>
 
-## New in 1.0.12
-- Add HTML in body
-- Unsubscribe Option added to email footer
-- Full Typescript Support
+## New in 1.0.13
+- Persistence using SQLite
 
 ## Features
-1. **Portable**: Create, share and reuse email marketing strategies between different products
-2. **Simple to use**: Time to send, subject, body of the emails can all be set up in a single JSON file
-3. **Free**: No need to pay for monthly Mailchimp etc. payments for email automation plans
+1. **Fully Typscript**
+2. **Portable**: Create, share and reuse email marketing strategies between different products
+3. **Simple to use**: Time to send, subject, body of the emails can all be set up in a single JSON file
+4. **Free**: No need to pay for monthly Mailchimp etc. payments for email automation plans
+5. **HTML Support**: Add HTML templates in the email body
+6. **Complicance**: Unsubscribe Option added to email footer
 
 ## Use Cases
 - Build better onboarding by guiding the user through the app with paced training emails
@@ -35,6 +36,10 @@ Or npm:
 npm install --save candymail
 ```
 ## Getting Started
+### Supported Email Servers
+- All SMTP 
+- Gmail: Sign up for an App Password for Gmail [here](https://myaccount.google.com/security)
+
 ### Configuration
 Create a `candymail.automation.json` file on the root level of your project.
 
@@ -77,7 +82,8 @@ require('dotenv').config()
 const candymail = require('candymail')
 const automations = require('../candymail.automation.json')
 
-candymail.init(automations.automations, {
+
+candymail.init(automation.workflows, {
   mail: {
     host: 'smtp.gmail.com',
     port: 465,
@@ -91,6 +97,8 @@ candymail.init(automations.automations, {
     },
   },
   hosting: { url: process.env.HOSTING_URL },
+  db: { reset: true },
+  debug: { trace: true },
 })
 
 candymail.start()
@@ -104,59 +112,11 @@ const someConditionSatisfiedByUser = () => {
 }
 
 someConditionSatisfiedByUser()
+
 ```
 
 ### Usage with Express Server
-```
-require('dotenv').config()
-const candymail = require('../../lib')
-const express = require('express')
-const app = express()
-const port = 3000
-
-const automations = require('../candymail.automation.json')
-candymail.init(automations.automations, {
-  mail: {
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.MAIL_USER,
-      pass: process.env.MAIL_PASSWORD,
-    },
-    tls: {
-      rejectUnauthorized: true,
-    },
-  },
-  hosting: { url: process.env.HOSTING_URL },
-})
-
-candymail.start()
-
-app.get('/', (req, res) => {
-  const user = process.env.RECIPIENT_EMAIL
-  candymail.runWorkflow('automation1', user)
-
-  res.send(
-    `Welcome to Candymail Demo. Messages scheduled: ${JSON.stringify(
-      candymail.getAllScheduledMessages()
-    )} `
-  )
-})
-
-app.get('/unsubscribe', (req, res) => {
-  const { email } = req.query
-  candymail.unsubscribeUser(email)
-  res.send(`Sent a unsubscribe request for ${email}`)
-})
-
-app.listen(port, () => {
-  console.log(`Learn about our new features at http://localhost:${port}`)
-})
-```
-
-Note: Having problems with Gmail? Enable `Allow less secure apps`  in Google Account settings [here](https://myaccount.google.com/lesssecureapps).
-
+Look in the `examples` folder
 
 ## Automation File Options
 | Property        | Required           | Description  |
@@ -173,7 +133,7 @@ Loads up all the automations and the options.
 - **automations**: Automations to be run.
 
 - **options**: `{
-  mail: {
+   mail: {
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
@@ -185,7 +145,9 @@ Loads up all the automations and the options.
       rejectUnauthorized: true,
     },
   },
-  hosting: { url: process.env.HOSTING_URL }`
+  hosting: { url: process.env.HOSTING_URL },
+  db: { reset: true },
+  debug: { trace: true }}`
 
 ### start()
 Starts the internal timer that will send emails at appropriate times.

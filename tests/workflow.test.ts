@@ -18,7 +18,7 @@ describe('Unit Tests - Workflow', () => {
   test('runWorkflow', () => {
     const workflows: Workflow[] = [
       {
-        "name": "workflow1",
+        "name": "automation1",
         "description": "tell user about pro features",
         "trigger_name": "proplan",
         "emails": [
@@ -39,7 +39,7 @@ describe('Unit Tests - Workflow', () => {
         ]
       },
       {
-        "name": "workflow2",
+        "name": "automation2",
         "description": "tell user about pro features 2",
         "trigger_name": "proplan",
         "emails": [
@@ -75,7 +75,7 @@ describe('Unit Tests - Workflow', () => {
     const a = jest.spyOn(mockAutomation, 'buildEmailAction');
 
     init(workflows, options)
-    runWorkflow("workflow1", "sendTo")
+    runWorkflow("automation1", "sendTo")
 
     expect(mockAutomation.buildEmailAction).toBeCalled()
   })

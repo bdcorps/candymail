@@ -23,7 +23,7 @@ describe('Unit Tests - Automation', () => {
   test('init', () => {
     const workflows: Workflow[] = [
       {
-        "name": "workflow1",
+        "name": "automation1",
         "description": "tell user about pro features",
         "trigger_name": "proplan",
         "emails": [
@@ -44,7 +44,7 @@ describe('Unit Tests - Automation', () => {
         ]
       },
       {
-        "name": "workflow2",
+        "name": "automation2",
         "description": "tell user about pro features 2",
         "trigger_name": "proplan",
         "emails": [
