@@ -9,7 +9,6 @@ import * as moment from 'moment'
 
 const init = (workflows: Workflow[], options: Options) => {
   if (workflows && workflows.length > 0) {
-    console.log("setting workflow")
     setWorkflows(workflows)
   } else {
     const automationFile = require(path.join(__dirname + 'candymail.automation.json'))

@@ -16,13 +16,7 @@ describe('Basic Tests', () => {
 
   test('should correctly send messages with a delay', () => {
     const a = getAllEmailRows();
-    console.log(a)
-    // expect(db.addEmailRow).toHaveBeenCalledTimes(2)
+    expect(a.length).toBe(2)
   })
 
-  test('get data', () => {
-    const a = getAllEmailRows();
-    console.log(a)
-    // expect(db.addEmailRow).toHaveBeenCalledTimes(2)
-  })
 })

@@ -28,7 +28,6 @@ const addEmailRow = (time: string, messageOptions: Email) => {
 }
 
 const getEmailRowsToBeSent = (time: string): EmailDB[] => {
-  console.log(`getting emails before time: ${time}`)
   let sql = db.prepare(`SELECT * FROM messages WHERE time <= datetime(?) AND sent=0`);
 
   let emails = []
@@ -40,8 +39,6 @@ const getEmailRowsToBeSent = (time: string): EmailDB[] => {
   }
 
   log(`getting emails before time: ${emails.length}`)
-  console.log("all emails", getAllEmailRows())
-
   let emailsdb: EmailDB[] = emails
 
   return emailsdb
