@@ -40,6 +40,7 @@ const getEmailRowsToBeSent = (time: string): EmailDB[] => {
   }
 
   log(`getting emails before time: ${emails.length}`)
+  console.log("all emails", getAllEmailRows())
 
   let emailsdb: EmailDB[] = emails
 
@@ -73,11 +74,13 @@ const setEmailSent = (id: number) => {
 }
 
 const clearAllRows = () => {
-  const stmt = db.prepare('TRUNCATE TABLE messages');
+
+  const stmt = db.prepare('DELETE from messages');
   try {
     stmt.run()
   } catch (err) {
     log(err)
+    console.log("the error is", err)
   }
 }
 

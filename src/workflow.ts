@@ -8,7 +8,6 @@ let loadedWorkflows: Workflow[]
 
 const setWorkflows = (workflows: Workflow[]) => {
   loadedWorkflows = workflows
-  console.log('good1', workflows, loadedWorkflows)
 }
 
 const runWorkflow = (workflow: string, sendTo: string) => {

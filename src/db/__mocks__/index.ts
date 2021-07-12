@@ -28,6 +28,10 @@ const setEmailSent = (id: number) => {
   });
 }
 
+const clearAllRows = () => {
+  emailsdb = []
+}
+
 export {
-  getAllEmailRows, setEmailSent, addEmailRow, getEmailRowsToBeSent
+  getAllEmailRows, setEmailSent, addEmailRow, getEmailRowsToBeSent, clearAllRows
 }

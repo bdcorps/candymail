@@ -57,13 +57,11 @@ const sendMessagesNow = async () => {
 
   if (messagesToBeSent) {
     messagesToBeSent.forEach((message: MessageRow) => {
+      console.log("sending email")
       sendEmail(message)
     })
   }
 }
-
-
-sendMessagesNow()
 
 export {
   init,
