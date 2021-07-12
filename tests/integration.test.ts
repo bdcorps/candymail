@@ -6,11 +6,12 @@ import {
 } from '../src/automation'
 import { runWorkflow } from '../src/workflow'
 import * as mockHelper from '../src/utils/helper'
-import { sendMessagesNow, start } from '../index'
+import { sendMessagesNow, start, unsubscribeUser } from '../index'
 
 import * as mockModelDB from '../src/db/db.model'
 import { addEmailRow, getAllEmailRows, getEmailRowsToBeSent } from '../src/db'
 import { clearAllScheduledMessages } from '../src/queue';
+import { hasUnsubscribed } from '../src/unsubscribe';
 
 jest.mock('../src/utils/helper')
 
@@ -108,6 +109,12 @@ describe('Integration Tests - Workflow', () => {
     Date.now = jest.fn(() => new Date('2020-08-20T04:31:00Z').valueOf())
 
     await sendMessagesNow()
+    expect(mockHelper.sendEmail).toHaveBeenCalledTimes(1)
+
+    unsubscribeUser("a@gmail.com")
+    const wasUserUnsubscribed = hasUnsubscribed("a@gmail.com")
+    expect(wasUserUnsubscribed).toBe(true)
+    Date.now = jest.fn(() => new Date('2020-08-20T06:31:00Z').valueOf())
     expect(mockHelper.sendEmail).toHaveBeenCalledTimes(1)
   })
 })
