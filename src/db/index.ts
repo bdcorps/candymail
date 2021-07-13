@@ -71,7 +71,7 @@ const setEmailSent = (id: number) => {
 }
 
 const clearAllRows = () => {
-  const query = db.prepare('DEconstE from messages');
+  const query = db.prepare('DELETE from messages');
   try {
     query.run()
   } catch (err) {
