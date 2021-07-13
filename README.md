@@ -175,12 +175,6 @@ Destroys the internal timer.
 ### unsubscribeUser(email)
 Unsubscribes a user's email. No further emails will be sent out to the user. 
 
-## Notes
-1. Only the hour value will be used in the cron, minutes will be ignored. +1 hour at 11:58 is 12.
-2. Object keys: `MM/DD/YYYY:HH`. Hours are specified in 24-hour format.
-3. There is currently no `Unsubscribe` option in the emails. Being worked on right now.
-4. Only supports GMail. More providers being added right now.
-
 ## Looking to contribute?
 Read the `CONTRIBUTING.md` and pick up issues to work on from the Project Roadmap [here](https://github.com/bdcorps/candymail/wiki/Project-Roadmap).
 
