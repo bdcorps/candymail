@@ -10,7 +10,7 @@ const getScheduledMessagesBeforeTime = (time: string): MessageRow[] => {
 
   const messages: MessageRow[] = []
 
-  for (let email of emails) {
+  for (const email of emails) {
     const message: MessageRow = { id: email.id, email: { template: email.template, sendFrom: email.sendFrom, sendTo: email.sendTo, subject: email.subject, body: email.body } }
     messages.push(message)
   }
@@ -23,7 +23,7 @@ const getAllScheduledMessages = (): MessageRow[] => {
 
   const messages: MessageRow[] = []
 
-  for (let email of emails) {
+  for (const email of emails) {
     const message: MessageRow = { id: email.id, email: { template: email.template, sendFrom: email.sendFrom, sendTo: email.sendTo, subject: email.subject, body: email.body } }
     messages.push(message)
   }

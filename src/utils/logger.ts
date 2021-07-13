@@ -5,7 +5,7 @@ const log = (messsage: string) => {
 
   if (shouldTrace) {
     const date = new Date(Date.now())
-    console.log(date, messsage)
+    console.log(date, messsage) // tslint:disable-line
   }
 }
 export { log }

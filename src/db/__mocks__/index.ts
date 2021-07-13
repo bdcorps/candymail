@@ -19,7 +19,7 @@ const getAllEmailRows = (): EmailDB[] => {
 }
 
 const setEmailSent = (id: number) => {
-  emailsdb.forEach(function (email, index, theArray) {
+  emailsdb.forEach((email, index, theArray) => {
     if (email.id === id) {
       email.sent = 1;
       theArray[index] = email

@@ -18,17 +18,17 @@ const addEmailRow = (time: string, messageOptions: Email) => {
   log(`adding email row for ${time} with message: ${messageOptions.body}`)
   const { template, sendFrom, sendTo, subject, body } = messageOptions
 
-  const stmt = db.prepare('INSERT INTO messages (time,template,sendFrom,sendTo,subject,body, sent) VALUES (?,?,?,?,?,?,?)');
+  const query = db.prepare('INSERT INTO messages (time,template,sendFrom,sendTo,subject,body, sent) VALUES (?,?,?,?,?,?,?)');
 
   try {
-    stmt.run(time, template, sendFrom, sendTo, subject, body, 0)
+    query.run(time, template, sendFrom, sendTo, subject, body, 0)
   } catch (err) {
     log(err)
   }
 }
 
 const getEmailRowsToBeSent = (time: string): EmailDB[] => {
-  let sql = db.prepare(`SELECT * FROM messages WHERE time <= datetime(?) AND sent=0`);
+  const sql = db.prepare(`SELECT * FROM messages WHERE time <= datetime(?) AND sent=0`);
 
   let emails = []
 
@@ -39,13 +39,13 @@ const getEmailRowsToBeSent = (time: string): EmailDB[] => {
   }
 
   log(`getting emails before time: ${emails.length}`)
-  let emailsdb: EmailDB[] = emails
+  const emailsdb: EmailDB[] = emails
 
   return emailsdb
 }
 
 const getAllEmailRows = (): EmailDB[] => {
-  let sql = db.prepare(`SELECT * FROM messages ORDER BY time`);
+  const sql = db.prepare(`SELECT * FROM messages ORDER BY time`);
 
   let emails = []
 
@@ -55,13 +55,13 @@ const getAllEmailRows = (): EmailDB[] => {
     log(err)
   }
 
-  let emailsdb: EmailDB[] = emails
+  const emailsdb: EmailDB[] = emails
 
   return emailsdb
 }
 
 const setEmailSent = (id: number) => {
-  let sql = db.prepare(`UPDATE messages SET sent = 1 WHERE id = ?`);
+  const sql = db.prepare(`UPDATE messages SET sent = 1 WHERE id = ?`);
 
   try {
     sql.run(id)
@@ -71,13 +71,11 @@ const setEmailSent = (id: number) => {
 }
 
 const clearAllRows = () => {
-
-  const stmt = db.prepare('DELETE from messages');
+  const query = db.prepare('DEconstE from messages');
   try {
-    stmt.run()
+    query.run()
   } catch (err) {
     log(err)
-    console.log("the error is", err)
   }
 }
 
@@ -86,16 +84,16 @@ const close = () => {
 }
 
 const addUnsubscribedEmail = (email: string) => {
-  const stmt = db.prepare('INSERT INTO unsubscribed (email) VALUES (?)');
+  const query = db.prepare('INSERT INTO unsubscribed (email) VALUES (?)');
   try {
-    stmt.run(email)
+    query.run(email)
   } catch (err) {
     log(err)
   }
 }
 
 const hasUnsubscribedEmail = (email: string): boolean => {
-  let sql = db.prepare(`SELECT * FROM unsubscribed WHERE email = ?`);
+  const sql = db.prepare(`SELECT * FROM unsubscribed WHERE email = ?`);
 
   let emails = []
 

@@ -13,16 +13,12 @@ const setConfig = (configOptions: Options) => {
   }
 }
 
-/**
- * @returns {config} Config
- */
 const getConfig = (): Options => {
   return config
 }
 
 const getTransporter = (): Mail => {
-  const config = getConfig()
-  return mailer.createTransport(config.mail)
+  return mailer.createTransport(getConfig().mail)
 }
 
 export { getConfig, setConfig, getTransporter }
