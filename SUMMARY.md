@@ -1,4 +1,6 @@
 # Table of contents
 
-* [Initial page](README.md)
+* [CandyMail - Email Automation for Node.js](README.md)
+* [CHANGELOG](changelog.md)
+* [Contributing to Candymail](contributing.md)
 
