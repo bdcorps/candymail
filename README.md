@@ -4,6 +4,9 @@
 ![David](https://img.shields.io/david/bdcorps/candymail)
 
 # CandyMail - Email Automation for Node.js
+<p align="center">
+  <img src="https://github.com/bdcorps/candymail/blob/main/logo.PNG?raw=true" />
+</p>
 Candymail makes it easy to trigger and send multi-step email sequences in Node.js using a single JSON file. Built for bootstrappers, indie makers with special care.
 
 <p align="center">
@@ -14,12 +17,12 @@ Candymail makes it easy to trigger and send multi-step email sequences in Node.j
 - Persistence using SQLite
 
 ## Features
-1. **Fully Typscript**
+1. **Fully Typescript**
 2. **Portable**: Create, share and reuse email marketing strategies between different products
 3. **Simple to use**: Time to send, subject, body of the emails can all be set up in a single JSON file
 4. **Free**: No need to pay for monthly Mailchimp etc. payments for email automation plans
 5. **HTML Support**: Add HTML templates in the email body
-6. **Complicance**: Unsubscribe Option added to email footer
+6. **Compliance**: Unsubscribe Option added to email footer
 
 ## Use Cases
 - Build better onboarding by guiding the user through the app with paced training emails
