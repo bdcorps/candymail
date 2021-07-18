@@ -5,7 +5,7 @@
 
 # CandyMail - Email Automation for Node.js
 <p align="center">
-  <img src="https://github.com/bdcorps/candymail/blob/main/logo.PNG?raw=true" />
+  <img src="https://github.com/bdcorps/candymail/blob/main/logo.png?raw=true" />
 </p>
 Candymail makes it easy to trigger and send multi-step email sequences in Node.js using a single JSON file. Built for bootstrappers, indie makers with special care.
 
