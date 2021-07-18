@@ -122,7 +122,7 @@ Look in the `examples` folder
 | Property        | Required           | Description  |
 | ------------- |:-------------:| -----:|
 | trigger     | No | Name of the trigger (Not usable) |
-| sendDelay      | Yes | Delay after which the email will be sent (in hours). From time 0, not from the last email |
+| sendDelay      | Yes | Delay after which the email will be sent (in hours) |
 | subject | Yes  | Subject of the email |
 | body | Yes | Body of the email: HTML or Text |
 | from | Yes | Sender's Email Address |
