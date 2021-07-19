@@ -181,4 +181,4 @@ Read the `CONTRIBUTING.md` and pick up issues to work on from the Project Roadma
 Got Feedback? Hit me up at <a href="mailto:sunnyashiin@gmail.com">sunnyashiin@gmail.com</a> \
 Now available for freelance work.
 
-Thanks to u/grantrules on Reddit for helping with a code review
+Thanks to [u/grantrules on Reddit](!https://www.reddit.com/user/grantrules/) for helping with a code review
