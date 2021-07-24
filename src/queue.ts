@@ -1,12 +1,12 @@
 import { Email, MessageRow } from './types'
 import { addEmailRow, getEmailRowsToBeSent, getAllEmailRows, clearAllRows } from "./db"
 
-const addScheduledMessage = (time: string, messageOptions: Email) => {
-  addEmailRow(time, messageOptions)
+const addScheduledMessage = async (time: string, messageOptions: Email) => {
+  await addEmailRow(time, messageOptions)
 }
 
-const getScheduledMessagesBeforeTime = (time: string): MessageRow[] => {
-  const emails = getEmailRowsToBeSent(time)
+const getScheduledMessagesBeforeTime = async (time: string): Promise<MessageRow[]> => {
+  const emails = await getEmailRowsToBeSent(time)
 
   const messages: MessageRow[] = []
 
@@ -18,8 +18,8 @@ const getScheduledMessagesBeforeTime = (time: string): MessageRow[] => {
   return messages
 }
 
-const getAllScheduledMessages = (): MessageRow[] => {
-  const emails = getAllEmailRows()
+const getAllScheduledMessages = async (): Promise<MessageRow[]> => {
+  const emails = await getAllEmailRows()
 
   const messages: MessageRow[] = []
 

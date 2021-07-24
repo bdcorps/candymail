@@ -21,12 +21,12 @@ const sendEmail = (message: MessageRow) => {
     html,
   }
 
-  transporter.sendMail(mailOptions, (err: any, info: any) => {
+  transporter.sendMail(mailOptions, async (err: any, info: any) => {
     if (err) {
       throw err
     }
 
-    setEmailSent(id)
+    await setEmailSent(id)
   })
 }
 

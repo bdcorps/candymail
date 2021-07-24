@@ -20,13 +20,13 @@ const init = (workflows: Workflow[], options: Options) => {
 
 
 const buildEmailAction = (emails: EmailAction[], sendTo: string) => {
-  emails.forEach(({ sendDelay, subject, body, from }) => {
+  emails.forEach(async ({ sendDelay, subject, body, from }) => {
     const template = 'default'
     const today = moment.utc()
     const time = today.add(sendDelay, 'hours').format("YYYY-MM-DD HH:mm:ss")
 
     const sendFrom = from
-    addScheduledMessage(time, { template, sendFrom, sendTo, subject, body })
+    await addScheduledMessage(time, { template, sendFrom, sendTo, subject, body })
   })
 }
 

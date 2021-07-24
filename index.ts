@@ -6,6 +6,7 @@ import * as cron from 'node-cron'
 import * as moment from 'moment'
 import { sendEmail } from './src/utils/helper'
 import { log } from './src/utils/logger'
+import { genConnection } from './src/db/connection'
 
 import {
   getAllScheduledMessages,
@@ -25,22 +26,22 @@ import {
 import {
   runWorkflow
 } from './src/workflow'
-import { getConfig } from "./src/config"
 
 const task = cron.schedule(
   '0 * * * *',
-  () => {
-    sendMessagesNow()
+  async () => {
+    await sendMessagesNow()
   },
   {
     scheduled: false,
   }
 )
 
-
-
-const start = () => {
-  task.start()
+const start = async () => {
+  console.log("start");
+  const db = await genConnection();
+  task.start();
+  console.log("started");
 }
 
 const stop = () => {
