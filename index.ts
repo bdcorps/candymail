@@ -14,6 +14,7 @@ import {
 } from './src/queue'
 
 import {
+  hasUnsubscribed,
   unsubscribeUser
 } from './src/unsubscribe'
 
@@ -57,7 +58,15 @@ const sendMessagesNow = async () => {
 
   if (messagesToBeSent) {
     messagesToBeSent.forEach((message: MessageRow) => {
-      sendEmail(message)
+      const { email: { sendTo } } = message
+      if (hasUnsubscribed(sendTo)) {
+        log(
+          `The user ${sendTo} you are trying to send a message to has already unsubscribed`
+        )
+      } else {
+        sendEmail(message)
+      }
+
     })
   }
 }

@@ -67,14 +67,14 @@ describe('Integration Tests - Workflow', () => {
             "sendDelay": 1,
             "subject": "w1e1",
             "body": "<h1>Send automated messages with Candymail</h1><p>Now with HTML support</p><a href='https://saasbase.dev/candymail'>Learn more here</a>",
-            "from": "sunnyashiin@gmail.com"
+            "from": "a@gmail.com"
           },
           {
             "trigger": "time",
             "sendDelay": 3,
             "subject": "w1e2",
             "body": "Customizations are great",
-            "from": "sunnyashiin@gmail.com"
+            "from": "a@gmail.com"
           }
         ]
       }
@@ -115,6 +115,7 @@ describe('Integration Tests - Workflow', () => {
     const wasUserUnsubscribed = hasUnsubscribed("a@gmail.com")
     expect(wasUserUnsubscribed).toBe(true)
     Date.now = jest.fn(() => new Date('2020-08-20T06:31:00Z').valueOf())
+    await sendMessagesNow()
     expect(mockHelper.sendEmail).toHaveBeenCalledTimes(1)
   })
 })
