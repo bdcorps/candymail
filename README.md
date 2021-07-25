@@ -14,7 +14,7 @@ Candymail makes it easy to trigger and send multi-step email sequences in Node.j
 - Persistence using SQLite
 
 ## Features
-1. **Fully Typescript**
+1. **Written in Typescript**
 2. **Portable**: Create, share and reuse email marketing strategies between different products
 3. **Simple to use**: Time to send, subject, body of the emails can all be set up in a single JSON file
 4. **Free**: No need to pay for monthly Mailchimp etc. payments for email automation plans
