@@ -36,9 +36,8 @@ Or npm:
 npm install --save candymail
 ```
 ## Getting Started
-### Supported Email Servers
-- All SMTP 
-- Gmail: Sign up for an App Password for Gmail [here](https://myaccount.google.com/security)
+### Supported Email Services
+- Gmail: 
 
 ### Configuration
 Create a `candymail.automation.json` file on the root level of your project.
@@ -73,8 +72,9 @@ Here's a sample:
 ```
 
 ### Supported Email Providers
-- Gmail
-- Looking for more support? Send me a message.
+- [Send emails using Gmail](https://github.com/bdcorps/candymail/wiki/Send-emails-using-Gmail)
+- [Send emails using Mailgun](https://github.com/bdcorps/candymail/wiki/Send-emails-using-Mailgun)
+- We Nodemailer under the hood, any SMTP provider will work
 
 ### Simple Usage
 ```
