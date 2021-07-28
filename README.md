@@ -10,7 +10,7 @@ Candymail makes it easy to trigger and send multi-step email sequences in Node.j
 </p>
 
 ## Sponsors
-- [SaasBase: Guides on building your next SaaS app](!https://saasbase.dev)
+- [SaasBase: Guides on building your next SaaS app](https://saasbase.dev)
 
 ## New in 1.0.13
 - Persistence using SQLite
