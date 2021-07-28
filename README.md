@@ -16,7 +16,7 @@ Candymail makes it easy to trigger and send multi-step email sequences in Node.j
 - Persistence using SQLite
 
 ## Features
-1. **Fully Typescript**
+1. **Written in Typescript**
 2. **Portable**: Create, share and reuse email marketing strategies between different products
 3. **Simple to use**: Time to send, subject, body of the emails can all be set up in a single JSON file
 4. **Free**: No need to pay for monthly Mailchimp etc. payments for email automation plans
@@ -38,10 +38,6 @@ Or npm:
 npm install --save candymail
 ```
 ## Getting Started
-### Supported Email Servers
-- All SMTP 
-- Gmail: Sign up for an App Password for Gmail [here](https://myaccount.google.com/security)
-
 ### Configuration
 Create a `candymail.automation.json` file on the root level of your project.
 
@@ -75,8 +71,9 @@ Here's a sample:
 ```
 
 ### Supported Email Providers
-- Gmail
-- Looking for more support? Send me a message.
+- [Send emails using Gmail](https://github.com/bdcorps/candymail/wiki/Send-emails-using-Gmail)
+- [Send emails using Mailgun](https://github.com/bdcorps/candymail/wiki/Send-emails-using-Mailgun)
+- We use Nodemailer under the hood, any SMTP provider will work
 
 ### Simple Usage
 ```
