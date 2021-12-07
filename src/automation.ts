@@ -9,7 +9,7 @@ import { genConnection } from './db/connection'
 
 
 const init = async (workflows: Workflow[], options: Options) => {
-  const db = await genConnection();
+    await genConnection();
     if (workflows && workflows.length > 0) {
       setWorkflows(workflows)
     } else {
