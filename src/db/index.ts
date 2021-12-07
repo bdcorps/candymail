@@ -7,13 +7,13 @@ import { createConnection, getConnection, Connection, LessThan, getRepository } 
 import { User } from '../entity/User';
 import { Message } from '../entity/Message'
 
-const addEmailRow = async (time: string, messageOptions: Email) => {
+const addEmailRow = async (messageOptions: Email) => {
   const db = getConnection()
   const userRepository = db.getRepository(User);
   const messageRepository = db.getRepository(Message);
 
-  log(`adding email row for ${time} with message: ${messageOptions.body}`)
-  const { template, sendFrom, sendTo, subject, body } = messageOptions
+  log(`adding email row for ${messageOptions.sendAt} with message: ${messageOptions.body}`)
+  const { template, sendFrom, sendTo, sendAt, subject, body } = messageOptions
 
   const user = await userRepository.find({ email: sendTo })
   if (!user) {
@@ -31,15 +31,15 @@ const addEmailRow = async (time: string, messageOptions: Email) => {
   message.template = template;
   message.sendFrom = sendFrom;
   message.sendTo = sendTo;
+  message.sendAt = sendAt;
   message.subject = subject;
   message.body = body;
-  message.sent = true;
 
   await messageRepository
     .save(message)
 }
 
-const getEmailRowsToBeSent = async (time: string): Promise<Message[]> => {
+const getEmailRowsToBeSent = async (time: Date): Promise<Message[]> => {
   const db = getConnection()
   const messageRepository = db.getRepository(Message);
 
@@ -47,7 +47,7 @@ const getEmailRowsToBeSent = async (time: string): Promise<Message[]> => {
     .find({
       where: {
         sent: false,
-        last_modified: LessThan(time)
+        sendAt: LessThan(moment().format())
       }
     })
 
@@ -106,9 +106,9 @@ const hasUnsubscribedEmail = async (email: string): Promise<boolean> => {
   const db = getConnection()
   const userRepository = db.getRepository(User);
 
-  const user: User | undefined = await userRepository.findOne({ email })
+  const user: User | undefined = await userRepository.findOne({ email });
 
-  if (user === undefined) { return true; }
+  if (user === undefined) { return false; }
 
   return user.isSubscribed
 }

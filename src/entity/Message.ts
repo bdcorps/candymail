@@ -16,6 +16,8 @@ export class Message {
 
   @Column()
   sendTo: string;
+  
+  @CreateDateColumn({ name: 'sendAt' }) 'sendAt': Date;
 
   @Column()
   subject: string;
@@ -23,6 +25,6 @@ export class Message {
   @Column()
   body: string;
 
-  @Column()
+  @Column({ type: 'boolean', default: false})
   sent: boolean;
 }

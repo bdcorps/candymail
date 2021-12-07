@@ -6,9 +6,9 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build:dev": "ts-node-dev index.ts",
-    "scrapbook":"ts-node-dev test.ts",
+    "scrapbook":"ts-node-dev src/test.ts",
     "start": "node index",
-    "example": "node examples/simple",
+    "example": "npm run build && node examples/simple",
     "prettify": "npx prettier --write **/*.js",
     "test": "jest",
     "build": "tsc",

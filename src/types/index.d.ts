@@ -3,7 +3,8 @@ export type Email = {
   sendFrom: string
   sendTo: string
   subject: string
-  body: string
+  body: string,
+  sendAt: Date;
 }
 
 export type MessageRow = {

@@ -18,24 +18,28 @@ candymail.init(automation.workflows, {
   hosting: { url: process.env.HOSTING_URL },
   db: { reset: true },
   debug: { trace: true },
+}).then(()=>{
+
+  candymail.start()
+
+  // candymail.unsubscribeUser('user@hotmail.com') // Immediatedly unsubscribe user and they will not receive any more messages
+  
+  // candymail.sendEmail({
+  //   template: 'string',
+  //   sendFrom: 'sunnyashiin@gmail.com',
+  //   sendTo: 'sunnyashiin@gmail.com',
+  //   subject: 'string',
+  //   body: 'string',
+  // })
+  
+  const someConditionSatisfiedByUser = async () => {
+    const user = process.env.RECIPIENT_EMAIL;
+    const scheduledMessages = await candymail.getAllScheduledMessages();
+    candymail.runWorkflow('automation1', user)
+    console.log({ scheduledMessages })
+  }
+  
+  someConditionSatisfiedByUser()
+
 })
 
-candymail.start()
-
-// candymail.unsubscribeUser('user@hotmail.com') // Immediatedly unsubscribe user and they will not receive any more messages
-
-// candymail.sendEmail({
-//   template: 'string',
-//   sendFrom: 'sunnyashiin@gmail.com',
-//   sendTo: 'sunnyashiin@gmail.com',
-//   subject: 'string',
-//   body: 'string',
-// })
-
-const someConditionSatisfiedByUser = () => {
-  const user = process.env.RECIPIENT_EMAIL
-  candymail.runWorkflow('automation1', user)
-  console.log({ get: candymail.getAllScheduledMessages() })
-}
-
-someConditionSatisfiedByUser()

@@ -29,22 +29,27 @@ import {
 import { Connection } from "typeorm"
 
 const task = cron.schedule(
-  '0 * * * *',
+  '* * * * *',
   async () => {
     await sendMessagesNow()
   },
   {
     scheduled: false,
   }
-)
+);
+
+(async () => {
+  console.log("start");
+  const db: Connection = await genConnection();
+  console.log("started");
+})();
+
 
 const start = async () => {
-  console.log("start");
-  const db:Connection = await genConnection();
-  console.log({isconnect: db.isConnected})
+  // const db:Connection = await genConnection();
+  // console.log({isconnect: db.isConnected})
 
   task.start();
-  console.log("started");
 }
 
 const stop = () => {
@@ -57,11 +62,12 @@ const destroy = () => {
 
 const sendMessagesNow = async () => {
   log(`cron trigger > ${moment.utc().format("YYYY-MM-DD HH:mm:ss")}`)
-  const today = moment.utc().format("YYYY-MM-DD HH:mm:ss")
+  // const today = moment.utc().format("YYYY-MM-DD HH:mm:ss")
+  const today = moment.utc().toDate()
   const messagesToBeSent = await getScheduledMessagesBeforeTime(today)
+  console.log("messagetosent", messagesToBeSent)
 
   if (messagesToBeSent) {
-
     for (const message of messagesToBeSent){
       const { email: { sendTo } } = message
       const isUnsubscribed = await hasUnsubscribed(sendTo)
