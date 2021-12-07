@@ -3,7 +3,7 @@ import * as SQLite3 from 'better-sqlite3'
 import { Email, EmailDB } from '../types'
 import { log } from '../utils/logger'
 import * as moment from 'moment'
-import { createConnection, getConnection, Connection, LessThan } from 'typeorm';
+import { createConnection, getConnection, Connection, LessThan, getRepository } from 'typeorm';
 import { User } from '../entity/User';
 import { Message } from '../entity/Message'
 
@@ -58,7 +58,8 @@ const getEmailRowsToBeSent = async (time: string): Promise<Message[]> => {
 
 const getAllEmailRows = async () => {
   const db = getConnection()
-  const messageRepository = db.getRepository(Message);
+  console.log("check connection", db.isConnected)
+  const messageRepository = getRepository(Message);
 
   const messages: Message[] = await messageRepository
     .find()

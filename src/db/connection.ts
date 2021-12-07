@@ -3,10 +3,10 @@ import { User } from "../entity/User";
 import { Message } from "../entity/Message";
 
 export const genConnection = async () =>
-  createConnection({
+  await createConnection({
     type: "sqlite",
     database: "./candymail.sql",
-    dropSchema: false,
+    dropSchema: true,
     entities: [
       User,
       Message

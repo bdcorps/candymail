@@ -1,12 +1,12 @@
 
 import { addUnsubscribedEmail, hasUnsubscribedEmail } from "./db"
 
-const unsubscribeUser = async (email: string) => {
-  await addUnsubscribedEmail(email)
+const unsubscribeUser = (email: string) => {
+  addUnsubscribedEmail(email)
 }
 
 const hasUnsubscribed = async (email: string): Promise<boolean> => {
-  return await hasUnsubscribedEmail(email)
+  return hasUnsubscribedEmail(email)
 }
 
 export { unsubscribeUser, hasUnsubscribed }

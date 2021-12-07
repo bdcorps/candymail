@@ -26,6 +26,7 @@ import {
 import {
   runWorkflow
 } from './src/workflow'
+import { Connection } from "typeorm"
 
 const task = cron.schedule(
   '0 * * * *',
@@ -39,7 +40,9 @@ const task = cron.schedule(
 
 const start = async () => {
   console.log("start");
-  const db = await genConnection();
+  const db:Connection = await genConnection();
+  console.log({isconnect: db.isConnected})
+
   task.start();
   console.log("started");
 }
@@ -58,17 +61,18 @@ const sendMessagesNow = async () => {
   const messagesToBeSent = await getScheduledMessagesBeforeTime(today)
 
   if (messagesToBeSent) {
-    messagesToBeSent.forEach((message: MessageRow) => {
+
+    for (const message of messagesToBeSent){
       const { email: { sendTo } } = message
-      if (hasUnsubscribed(sendTo)) {
+      const isUnsubscribed = await hasUnsubscribed(sendTo)
+      if (isUnsubscribed) {
         log(
           `The user ${sendTo} you are trying to send a message to has already unsubscribed`
         )
       } else {
         sendEmail(message)
       }
-
-    })
+    }
   }
 }
 
