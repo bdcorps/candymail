@@ -33,6 +33,7 @@ const addEmailRow = async (time: string, messageOptions: Email) => {
   message.sendTo = sendTo;
   message.subject = subject;
   message.body = body;
+  message.sent = true;
 
   await messageRepository
     .save(message)

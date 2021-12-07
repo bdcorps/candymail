@@ -44,7 +44,7 @@
     "@types/express": "^4.17.9",
     "@types/jest": "^26.0.20",
     "@types/lodash": "^4.14.167",
-    "@types/node": "^14.17.5",
+    "@types/node": "^14.18.0",
     "@types/node-cron": "^2.0.3",
     "@types/nodemailer": "^6.4.0",
     "@types/sqlite3": "^3.1.7",
