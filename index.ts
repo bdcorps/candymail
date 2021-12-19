@@ -39,9 +39,7 @@ const task = cron.schedule(
 );
 
 (async () => {
-  console.log("start");
   const db: Connection = await genConnection();
-  console.log("started");
 })();
 
 
@@ -68,7 +66,7 @@ const sendMessagesNow = async () => {
   console.log("messagetosent", messagesToBeSent)
 
   if (messagesToBeSent) {
-    for (const message of messagesToBeSent){
+    for (const message of messagesToBeSent) {
       const { email: { sendTo } } = message
       const isUnsubscribed = await hasUnsubscribed(sendTo)
       if (isUnsubscribed) {
