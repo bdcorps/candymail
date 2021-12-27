@@ -2,7 +2,7 @@ import { createConnection, getConnection } from "typeorm";
 import { User } from "../entity/User";
 import { Message } from "../entity/Message";
 
-export const genConnection = async () =>
+export const genConnection = async () => {
   await createConnection({
     type: "sqlite",
     database: "./candymail.sql",
@@ -13,6 +13,7 @@ export const genConnection = async () =>
     ],
     synchronize: true,
   });
+}
 
 export const getDB = async () => {
   return await getConnection();

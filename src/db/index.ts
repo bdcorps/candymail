@@ -8,24 +8,23 @@ import { User } from '../entity/User';
 import { Message } from '../entity/Message'
 
 const addEmailRow = async (messageOptions: Email) => {
-  const db = getConnection()
-  const userRepository = db.getRepository(User);
-  const messageRepository = db.getRepository(Message);
+  const userRepository = getRepository(User);
+  const messageRepository = getRepository(Message);
 
   log(`adding email row for ${messageOptions.sendAt} with message: ${messageOptions.body}`)
   const { template, sendFrom, sendTo, sendAt, subject, body } = messageOptions
 
   const user = await userRepository.find({ email: sendTo })
   if (!user) {
-    console.log("sukh user not found: ", sendTo)
     const newUser = new User();
     newUser.email = sendTo;
     newUser.isSubscribed = true;
 
     await userRepository
       .save(newUser)
-  }
 
+    console.log("add user")
+  }
 
   const message = new Message();
   message.template = template;
@@ -40,8 +39,7 @@ const addEmailRow = async (messageOptions: Email) => {
 }
 
 const getEmailRowsToBeSent = async (time: Date): Promise<Message[]> => {
-  const db = getConnection()
-  const messageRepository = db.getRepository(Message);
+  const messageRepository = getRepository(Message);
 
   const messages = await messageRepository
     .find({
@@ -56,20 +54,16 @@ const getEmailRowsToBeSent = async (time: Date): Promise<Message[]> => {
   return messages
 }
 
-const getAllEmailRows = async () => {
-  const db = getConnection()
-  console.log("check connection", db.isConnected)
+const getAllEmailRows = async (): Promise<Message[]> => {
   const messageRepository = getRepository(Message);
-
   const messages: Message[] = await messageRepository
-    .find()
+    .find({})
   log(messages.toString())
   return messages
 }
 
 const setEmailSent = async (id: number) => {
-  const db = getConnection()
-  const messageRepository = db.getRepository(Message);
+  const messageRepository = getRepository(Message);
 
   const message = await messageRepository
     .findOne({ id })
@@ -83,15 +77,13 @@ const setEmailSent = async (id: number) => {
 }
 
 const clearAllRows = async () => {
-  const db = getConnection()
-  const messageRepository = db.getRepository(Message);
+  const messageRepository = getRepository(Message);
 
   await messageRepository.clear();
 }
 
 const addUnsubscribedEmail = async (email: string) => {
-  const db = getConnection()
-  const userRepository = db.getRepository(User);
+  const userRepository = getRepository(User);
 
   const user: User | undefined = await userRepository.findOne({ email })
 
@@ -103,10 +95,9 @@ const addUnsubscribedEmail = async (email: string) => {
 }
 
 const hasUnsubscribedEmail = async (email: string): Promise<boolean> => {
-  const db = getConnection()
-  const userRepository = db.getRepository(User);
+  const userRepository = getRepository(User);
 
-  const user: User | undefined = await userRepository.findOne({ email });
+  const user: User | undefined = await userRepository.findOne({ email, isSubscribed: false });
 
   if (user === undefined) { return false; }
 

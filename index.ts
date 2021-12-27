@@ -26,7 +26,7 @@ import {
 import {
   runWorkflow
 } from './src/workflow'
-import { Connection } from "typeorm"
+import { ConnectionIsNotSetError } from "typeorm"
 
 const task = cron.schedule(
   '* * * * *',
@@ -38,15 +38,7 @@ const task = cron.schedule(
   }
 );
 
-(async () => {
-  const db: Connection = await genConnection();
-})();
-
-
 const start = async () => {
-  // const db:Connection = await genConnection();
-  // console.log({isconnect: db.isConnected})
-
   task.start();
 }
 
@@ -59,11 +51,10 @@ const destroy = () => {
 }
 
 const sendMessagesNow = async () => {
-  log(`cron trigger > ${moment.utc().format("YYYY-MM-DD HH:mm:ss")}`)
-  // const today = moment.utc().format("YYYY-MM-DD HH:mm:ss")
   const today = moment.utc().toDate()
   const messagesToBeSent = await getScheduledMessagesBeforeTime(today)
-  console.log("messagetosent", messagesToBeSent)
+
+  console.log("mess", messagesToBeSent)
 
   if (messagesToBeSent) {
     for (const message of messagesToBeSent) {

@@ -48,7 +48,7 @@ Here's a sample:
 {
   "automations": [
     {
-      "name": "automation1",
+      "name": "workflow1",
       "description": "tell users about pro features",
       "trigger_name": "proplan",
       "emails": [
@@ -107,7 +107,7 @@ candymail.start()
 
 const someConditionSatisfiedByUser = () => {
   const user = process.env.RECIPIENT_EMAIL
-  candymail.runWorkflow('automation1', user)
+  candymail.runWorkflow('workflow1', user)
   console.log({ get: candymail.getAllScheduledMessages() })
 }
 
@@ -154,7 +154,7 @@ Starts the internal timer that will send emails at appropriate times.
 
 ### runWorkflow(workflowName)
 Triggers an automation based on `name` specified in the `candymail.automation.json` file. Needs `candymail.start()` to have been called.
-- **automationName**: Name of `automation` in `candymail.automation.json`. Example: 'automation1'.
+- **automationName**: Name of `automation` in `candymail.automation.json`. Example: 'workflow1'.
 
 ### getAllScheduledMessages()
 Get the list of all scheduled messages.

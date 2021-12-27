@@ -10,15 +10,15 @@ const addEmailRow = (time: string, messageOptions: Email) => {
   emailsdb.push(email)
 }
 
-const getEmailRowsToBeSent = (): EmailDB[] => {
-  return [emailsdb[0]]
+const getEmailRowsToBeSent = async (): Promise<EmailDB[]> => {
+  return Promise.resolve([emailsdb[0]])
 }
 
-const getAllEmailRows = (): EmailDB[] => {
+const getAllEmailRows = async (): Promise<EmailDB[]> => {
   return emailsdb
 }
 
-const setEmailSent = (id: number) => {
+const setEmailSent = async (id: number) => {
   emailsdb.forEach((email, index, theArray) => {
     if (email.id === id) {
       email.sent = 1;
@@ -28,7 +28,7 @@ const setEmailSent = (id: number) => {
   });
 }
 
-const clearAllRows = () => {
+const clearAllRows = async () => {
   emailsdb = []
 }
 

@@ -6,8 +6,6 @@ export class Message {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @CreateDateColumn({ name: 'time' }) 'time': Date;
-
   @Column()
   template: string;
 
@@ -16,7 +14,7 @@ export class Message {
 
   @Column()
   sendTo: string;
-  
+
   @CreateDateColumn({ name: 'sendAt' }) 'sendAt': Date;
 
   @Column()
@@ -25,6 +23,6 @@ export class Message {
   @Column()
   body: string;
 
-  @Column({ type: 'boolean', default: false})
+  @Column({ type: 'boolean', default: false })
   sent: boolean;
 }

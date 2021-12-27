@@ -4,44 +4,48 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-const automations = require('../candymail.automation.json')
-candymail.init(automations.automations, {
-  mail: {
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.MAIL_USER,
-      pass: process.env.MAIL_PASSWORD,
+const automation = require('../candymail.automation.json')
+candymail
+  .init(automation.workflows, {
+    mail: {
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASSWORD,
+      },
+      tls: {
+        rejectUnauthorized: true,
+      },
     },
-    tls: {
-      rejectUnauthorized: true,
-    },
-  },
-  hosting: { url: process.env.HOSTING_URL },
-  db: { reset: true },
-  debug: { trace: true },
-})
+    hosting: { url: process.env.HOSTING_URL },
+    db: { reset: true },
+    debug: { trace: true },
+  })
+  .then((e) => {
+    candymail.start()
 
-candymail.start()
+    app.get('/', async (req, res) => {
+      const user = process.env.RECIPIENT_EMAIL
+      candymail.runWorkflow('workflow1', user)
 
-app.get('/', (req, res) => {
-  const user = process.env.RECIPIENT_EMAIL
-  candymail.runWorkflow('automation1', user)
+      const messages = await candymail.getAllScheduledMessages()
+      res.send('workflow1 started')
+    })
 
-  res.send(
-    `Welcome to Candymail Demo. Messages scheduled: ${JSON.stringify(
-      candymail.getAllScheduledMessages()
-    )} `
-  )
-})
+    app.get('/messages', async (req, res) => {
+      const messages = await candymail.getAllScheduledMessages()
+      res.json(`Messages scheduled: ${JSON.stringify(messages)}`)
+    })
 
-app.get('/unsubscribe', (req, res) => {
-  const { email } = req.query
-  candymail.unsubscribeUser(email)
-  res.send(`Sent a unsubscribe request for ${email}`)
-})
+    app.get('/unsubscribe', (req, res) => {
+      const { email } = req.query
+      candymail.unsubscribeUser(email)
+      res.send(`Sent a unsubscribe request for ${email}`)
+    })
 
-app.listen(port, () => {
-  console.log(`Learn about our new features at http://localhost:${port}`)
-})
+    app.listen(port, () => {
+      console.log(`Learn about our new features at http://localhost:${port}`)
+    })
+  })
