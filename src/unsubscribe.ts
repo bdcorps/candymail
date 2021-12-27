@@ -7,7 +7,6 @@ const unsubscribeUser = async (email: string) => {
 
 const hasUnsubscribed = async (email: string): Promise<boolean> => {
   const isUnsubscribed = await hasUnsubscribedEmail(email)
-  console.log("isUnsubscribed", isUnsubscribed)
   return isUnsubscribed
 }
 

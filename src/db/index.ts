@@ -22,8 +22,6 @@ const addEmailRow = async (messageOptions: Email) => {
 
     await userRepository
       .save(newUser)
-
-    console.log("add user")
   }
 
   const message = new Message();

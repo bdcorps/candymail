@@ -22,7 +22,6 @@ const init = async (workflows: Workflow[], options: Options) => {
 }
 
 const buildEmailAction = (emails: EmailAction[], sendTo: string) => {
-  console.log("emails are", emails)
   emails.forEach(async ({ sendDelay, subject, body, from }) => {
     const template = 'default'
     const today = moment.utc()

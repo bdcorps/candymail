@@ -54,8 +54,6 @@ const sendMessagesNow = async () => {
   const today = moment.utc().toDate()
   const messagesToBeSent = await getScheduledMessagesBeforeTime(today)
 
-  console.log("mess", messagesToBeSent)
-
   if (messagesToBeSent) {
     for (const message of messagesToBeSent) {
       const { email: { sendTo } } = message
