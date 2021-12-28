@@ -4,10 +4,12 @@ export type Email = {
   sendTo: string
   subject: string
   body: string
+  sendAt: Date
 }
 
 export type MessageRow = {
-  id: number, email: Email
+  id: number
+  email: Email
 }
 
 export type HostingOptions = {
@@ -38,7 +40,7 @@ export type MailOptions = {
 export type Options = {
   mail: MailOptions
   hosting: HostingOptions
-  db: DatabaseOptions,
+  db: DatabaseOptions
   debug: DebugOptions
 }
 

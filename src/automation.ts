@@ -5,9 +5,11 @@ import { setConfig } from './config'
 import { addScheduledMessage } from './queue'
 import { setWorkflows } from './workflow'
 import * as moment from 'moment'
+import { genConnection } from './db/connection'
 
+const init = async (workflows: Workflow[], options: Options) => {
+  await genConnection()
 
-const init = (workflows: Workflow[], options: Options) => {
   if (workflows && workflows.length > 0) {
     setWorkflows(workflows)
   } else {
@@ -18,15 +20,14 @@ const init = (workflows: Workflow[], options: Options) => {
   setConfig(options)
 }
 
-
 const buildEmailAction = (emails: EmailAction[], sendTo: string) => {
-  emails.forEach(({ sendDelay, subject, body, from }) => {
+  emails.forEach(async ({ sendDelay, subject, body, from }) => {
     const template = 'default'
     const today = moment.utc()
-    const time = today.add(sendDelay, 'hours').format("YYYY-MM-DD HH:mm:ss")
+    const sendAt = today.add(sendDelay, 'hours').toDate()
 
     const sendFrom = from
-    addScheduledMessage(time, { template, sendFrom, sendTo, subject, body })
+    await addScheduledMessage({ template, sendFrom, sendTo, sendAt, subject, body })
   })
 }
 

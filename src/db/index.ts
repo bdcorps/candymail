@@ -3,107 +3,112 @@ import * as SQLite3 from 'better-sqlite3'
 import { Email, EmailDB } from '../types'
 import { log } from '../utils/logger'
 import * as moment from 'moment'
-import { getDB } from './db.model'
+import { createConnection, getConnection, Connection, LessThan, getRepository } from 'typeorm'
+import { User } from '../entity/User'
+import { Message } from '../entity/Message'
 
-const db = getDB()
+const addEmailRow = async (messageOptions: Email) => {
+  const userRepository = getRepository(User)
+  const messageRepository = getRepository(Message)
 
-const stmt = db.prepare('CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY AUTOINCREMENT, time datetime, template TEXT, sendFrom TEXT, sendTo TEXT, subject TEXT, body TEXT, sent INT)');
-stmt.run()
+  log(`adding email row for ${messageOptions.sendAt} with message: ${messageOptions.body}`)
+  const { template, sendFrom, sendTo, sendAt, subject, body } = messageOptions
 
-const stmt2 = db.prepare('CREATE TABLE IF NOT EXISTS unsubscribed (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT)');
-stmt2.run()
+  const user = await userRepository.find({ email: sendTo })
+  if (!user) {
+    const newUser = new User()
+    newUser.email = sendTo
+    newUser.isSubscribed = true
 
-const addEmailRow = (time: string, messageOptions: Email) => {
-
-  log(`adding email row for ${time} with message: ${messageOptions.body}`)
-  const { template, sendFrom, sendTo, subject, body } = messageOptions
-
-  const query = db.prepare('INSERT INTO messages (time,template,sendFrom,sendTo,subject,body, sent) VALUES (?,?,?,?,?,?,?)');
-
-  try {
-    query.run(time, template, sendFrom, sendTo, subject, body, 0)
-  } catch (err) {
-    log(err)
-  }
-}
-
-const getEmailRowsToBeSent = (time: string): EmailDB[] => {
-  const sql = db.prepare(`SELECT * FROM messages WHERE time <= datetime(?) AND sent=0`);
-
-  let emails = []
-
-  try {
-    emails = sql.all(time)
-  } catch (err) {
-    log(err)
+    await userRepository.save(newUser)
   }
 
-  log(`getting emails before time: ${emails.length}`)
-  const emailsdb: EmailDB[] = emails
+  const message = new Message()
+  message.template = template
+  message.sendFrom = sendFrom
+  message.sendTo = sendTo
+  message.sendAt = sendAt
+  message.subject = subject
+  message.body = body
 
-  return emailsdb
+  await messageRepository.save(message)
 }
 
-const getAllEmailRows = (): EmailDB[] => {
-  const sql = db.prepare(`SELECT * FROM messages ORDER BY time`);
+const getEmailRowsToBeSent = async (time: Date): Promise<Message[]> => {
+  const messageRepository = getRepository(Message)
 
-  let emails = []
+  const messages = await messageRepository.find({
+    where: {
+      sent: false,
+      sendAt: LessThan(moment().format()),
+    },
+  })
 
-  try {
-    emails = sql.all()
-  } catch (err) {
-    log(err)
+  if (messages === undefined) {
+    return []
   }
 
-  const emailsdb: EmailDB[] = emails
-
-  return emailsdb
+  return messages
 }
 
-const setEmailSent = (id: number) => {
-  const sql = db.prepare(`UPDATE messages SET sent = 1 WHERE id = ?`);
-
-  try {
-    sql.run(id)
-  } catch (err) {
-    log(err)
-  }
+const getAllEmailRows = async (): Promise<Message[]> => {
+  const messageRepository = getRepository(Message)
+  const messages: Message[] = await messageRepository.find({})
+  log(messages.toString())
+  return messages
 }
 
-const clearAllRows = () => {
-  const query = db.prepare('DELETE from messages');
-  try {
-    query.run()
-  } catch (err) {
-    log(err)
-  }
-}
+const setEmailSent = async (id: number) => {
+  const messageRepository = getRepository(Message)
 
-const close = () => {
-  db.close()
-}
+  const message = await messageRepository.findOne({ id })
 
-const addUnsubscribedEmail = (email: string) => {
-  const query = db.prepare('INSERT INTO unsubscribed (email) VALUES (?)');
-  try {
-    query.run(email)
-  } catch (err) {
-    log(err)
-  }
-}
-
-const hasUnsubscribedEmail = (email: string): boolean => {
-  const sql = db.prepare(`SELECT * FROM unsubscribed WHERE email = ?`);
-
-  let emails = []
-
-  try {
-    emails = sql.all(email)
-  } catch (err) {
-    log(err)
+  if (message === undefined) {
+    return
   }
 
-  return emails.length > 0
+  message.sent = true
+
+  await messageRepository.save(message)
 }
 
-export { addEmailRow, getEmailRowsToBeSent, getAllEmailRows, setEmailSent, clearAllRows, addUnsubscribedEmail, hasUnsubscribedEmail, close }
+const clearAllRows = async () => {
+  const messageRepository = getRepository(Message)
+
+  await messageRepository.clear()
+}
+
+const addUnsubscribedEmail = async (email: string) => {
+  const userRepository = getRepository(User)
+
+  const user: User | undefined = await userRepository.findOne({ email })
+
+  if (user === undefined) {
+    return
+  }
+
+  user.isSubscribed = false
+  await userRepository.save(user)
+}
+
+const hasUnsubscribedEmail = async (email: string): Promise<boolean> => {
+  const userRepository = getRepository(User)
+
+  const user: User | undefined = await userRepository.findOne({ email, isSubscribed: false })
+
+  if (user === undefined) {
+    return false
+  }
+
+  return user.isSubscribed
+}
+
+export {
+  addEmailRow,
+  getEmailRowsToBeSent,
+  getAllEmailRows,
+  setEmailSent,
+  clearAllRows,
+  addUnsubscribedEmail,
+  hasUnsubscribedEmail,
+}

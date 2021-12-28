@@ -1,32 +1,22 @@
 import { Email, MessageRow } from './types'
-import { addEmailRow, getEmailRowsToBeSent, getAllEmailRows, clearAllRows } from "./db"
+import { addEmailRow, getEmailRowsToBeSent, getAllEmailRows, clearAllRows } from './db'
 
-const addScheduledMessage = (time: string, messageOptions: Email) => {
-  addEmailRow(time, messageOptions)
+const addScheduledMessage = async (messageOptions: Email) => {
+  await addEmailRow(messageOptions)
 }
 
-const getScheduledMessagesBeforeTime = (time: string): MessageRow[] => {
-  const emails = getEmailRowsToBeSent(time)
+const getScheduledMessagesBeforeTime = async (time: Date): Promise<MessageRow[]> => {
+  const emails = await getEmailRowsToBeSent(time)
 
-  const messages: MessageRow[] = []
-
-  for (const email of emails) {
-    const message: MessageRow = { id: email.id, email: { template: email.template, sendFrom: email.sendFrom, sendTo: email.sendTo, subject: email.subject, body: email.body } }
-    messages.push(message)
-  }
+  const messages: MessageRow[] = emails.map((email) => ({ id: email.id, email }))
 
   return messages
 }
 
-const getAllScheduledMessages = (): MessageRow[] => {
-  const emails = getAllEmailRows()
+const getAllScheduledMessages = async (): Promise<MessageRow[]> => {
+  const emails = await getAllEmailRows()
 
-  const messages: MessageRow[] = []
-
-  for (const email of emails) {
-    const message: MessageRow = { id: email.id, email: { template: email.template, sendFrom: email.sendFrom, sendTo: email.sendTo, subject: email.subject, body: email.body } }
-    messages.push(message)
-  }
+  const messages: MessageRow[] = emails.map((email) => ({ id: email.id, email }))
 
   return messages
 }

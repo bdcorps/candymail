@@ -1,11 +1,12 @@
-import * as dotenv from "dotenv"
+import * as dotenv from 'dotenv'
 dotenv.config()
 
-import { MessageRow } from "./src/types"
+import { MessageRow } from './src/types'
 import * as cron from 'node-cron'
 import * as moment from 'moment'
 import { sendEmail } from './src/utils/helper'
 import { log } from './src/utils/logger'
+import { genConnection } from './src/db/connection'
 
 import {
   getAllScheduledMessages,
@@ -13,33 +14,24 @@ import {
   clearAllScheduledMessages,
 } from './src/queue'
 
-import {
-  hasUnsubscribed,
-  unsubscribeUser
-} from './src/unsubscribe'
+import { hasUnsubscribed, unsubscribeUser } from './src/unsubscribe'
 
-import {
-  init
-} from './src/automation'
+import { init } from './src/automation'
 
-import {
-  runWorkflow
-} from './src/workflow'
-import { getConfig } from "./src/config"
+import { runWorkflow } from './src/workflow'
+import { ConnectionIsNotSetError } from 'typeorm'
 
 const task = cron.schedule(
-  '0 * * * *',
-  () => {
-    sendMessagesNow()
+  '* * * * *',
+  async () => {
+    await sendMessagesNow()
   },
   {
     scheduled: false,
   }
 )
 
-
-
-const start = () => {
+const start = async () => {
   task.start()
 }
 
@@ -52,22 +44,21 @@ const destroy = () => {
 }
 
 const sendMessagesNow = async () => {
-  log(`cron trigger > ${moment.utc().format("YYYY-MM-DD HH:mm:ss")}`)
-  const today = moment.utc().format("YYYY-MM-DD HH:mm:ss")
+  const today = moment.utc().toDate()
   const messagesToBeSent = await getScheduledMessagesBeforeTime(today)
 
   if (messagesToBeSent) {
-    messagesToBeSent.forEach((message: MessageRow) => {
-      const { email: { sendTo } } = message
-      if (hasUnsubscribed(sendTo)) {
-        log(
-          `The user ${sendTo} you are trying to send a message to has already unsubscribed`
-        )
+    for (const message of messagesToBeSent) {
+      const {
+        email: { sendTo },
+      } = message
+      const isUnsubscribed = await hasUnsubscribed(sendTo)
+      if (isUnsubscribed) {
+        log(`The user ${sendTo} you are trying to send a message to has already unsubscribed`)
       } else {
         sendEmail(message)
       }
-
-    })
+    }
   }
 }
 
@@ -81,5 +72,5 @@ export {
   getScheduledMessagesBeforeTime,
   clearAllScheduledMessages,
   sendMessagesNow,
-  unsubscribeUser
+  unsubscribeUser,
 }
