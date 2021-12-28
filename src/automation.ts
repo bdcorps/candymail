@@ -7,9 +7,8 @@ import { setWorkflows } from './workflow'
 import * as moment from 'moment'
 import { genConnection } from './db/connection'
 
-
 const init = async (workflows: Workflow[], options: Options) => {
-  await genConnection();
+  await genConnection()
 
   if (workflows && workflows.length > 0) {
     setWorkflows(workflows)

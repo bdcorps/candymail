@@ -1,7 +1,7 @@
-import * as dotenv from "dotenv"
+import * as dotenv from 'dotenv'
 dotenv.config()
 
-import { MessageRow } from "./src/types"
+import { MessageRow } from './src/types'
 import * as cron from 'node-cron'
 import * as moment from 'moment'
 import { sendEmail } from './src/utils/helper'
@@ -14,19 +14,12 @@ import {
   clearAllScheduledMessages,
 } from './src/queue'
 
-import {
-  hasUnsubscribed,
-  unsubscribeUser
-} from './src/unsubscribe'
+import { hasUnsubscribed, unsubscribeUser } from './src/unsubscribe'
 
-import {
-  init
-} from './src/automation'
+import { init } from './src/automation'
 
-import {
-  runWorkflow
-} from './src/workflow'
-import { ConnectionIsNotSetError } from "typeorm"
+import { runWorkflow } from './src/workflow'
+import { ConnectionIsNotSetError } from 'typeorm'
 
 const task = cron.schedule(
   '* * * * *',
@@ -36,10 +29,10 @@ const task = cron.schedule(
   {
     scheduled: false,
   }
-);
+)
 
 const start = async () => {
-  task.start();
+  task.start()
 }
 
 const stop = () => {
@@ -56,12 +49,12 @@ const sendMessagesNow = async () => {
 
   if (messagesToBeSent) {
     for (const message of messagesToBeSent) {
-      const { email: { sendTo } } = message
+      const {
+        email: { sendTo },
+      } = message
       const isUnsubscribed = await hasUnsubscribed(sendTo)
       if (isUnsubscribed) {
-        log(
-          `The user ${sendTo} you are trying to send a message to has already unsubscribed`
-        )
+        log(`The user ${sendTo} you are trying to send a message to has already unsubscribed`)
       } else {
         sendEmail(message)
       }
@@ -79,5 +72,5 @@ export {
   getScheduledMessagesBeforeTime,
   clearAllScheduledMessages,
   sendMessagesNow,
-  unsubscribeUser
+  unsubscribeUser,
 }

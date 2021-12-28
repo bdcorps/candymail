@@ -1,22 +1,20 @@
-import { Options, Workflow } from '../src/types';
-import {
-  init
-} from '../src/automation'
+import { Options, Workflow } from '../src/types'
+import { init } from '../src/automation'
 
 import * as mockConfig from '../src/config'
 import * as mockWorkflow from '../src/workflow'
 import * as mockAutomation from '../src/automation'
 
-import { sampleWorkflows, sampleOpts } from "../src/utils/setupTests"
+import { sampleWorkflows, sampleOpts } from '../src/utils/setupTests'
 
-jest.mock('../src/config');
-jest.mock('../src/workflow');
+jest.mock('../src/config')
+jest.mock('../src/workflow')
 // jest.mock('../src/workflow', () => ({
 //   ...jest.requireActual('../src/workflow') as object,
 //   setWorkflows: jest.fn()
 // }));
 
-jest.mock('../src/db');
+jest.mock('../src/db')
 
 describe('Unit Tests - Automation', () => {
   beforeAll((done) => {

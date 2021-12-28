@@ -1,28 +1,27 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm'
 
 @Entity()
 export class Message {
-
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Column()
-  template: string;
+  template: string
 
   @Column()
-  sendFrom: string;
+  sendFrom: string
 
   @Column()
-  sendTo: string;
+  sendTo: string
 
-  @CreateDateColumn({ name: 'sendAt' }) 'sendAt': Date;
-
-  @Column()
-  subject: string;
+  @CreateDateColumn({ name: 'sendAt' }) 'sendAt': Date
 
   @Column()
-  body: string;
+  subject: string
+
+  @Column()
+  body: string
 
   @Column({ type: 'boolean', default: false })
-  sent: boolean;
+  sent: boolean
 }

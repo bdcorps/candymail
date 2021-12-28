@@ -1,5 +1,4 @@
-
-import { addUnsubscribedEmail, hasUnsubscribedEmail } from "./db"
+import { addUnsubscribedEmail, hasUnsubscribedEmail } from './db'
 
 const unsubscribeUser = async (email: string) => {
   await addUnsubscribedEmail(email)
