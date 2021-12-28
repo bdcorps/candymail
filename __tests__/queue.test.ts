@@ -2,25 +2,11 @@ import {
   addScheduledMessage,
   getAllScheduledMessages,
   getScheduledMessagesBeforeTime,
-  clearAllScheduledMessages,
 } from '../src/queue'
-import * as db from '../src/db'
-import { init } from '..'
-import { sampleWorkflows, sampleOpts, sampleMessages } from '../src/utils/setupTests'
+import { sampleMessages } from '../src/utils/setupTests'
 import typeorm = require('typeorm')
 
-// jest.mock('../src/db');
 describe('Unit Tests', () => {
-  // beforeAll((done) => {
-  //   init(sampleWorkflows, sampleOpts).then(() => {
-  //     done()
-  //   })
-  // })
-  // afterEach(() => {
-  //   jest.clearAllMocks()
-  //   jest.resetAllMocks()
-  // })
-
   typeorm.getRepository = jest.fn().mockReturnValue({
     find: jest.fn().mockResolvedValue(sampleMessages),
     save: jest.fn().mockResolvedValue(sampleMessages[0]),
@@ -39,7 +25,7 @@ describe('Unit Tests', () => {
     expect(messages.length).toBe(1)
   })
 
-  // "2020-08-20 02:30:30",
+  // "2020-08-20 02:30:30"
   test('add scheduled message', async () => {
     await addScheduledMessage({
       body: 'asd',
