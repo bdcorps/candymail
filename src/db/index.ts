@@ -54,7 +54,6 @@ const getEmailRowsToBeSent = async (time: Date): Promise<Message[]> => {
 const getAllEmailRows = async (): Promise<Message[]> => {
   const messageRepository = getRepository(Message)
   const messages: Message[] = await messageRepository.find({})
-  log(messages.toString())
   return messages
 }
 

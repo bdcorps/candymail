@@ -27,10 +27,13 @@ candymail
     candymail.start()
 
     app.get('/', async (req, res) => {
+      res.send('Go to /start to trigger the first workflow')
+    })
+
+    app.get('/start', async (req, res) => {
       const user = process.env.RECIPIENT_EMAIL
       candymail.runWorkflow('workflow1', user)
 
-      const messages = await candymail.getAllScheduledMessages()
       res.send('workflow1 started')
     })
 
