@@ -1,4 +1,4 @@
-import { Workflow, EmailAction, AutomationFile, Options } from './types'
+import { Workflow } from './types'
 import { buildEmailAction } from './automation'
 import { isEmpty } from 'lodash'
 

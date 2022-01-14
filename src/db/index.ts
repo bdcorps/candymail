@@ -1,9 +1,7 @@
-import { getConfig } from '../config'
-import * as SQLite3 from 'better-sqlite3'
-import { Email, EmailDB } from '../types'
+import { Email } from '../types'
 import { log } from '../utils/logger'
 import * as moment from 'moment'
-import { createConnection, getConnection, Connection, LessThan, getRepository } from 'typeorm'
+import { LessThan, getRepository } from 'typeorm'
 import { User } from '../entity/User'
 import { Message } from '../entity/Message'
 

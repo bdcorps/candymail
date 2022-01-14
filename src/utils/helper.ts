@@ -1,22 +1,18 @@
 import { MessageRow } from '../types'
 
-import * as mailer from 'nodemailer'
 import { getConfig, getTransporter } from '../config'
-import { hasUnsubscribed } from '../unsubscribe'
 import { setEmailSent } from '../db'
-import { log } from './logger'
 
 const sendEmail = (message: MessageRow) => {
   const {
     id,
-    email: { template, sendFrom, sendTo, subject, body },
+    email: { sendFrom, sendTo, subject, body },
   } = message
 
   const transporter = getTransporter()
 
-  const html = `${body}<br><a href="${
-    getConfig().hosting.url
-  }/unsubscribe?email=${sendTo}">Click here to unsubscribe</a>`
+  const html = `${body}<br><a href="${getConfig().hosting.url
+    }/unsubscribe?email=${sendTo}">Click here to unsubscribe</a>`
 
   const mailOptions = {
     from: sendFrom,

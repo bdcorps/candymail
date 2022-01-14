@@ -1,6 +1,5 @@
 import * as path from 'path'
-import { Workflow, EmailAction, AutomationFile, Options } from './types'
-import { isEmpty } from 'lodash'
+import { Workflow, EmailAction, Options } from './types'
 import { setConfig } from './config'
 import { addScheduledMessage } from './queue'
 import { setWorkflows } from './workflow'

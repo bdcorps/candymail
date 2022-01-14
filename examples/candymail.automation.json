@@ -8,14 +8,14 @@
         {
           "trigger": "time",
           "sendDelay": 0,
-          "subject": "w1e1",
+          "subject": "Workflow 1 Example 1",
           "body": "<h1>Send automated messages with Candymail</h1><p>Now with HTML support</p><a href='https://saasbase.dev/candymail'>Learn more here</a>",
           "from": "sunnyashiin@gmail.com"
         },
         {
           "trigger": "time",
           "sendDelay": 3,
-          "subject": "w1e2",
+          "subject": "Workflow 1 Example 2",
           "body": "Customizations are great",
           "from": "sunnyashiin@gmail.com"
         }
@@ -29,7 +29,7 @@
         {
           "trigger": "time",
           "sendDelay": 1,
-          "subject": "w2e1",
+          "subject": "Workflow 2 Example 1",
           "body": "Customizations are great",
           "from": "sunnyashiin@gmail.com"
         }
