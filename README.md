@@ -75,48 +75,6 @@ Here's a sample:
 - [Send emails using Mailgun](https://github.com/bdcorps/candymail/wiki/Send-emails-using-Mailgun)
 - We use Nodemailer under the hood, any SMTP provider will work
 
-### Simple Usage
-```
-require('dotenv').config()
-const candymail = require('candymail')
-const automations = require('../candymail.automation.json')
-
-
-candymail.init(automation.workflows, {
-  mail: {
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.MAIL_USER,
-      pass: process.env.MAIL_PASSWORD,
-    },
-    tls: {
-      rejectUnauthorized: true,
-    },
-  },
-  hosting: { url: process.env.HOSTING_URL },
-  db: { reset: true },
-  debug: { trace: true },
-})
-
-candymail.start()
-
-// candymail.unsubscribeUser('user@hotmail.com') // Immediatedly unsubscribe user and they will not receive any more messages
-
-const someConditionSatisfiedByUser = () => {
-  const user = process.env.RECIPIENT_EMAIL
-  candymail.runWorkflow('workflow1', user)
-  console.log({ get: candymail.getAllScheduledMessages() })
-}
-
-someConditionSatisfiedByUser()
-
-```
-
-### Usage with Express Server
-Look in the `examples` folder
-
 ## Automation File Options
 | Property        | Required           | Description  |
 | ------------- |:-------------:| -----:|
