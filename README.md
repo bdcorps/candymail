@@ -1,19 +1,20 @@
-![NPM](https://img.shields.io/npm/l/candymail)
-![npm](https://img.shields.io/npm/v/candymail)
-![npm](https://img.shields.io/npm/dm/candymail)
+<div align="center">
+  <img src="https://github.com/bdcorps/candymail/blob/main/web.png?raw=true" />
+  <h1>CandyMail - Email Automation for Node.js 🍬</h1>
 
-# CandyMail - Email Automation for Node.js
+  <img alt="MIT License" src="https://img.shields.io/github/license/bdcorps/candymail"/>
+  <img alt="Github Stars" src="https://badgen.net/github/stars/bdcorps/candymail" />
+
+</div>
+
 Candymail makes it easy to trigger and send multi-step email sequences in Node.js using a single JSON file. Built for bootstrappers, indie makers with special care.
 
-<p align="center">
-  <img src="https://github.com/bdcorps/candymail/blob/main/web.png?raw=true" />
-</p>
+## Looking for the documentation? 📝
+Latest version => [Full docs](candymail.saasbase.dev)
+
 
 ## Sponsors
 - [SaasBase: Guides on building your next SaaS app](https://bit.ly/3oumU3V)
-
-## New in 1.0.13
-- Persistence using SQLite
 
 ## Features
 1. **Written in Typescript**
