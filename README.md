@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/bdcorps/candymail/blob/main/candy.PNG?raw=true" />
+  <img width=100 src="https://github.com/bdcorps/candymail/blob/main/candy.PNG?raw=true" />
   <h1>Email Automation for Node.js</h1>
   <img alt="MIT License" src="https://img.shields.io/github/license/bdcorps/candymail"/>
   <img alt="Github Stars" src="https://badgen.net/github/stars/bdcorps/candymail" />
