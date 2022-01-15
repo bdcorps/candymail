@@ -7,6 +7,10 @@
 
 Candymail makes it easy to trigger and send multi-step email sequences in Node.js using a single JSON file. Built for bootstrappers, indie makers with special care.
 
+<img src="https://candymail.saasbase.dev/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FeXzqMyZoNIcW7aKbUSq2%2Fuploads%2FAM96V60Wln9erYTGOyxh%2FVisual%20Guide%20to%20Candymail-01.png?alt=media&token=c623306b-b52c-4594-ae04-0063e20107ed" />
+
+
+
 ## Looking for the documentation? 📝
 [Full docs](https://candymail.saasbase.dev)
 
