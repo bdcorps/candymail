@@ -32,12 +32,12 @@ Candymail makes it easy to trigger and send multi-step email sequences in Node.j
 
 ## Installation
 Install candymail using yarn:
-```
-yarn add candymail
-```
-Or npm:
-```
+``` bash
+# npm
 npm install --save candymail
+
+# yarn
+yarn add candymail
 ```
 
 ## Email Providers
