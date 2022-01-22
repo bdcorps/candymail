@@ -31,7 +31,6 @@ Candymail makes it easy to trigger and send multi-step email sequences in Node.j
 - Convert more customers to paid plans by offering discounts based on the user's usage activity
 
 ## Installation
-Install candymail using yarn:
 ``` bash
 # npm
 npm install --save candymail
