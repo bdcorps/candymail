@@ -1,7 +1,7 @@
 {
   "workflows": [
     {
-      "name": "automation1",
+      "name": "welcome-series",
       "description": "send 3 welcome emails in a week after a user signs up",
       "trigger_name": "welcome",
       "emails": [
@@ -10,21 +10,21 @@
           "sendDelay": 0,
           "subject": "Welcome to Candymail!",
           "body": "<div style=\"text-align:center\"><h1>Welcome to Candymail!</h1> <p>It's time to grow your product with email marketing - using just a JSON file.</p><div style=\"text-align:left\"> <p>Candymail is awesome because: </p><ul> <li>Portable: Create, share and reuse email marketing strategies between different products </li><li>Simple to use: Time to send, subject, and body of the emails can all be set up in a single JSON file</li><li>Compliance: Unsubscribe Option added to email footer</li></ul></div>",
-          "from": "ghdagbenagni@gmail.com"
+          "from": "sunnyashiin@gmail.com"
         },
         {
           "trigger": "time",
           "sendDelay": 24,
           "subject": "Quickstart with Candymail",
           "body": "<div style=\"text-align:center\"><h1>Quickstart with Candymail</h1><p>We have put together 2 example projects for you to learn from.</p><p>Here's one for<span><a href=\"https://candymail.saasbase.dev/guides/examples/using-node.js\">vanilla Node.js</a></span>and another for<span><a href=\"https://candymail.saasbase.dev/guides/examples/using-express-api\">Express.js</a></span></p><p>- Candymail Devs</p></div>",
-          "from": "ghdagbenagni@gmail.com"
+          "from": "sunnyashiin@gmail.com"
         },
         {
           "trigger": "time",
           "sendDelay": 48,
           "subject": "Send your first email sequence with Candymail",
           "body": "<div style=\"text-align:center\"><h1>Here's how to get started with Candymail with Node.js</h1> <ol style=\"text-align:left;\"> <li><p>Install NPM packge with: <pre>npm install candymail --save</pre></p><li> <a href=\"https://candymail.saasbase.dev/guides/docs#import-the-library\">Initilize workflows</a></li><li> <a href=\"https://candymail.saasbase.dev/guides/docs#trigger-a-workflow\">Trigger workflow</a></li></ol></div>",
-          "from": "ghdagbenagni@gmail.com"
+          "from": "sunnyashiin@gmail.com"
         }
       ]
     },
@@ -38,14 +38,14 @@
           "sendDelay": 24,
           "subject": "Your Candymail Usage Report",
           "body": "<div style=\"text-align:center\"><h1>55 emails sent!</h1><p>Hey there, you have sent 55 emails yesterday (22nd Jan 2023) and that's awesome! Just to let you know, we do offer a paid plan for folks sending over 50 emails/day for $9.99/month that comes with additional features like reporting and analytics.</p><a href=\"https://candymail.saasbase.dev\">Click here to upgrade</a></div>",
-          "from": "ghdagbenagni@gmail.com"
+          "from": "sunnyashiin@gmail.com"
         },
         {
           "trigger": "time",
           "sendDelay": 50,
           "subject": "Limited time offer: Upgrade to PRO for $10/month",
           "body": "<div style=\"text-align:center\"><h1>Upgrade to PRO</h1><p>You're doing great work with Candymail. We're happy to bump up your daily email sending quota and add other PRO features for 50% price.</p><p>That's right - upgrade within 1 day and you can get on the Candymail PRO plan for $10/month instead of $20/month.</p><a href=\"https://candymail.saasbase.dev\">Click here to upgrade</a></div>",
-          "from": "ghdagbenagni@gmail.com"
+          "from": "sunnyashiin@gmail.com"
         }
       ]
     }
