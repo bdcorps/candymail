@@ -73,3 +73,8 @@ export type EmailDB = {
   body: string
   sent: number
 }
+
+export type BodyParam = {
+  key: string
+  value: string
+}

@@ -37,6 +37,7 @@ candymail
   })
 
 const someConditionSatisfiedByUser = async () => {
+  params=[{key:"Firstname",value:"Harry"},{key:"Lastname",value:"GBAGUIDI"}]
   const user = process.env.RECIPIENT_EMAIL
-  candymail.runWorkflow('workflow1', user)
+  candymail.runWorkflow('automation1', user,params)
 }
