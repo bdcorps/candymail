@@ -19,25 +19,22 @@ const init = async (workflows: Workflow[], options: Options) => {
   setConfig(options)
 }
 
-const buildEmailAction = (emails: EmailAction[], sendTo: string, params?:BodyParam[]) => {
+const buildEmailAction = (emails: EmailAction[], sendTo: string, params: BodyParam[] = []) => {
   emails.forEach(async ({ sendDelay, subject, body, from }) => {
     const template = 'default'
     const today = moment.utc()
     const sendAt = today.add(sendDelay, 'hours').toDate()
-    if (typeof params !== "undefined") {
-      body=setBodyParameters(body,params)
-    }
     const sendFrom = from
-    await addScheduledMessage({ template, sendFrom, sendTo, sendAt, subject, body })
+    let formattedBody = body;
+    formattedBody=setBodyParameters(body,params)
+    await addScheduledMessage({ template, sendFrom, sendTo, sendAt, subject, body:formattedBody })
   })
 }
 
-const setBodyParameters=(body:string, params?:BodyParam[]) =>{
-  if (typeof params !== "undefined") {
-    params.forEach(element => {
-      body=body.replace(`PARAMS_${element.key}`, element.value);
-    });
-  }
+const setBodyParameters=(body:string, params: BodyParam[] = []) =>{
+  params.forEach(element => {
+    body=body.replace(`PARAMS_${element.key}`, element.value);
+  });
   return body
 }
 

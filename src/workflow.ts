@@ -12,16 +12,13 @@ const getWorkflows = (): Workflow[] => {
   return loadedWorkflows
 }
 
-const runWorkflow = async (workflow: string, sendTo: string, params?:BodyParam[]) => {
+const runWorkflow = async (workflow: string, sendTo: string, params: BodyParam[] = []) => {
   if (!getWorkflows() || isEmpty(getWorkflows())) {
     throw new Error('No workflows found. Run the init first: init()')
   }
   const messagesInWorkflow = getWorkflows().find((message) => message.name === workflow)
   if (messagesInWorkflow) {
-    if (typeof params !== "undefined") {
-      await buildEmailAction(messagesInWorkflow.emails, sendTo, params);
-    }
-    await buildEmailAction(messagesInWorkflow.emails, sendTo);
+    await buildEmailAction(messagesInWorkflow.emails, sendTo, params);
   }
 }
 
