@@ -33,7 +33,7 @@ const buildEmailAction = (emails: EmailAction[], sendTo: string, params: BodyPar
 
 const setBodyParameters=(body:string, params: BodyParam[] = []) =>{
   params.forEach(element => {
-    body=body.replace(`PARAMS_${element.key}`, element.value);
+    body=body.replace(`{{${element.key}}}`, element.value);
   });
   return body
 }
