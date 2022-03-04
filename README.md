@@ -16,7 +16,7 @@ Candymail makes it easy to trigger and send multi-step email sequences in Node.j
   <br/>
   </p>
   
-<img src="https://candymail.saasbase.dev/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FeXzqMyZoNIcW7aKbUSq2%2Fuploads%2FAM96V60Wln9erYTGOyxh%2FVisual%20Guide%20to%20Candymail-01.png?alt=media&token=c623306b-b52c-4594-ae04-0063e20107ed" />
+<img src="https://github.com/bdcorps/candymail/blob/main/web.png?raw=true" />
 
 ## Features
 1. **Portable**: Create, share and reuse email marketing strategies between different products
