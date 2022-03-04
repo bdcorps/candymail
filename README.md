@@ -53,3 +53,6 @@ Got Feedback? Hit me up at <a href="mailto:sunnyashiin@gmail.com">sunnyashiin@gm
 Now available for freelance work.
 
 Thanks to [u/grantrules on Reddit](https://www.reddit.com/user/grantrules/) for helping with a code review
+
+## Contributers
+- @Gbaguidi and the team at [Gurulab](https://www.linkedin.com/company/gurulab-sas) build email body personalization feature. [Check out their product](https://kryptonite.africa).
