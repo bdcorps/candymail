@@ -1,5 +1,5 @@
 import * as path from 'path'
-import { Workflow, EmailAction, Options } from './types'
+import { Workflow, EmailAction, Options, BodyParam} from './types'
 import { setConfig } from './config'
 import { addScheduledMessage } from './queue'
 import { setWorkflows } from './workflow'
@@ -19,15 +19,23 @@ const init = async (workflows: Workflow[], options: Options) => {
   setConfig(options)
 }
 
-const buildEmailAction = (emails: EmailAction[], sendTo: string) => {
+const buildEmailAction = (emails: EmailAction[], sendTo: string, params: BodyParam[] = []) => {
   emails.forEach(async ({ sendDelay, subject, body, from }) => {
     const template = 'default'
     const today = moment.utc()
     const sendAt = today.add(sendDelay, 'hours').toDate()
-
     const sendFrom = from
-    await addScheduledMessage({ template, sendFrom, sendTo, sendAt, subject, body })
+    let formattedBody = body;
+    formattedBody=setBodyParameters(body,params)
+    await addScheduledMessage({ template, sendFrom, sendTo, sendAt, subject, body:formattedBody })
   })
 }
 
-export { init, buildEmailAction }
+const setBodyParameters=(body:string, params: BodyParam[] = []) =>{
+  params.forEach(element => {
+    body=body.replace(`{{${element.key}}}`, element.value);
+  });
+  return body
+}
+
+export { init, buildEmailAction, setBodyParameters }
