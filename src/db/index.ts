@@ -38,7 +38,7 @@ const getEmailRowsToBeSent = async (time: Date): Promise<Message[]> => {
   const messages = await messageRepository.find({
     where: {
       sent: false,
-      sendAt: LessThan(moment().format()),
+      sendAt: LessThan(moment.utc().format("YYYY-MM-DD HH:mm:ss")),
     },
   })
 
