@@ -7,6 +7,7 @@ import * as moment from 'moment'
 import { genConnection } from './db/connection'
 
 const init = async (workflows: Workflow[], options: Options) => {
+  setConfig(options)
   await genConnection()
 
   if (workflows && workflows.length > 0) {
@@ -16,7 +17,7 @@ const init = async (workflows: Workflow[], options: Options) => {
     setWorkflows(automationFile?.workflows)
   }
 
-  setConfig(options)
+  
 }
 
 const buildEmailAction = (emails: EmailAction[], sendTo: string, params: BodyParam[] = []) => {
